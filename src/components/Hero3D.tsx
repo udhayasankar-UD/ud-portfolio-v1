@@ -76,19 +76,20 @@ function AnimatedCube() {
   useFrame((state) => {
     if (meshRef.current) {
       const time = state.clock.getElapsedTime();
-      
-      meshRef.current.rotation.x += (target.x - meshRef.current.rotation.x) * 0.07 + 0.003;
-      meshRef.current.rotation.y += (target.y - meshRef.current.rotation.y) * 0.07 + 0.007;
-      meshRef.current.position.y = Math.sin(time * 0.8) * 0.15;
-      
-      // Enhanced hover effect
-      const scale = isHovered ? 1.6 : 1.4;
-      meshRef.current.scale.lerp(new THREE.Vector3(scale, scale, scale), 0.1);
-      
-      // Pulsing glow effect
+
+      // Slower floating
+      meshRef.current.rotation.x += (target.x - meshRef.current.rotation.x) * 0.07 + 0.001;
+      meshRef.current.rotation.y += (target.y - meshRef.current.rotation.y) * 0.07 + 0.0015;
+      meshRef.current.position.y = Math.sin(time * 0.36) * 0.13; // was time*0.8
+
+      // Slower, more subtle "pulsing glow"
       if (meshRef.current.material instanceof THREE.MeshStandardMaterial) {
-        meshRef.current.material.emissiveIntensity = 0.5 + Math.sin(time * 2) * 0.2;
+        meshRef.current.material.emissiveIntensity = 0.46 + Math.sin(time * 0.65) * 0.08;
       }
+
+      // More subtle scale
+      const scale = isHovered ? 1.55 : 1.38;
+      meshRef.current.scale.lerp(new THREE.Vector3(scale, scale, scale), 0.06);
     }
   });
 
@@ -242,8 +243,8 @@ export default function Hero3D() {
       <CursorBullet />
       <section
         id="home"
-        className="relative flex flex-col items-center justify-center h-[90vh] pt-8 pb-10 w-full overflow-hidden cursor-none"
-        style={{ minHeight: "600px" }}
+        className="relative flex flex-col items-center justify-center h-[80vh] md:h-[90vh] pt-8 pb-10 w-full overflow-hidden cursor-none"
+        style={{ minHeight: "450px" }}
       >
         {/* Animated background with parallax */}
         <div 
@@ -266,7 +267,7 @@ export default function Hero3D() {
         <div className="relative z-10 flex flex-col items-center">
           {/* Enhanced glassy canvas */}
           <div 
-            className="w-[380px] h-[380px] rounded-full shadow-soft-glow border-2 border-white/10 overflow-hidden flex items-center justify-center bg-gradient-to-br from-blue-900/70 to-gray-900/90 mb-8 animate-float hover:shadow-[0_0_30px_10px_rgba(96,165,250,0.3)] transition-all duration-300 cursor-pointer"
+            className="w-[90vw] max-w-[380px] h-[90vw] max-h-[380px] md:w-[380px] md:h-[380px] rounded-full shadow-soft-glow border-2 border-white/10 overflow-hidden flex items-center justify-center bg-gradient-to-br from-blue-900/70 to-gray-900/90 mb-8 animate-float hover:shadow-[0_0_30px_10px_rgba(96,165,250,0.3)] transition-all duration-300 cursor-pointer"
             style={{
               transform: `perspective(1000px) rotateX(${mousePosition.y * 5}deg) rotateY(${mousePosition.x * 5}deg)`,
             }}
@@ -319,11 +320,11 @@ export default function Hero3D() {
         <style>{`
           @keyframes float {
             0%, 100% { transform: translateY(0) rotate(0deg); }
-            33% { transform: translateY(-12px) rotate(0.5deg); }
-            66% { transform: translateY(-8px) rotate(-0.5deg); }
+            33% { transform: translateY(-6px) rotate(0.3deg); }
+            66% { transform: translateY(-4px) rotate(-0.2deg); }
           }
           .animate-float {
-            animation: float 4s ease-in-out infinite;
+            animation: float 8s ease-in-out infinite;
           }
         `}</style>
       </section>
