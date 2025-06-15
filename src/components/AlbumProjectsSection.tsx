@@ -1,4 +1,5 @@
 
+
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -109,26 +110,26 @@ export default function AlbumProjectsSection() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(96,165,250,0.1),transparent_50%)]" />
       </div>
 
-      {/* Section Title - More prominent positioning */}
-      <div className="absolute top-12 left-1/2 transform -translate-x-1/2 z-20 pointer-events-none text-center">
-        <h2 className="gradient-text text-4xl md:text-6xl font-bold drop-shadow-2xl leading-tight">
+      {/* Section Title - Left aligned with reduced padding */}
+      <div className="absolute top-8 left-8 z-20 pointer-events-none">
+        <h2 className="gradient-text text-3xl md:text-5xl font-bold drop-shadow-2xl leading-tight">
           Top Collection
         </h2>
       </div>
 
       {/* Main Content */}
-      <div className="relative h-full flex items-center pt-32">
+      <div className="relative h-full flex items-center pt-20">
         {/* Combined Project Cards Track */}
         <div
           ref={trackRef}
-          className="flex items-stretch gap-12 px-20 min-w-max case-track"
+          className="flex items-stretch gap-12 px-12 min-w-max case-track"
         >
           {projects.map((project, index) => (
             <div key={project.id} className="flex-shrink-0">
               {/* Unified Project Card with Larger Size */}
-              <div className="neu-card p-8 backdrop-blur-md bg-gray-800/90 w-[500px] h-[700px] flex flex-col">
+              <div className="neu-card p-6 backdrop-blur-md bg-gray-800/90 w-[480px] h-[680px] flex flex-col">
                 {/* Project Case at the top - Fixed Height */}
-                <div className="flex-shrink-0 mb-8 h-[320px] flex items-center justify-center">
+                <div className="flex-shrink-0 mb-6 h-[320px] flex items-center justify-center">
                   <AlbumCase project={project} index={index} />
                 </div>
                 
@@ -188,3 +189,4 @@ export default function AlbumProjectsSection() {
     </section>
   );
 }
+
