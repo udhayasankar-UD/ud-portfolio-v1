@@ -29,26 +29,26 @@ export default function BlogSection() {
       id="blog"
       className="min-h-screen w-full px-4 bg-gradient-to-b from-gray-900 to-gray-800 flex items-center"
     >
-      <div className="max-w-4xl mx-auto w-full">
-        <h2 className="gradient-text text-3xl md:text-4xl font-bold mb-8 text-center">Blog</h2>
-        <div className="space-y-8">
+      <div className="max-w-5xl mx-auto w-full">
+        <h2 className="gradient-text text-4xl md:text-5xl font-bold mb-12 text-center">Blog</h2>
+        <div className="space-y-10">
           {posts.map(post => (
             <div
               key={post.id}
-              className="glass-card p-6 rounded-xl hover:shadow-soft-glow transition cursor-pointer"
+              className="glass-card p-8 rounded-xl hover:shadow-soft-glow transition cursor-pointer"
             >
               <div className="flex flex-col md:flex-row md:items-center md:justify-between">
                 <div>
-                  <h3 className="text-2xl font-semibold text-blue-glow mb-1">{post.title}</h3>
-                  <p className="text-gray-300 mb-2">{post.excerpt}</p>
+                  <h3 className="text-3xl font-semibold text-blue-glow mb-3">{post.title}</h3>
+                  <p className="text-gray-300 mb-4 text-lg leading-relaxed">{post.excerpt}</p>
                   <a
                     href={`/blog/${post.slug}`}
-                    className="text-blue-glow underline underline-offset-2 text-sm hover:text-blue-400"
+                    className="text-blue-glow underline underline-offset-2 text-base hover:text-blue-400 font-medium"
                   >
                     Read more →
                   </a>
                 </div>
-                <div className="text-xs text-gray-400 mt-4 md:mt-0 md:text-right whitespace-nowrap">
+                <div className="text-sm text-gray-400 mt-6 md:mt-0 md:text-right whitespace-nowrap">
                   {post.date}
                 </div>
               </div>
