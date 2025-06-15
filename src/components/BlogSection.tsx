@@ -1,50 +1,33 @@
-
-const posts = [
-  {
-    id: 1,
-    slug: "styling-neumorphism-tailwind",
-    title: "Styling Neumorphism with Tailwind CSS",
-    date: "2024-06-12",
-    excerpt: "Neumorphic design brings soft, tactile UIs – let's learn how to pull it off with custom box-shadow, gradients, and Tailwind utilities for beautiful cards."
-  },
-  {
-    id: 2,
-    slug: "threejs-react-intro",
-    title: "Getting Started with Three.js in React",
-    date: "2024-05-27",
-    excerpt: "3D scenes? Yes, please! A quickstart on integrating Three.js and @react-three/fiber for stunning hero sections and interactive graphics."
-  },
-  {
-    id: 3,
-    slug: "unity-to-webgl-portfolio",
-    title: "Showcasing Unity Games on Your Portfolio",
-    date: "2024-04-18",
-    excerpt: "Your Unity game is WebGL-ready – now embed it beautifully in your dev portfolio and wow recruiters with live demos!"
-  }
-];
-
+const posts = [{
+  id: 1,
+  slug: "styling-neumorphism-tailwind",
+  title: "Styling Neumorphism with Tailwind CSS",
+  date: "2024-06-12",
+  excerpt: "Neumorphic design brings soft, tactile UIs – let's learn how to pull it off with custom box-shadow, gradients, and Tailwind utilities for beautiful cards."
+}, {
+  id: 2,
+  slug: "threejs-react-intro",
+  title: "Getting Started with Three.js in React",
+  date: "2024-05-27",
+  excerpt: "3D scenes? Yes, please! A quickstart on integrating Three.js and @react-three/fiber for stunning hero sections and interactive graphics."
+}, {
+  id: 3,
+  slug: "unity-to-webgl-portfolio",
+  title: "Showcasing Unity Games on Your Portfolio",
+  date: "2024-04-18",
+  excerpt: "Your Unity game is WebGL-ready – now embed it beautifully in your dev portfolio and wow recruiters with live demos!"
+}];
 export default function BlogSection() {
-  return (
-    <section
-      id="blog"
-      className="min-h-screen w-full px-4 bg-gradient-to-b from-gray-900 to-gray-800 flex items-center"
-    >
+  return <section id="blog" className="min-h-screen w-full px-4 bg-gradient-to-b from-gray-900 to-gray-800 flex items-center">
       <div className="max-w-5xl mx-auto w-full">
-        <h2 className="gradient-text text-4xl md:text-5xl font-bold mb-12 text-center">Blog</h2>
+        <h2 className="gradient-text text-4xl md:text-5xl font-bold mb-12 text-left">Blog</h2>
         <div className="space-y-10">
-          {posts.map(post => (
-            <div
-              key={post.id}
-              className="glass-card p-8 rounded-xl hover:shadow-soft-glow transition cursor-pointer"
-            >
+          {posts.map(post => <div key={post.id} className="glass-card p-8 rounded-xl hover:shadow-soft-glow transition cursor-pointer">
               <div className="flex flex-col md:flex-row md:items-center md:justify-between">
                 <div>
                   <h3 className="text-3xl font-semibold text-blue-glow mb-3">{post.title}</h3>
                   <p className="text-gray-300 mb-4 text-lg leading-relaxed">{post.excerpt}</p>
-                  <a
-                    href={`/blog/${post.slug}`}
-                    className="text-blue-glow underline underline-offset-2 text-base hover:text-blue-400 font-medium"
-                  >
+                  <a href={`/blog/${post.slug}`} className="text-blue-glow underline underline-offset-2 text-base hover:text-blue-400 font-medium">
                     Read more →
                   </a>
                 </div>
@@ -52,10 +35,8 @@ export default function BlogSection() {
                   {post.date}
                 </div>
               </div>
-            </div>
-          ))}
+            </div>)}
         </div>
       </div>
-    </section>
-  );
+    </section>;
 }
