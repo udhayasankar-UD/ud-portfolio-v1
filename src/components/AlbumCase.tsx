@@ -46,8 +46,8 @@ export default function AlbumCase({ project, index }: AlbumCaseProps) {
       onMouseLeave={handleMouseLeave}
       onMouseMove={handleMouseMove}
     >
-      {/* CD Case Container */}
-      <div className="relative w-80 h-80 perspective-1000">
+      {/* CD Case Container - Made smaller for card layout */}
+      <div className="relative w-72 h-72 perspective-1000 mx-auto">
         {/* Case Shadow */}
         <div className="absolute inset-0 bg-black/20 rounded-lg transform translate-x-2 translate-y-2 blur-md" />
         
@@ -81,7 +81,7 @@ export default function AlbumCase({ project, index }: AlbumCaseProps) {
               
               {/* Project Icon Overlay */}
               <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-blue-glow/60 to-purple-500/60">
-                <div className="text-white text-6xl font-bold opacity-90">
+                <div className="text-white text-5xl font-bold opacity-90">
                   {project.title.charAt(0)}
                 </div>
               </div>
@@ -93,23 +93,6 @@ export default function AlbumCase({ project, index }: AlbumCaseProps) {
           
           {/* Reflection */}
           <div className="absolute inset-0 bg-gradient-to-t from-transparent via-white/5 to-white/10 pointer-events-none" />
-        </div>
-      </div>
-
-      {/* Title Label */}
-      <div className="mt-4 text-center">
-        <h3 className="text-white font-semibold text-lg truncate">
-          {project.title}
-        </h3>
-        <div className="flex flex-wrap gap-1 justify-center mt-2">
-          {project.tech.slice(0, 3).map((tech) => (
-            <span
-              key={tech}
-              className="text-xs bg-blue-glow/20 text-blue-glow px-2 py-1 rounded"
-            >
-              {tech}
-            </span>
-          ))}
         </div>
       </div>
     </div>
