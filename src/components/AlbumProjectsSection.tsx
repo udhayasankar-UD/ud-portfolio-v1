@@ -110,31 +110,31 @@ export default function AlbumProjectsSection() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(96,165,250,0.1),transparent_50%)]" />
       </div>
 
-      {/* Section Title - Made more visible */}
-      <div className="absolute top-8 left-8 z-10">
-        <h2 className="gradient-text text-4xl md:text-6xl font-bold">
+      {/* Section Title - Fixed position and highly visible */}
+      <div className="fixed top-20 left-8 z-50 pointer-events-none">
+        <h2 className="gradient-text text-4xl md:text-6xl font-bold drop-shadow-2xl">
           Top Collection
         </h2>
-        <p className="text-white/80 text-lg mt-2">
+        <p className="text-white/90 text-lg mt-2 drop-shadow-lg">
           Scroll to explore my featured projects
         </p>
       </div>
 
       {/* Main Content */}
       <div className="relative h-full flex items-center pt-32">
-        {/* Cases Track with project details on the right */}
+        {/* Cases Track with project details below each case */}
         <div
           ref={trackRef}
-          className="flex items-center gap-24 px-32 min-w-max case-track"
+          className="flex items-start gap-16 px-32 min-w-max case-track"
         >
           {projects.map((project, index) => (
-            <div key={project.id} className="flex items-center gap-8">
+            <div key={project.id} className="flex flex-col items-center gap-6">
               <AlbumCase
                 project={project}
                 index={index}
               />
               
-              {/* Details Card positioned to the right of each case */}
+              {/* Details Card positioned below each case */}
               <div className="w-[420px] flex-shrink-0">
                 <AlbumDetailsCard
                   project={project}
