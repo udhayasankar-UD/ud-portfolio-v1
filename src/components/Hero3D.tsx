@@ -43,17 +43,17 @@ function FloatingParticles() {
       <bufferGeometry>
         <bufferAttribute
           attach="attributes-position"
-          array={positions}
           count={particleCount}
+          array={positions}
           itemSize={3}
         />
       </bufferGeometry>
       <pointsMaterial
         size={0.05}
         color="#60a5fa"
-        transparent
+        transparent={true}
         opacity={0.6}
-        sizeAttenuation
+        sizeAttenuation={true}
       />
     </points>
   );
