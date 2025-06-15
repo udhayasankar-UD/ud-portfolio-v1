@@ -16,7 +16,7 @@ export default function ProjectSidebar({ projects, activeIndex, onSelect }: Proj
     <div className="w-[30%] min-w-[260px] max-w-[360px] glass-card backdrop-blur-lg border-r border-white/10 flex flex-col py-10 px-6 md:flex hidden">
       <div className="mb-8">
         <h2 className="text-2xl font-bold gradient-text mb-2">Projects</h2>
-        <p className="text-gray-400 text-sm">Scroll to explore each project</p>
+        <p className="text-gray-300 text-sm font-medium">Scroll to explore each project</p>
       </div>
       
       <div className="flex-1 space-y-3">

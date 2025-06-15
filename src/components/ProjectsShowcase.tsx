@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useRef } from "react";
 import ProjectSidebar from "./ProjectSidebar";
 import ProjectDetail from "./ProjectDetail";
@@ -73,6 +74,7 @@ export default function ProjectsShowcase() {
   const [isExiting, setIsExiting] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
+  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -88,7 +90,7 @@ export default function ProjectsShowcase() {
           setTimeout(() => {
             setIsActive(false);
             setIsExiting(false);
-          }, 300); // Smooth transition delay
+          }, 300);
         }
       },
       { 
@@ -110,7 +112,6 @@ export default function ProjectsShowcase() {
       html.style.scrollBehavior = "smooth";
     } else {
       body.style.overflow = "";
-      // Delay removing scroll behavior to allow smooth transition
       setTimeout(() => {
         html.style.scrollBehavior = "";
       }, 500);
@@ -125,18 +126,31 @@ export default function ProjectsShowcase() {
   const handleScroll = () => {
     if (!containerRef.current) return;
     
-    const scrollTop = containerRef.current.scrollTop;
-    const containerHeight = containerRef.current.scrollHeight;
-    const viewportHeight = containerRef.current.clientHeight;
-    const maxScroll = containerHeight - viewportHeight;
-    
-    const newIndex = Math.round((scrollTop / maxScroll) * projects.length);
-    const clampedIndex = Math.min(newIndex, projects.length);
-    
-    if (clampedIndex !== currentIndex) {
-      setAnimateDirection(clampedIndex > currentIndex ? 'down' : 'up');
-      setCurrentIndex(clampedIndex);
+    // Clear existing timeout
+    if (scrollTimeoutRef.current) {
+      clearTimeout(scrollTimeoutRef.current);
     }
+    
+    // Debounce scroll changes to make them less sensitive
+    scrollTimeoutRef.current = setTimeout(() => {
+      const scrollTop = containerRef.current!.scrollTop;
+      const containerHeight = containerRef.current!.scrollHeight;
+      const viewportHeight = containerRef.current!.clientHeight;
+      const maxScroll = containerHeight - viewportHeight;
+      
+      // Add threshold to prevent small scroll changes
+      const scrollThreshold = 100; // pixels
+      const effectiveScroll = Math.max(0, scrollTop - scrollThreshold);
+      const adjustedMaxScroll = Math.max(1, maxScroll - scrollThreshold);
+      
+      const newIndex = Math.round((effectiveScroll / adjustedMaxScroll) * projects.length);
+      const clampedIndex = Math.min(newIndex, projects.length);
+      
+      if (clampedIndex !== currentIndex) {
+        setAnimateDirection(clampedIndex > currentIndex ? 'down' : 'up');
+        setCurrentIndex(clampedIndex);
+      }
+    }, 150); // 150ms debounce
   };
 
   const handleSidebarSelect = (index: number) => {
@@ -176,7 +190,7 @@ export default function ProjectsShowcase() {
             className="flex-1 h-full overflow-y-auto overflow-x-hidden scroll-smooth"
             onScroll={handleScroll}
             style={{ 
-              scrollSnapType: 'y mandatory',
+              scrollSnapType: 'y proximity',
               scrollBehavior: 'smooth'
             }}
           >
@@ -184,7 +198,7 @@ export default function ProjectsShowcase() {
               <div
                 key={project.id}
                 className="h-screen flex items-center justify-center p-8"
-                style={{ scrollSnapAlign: 'center' }}
+                style={{ scrollSnapAlign: 'start' }}
               >
                 <ProjectDetail 
                   project={project} 
@@ -196,10 +210,13 @@ export default function ProjectsShowcase() {
             
             <div 
               className="h-screen flex items-center justify-center"
-              style={{ scrollSnapAlign: 'center' }}
+              style={{ scrollSnapAlign: 'start' }}
             >
               <ProjectFinalPanel isActive={currentIndex === projects.length} />
             </div>
+            
+            {/* Add extra space after the final panel to allow scrolling past it */}
+            <div className="h-20"></div>
           </div>
         </div>
       )}
