@@ -2,7 +2,7 @@
 import Layout from "../components/Layout";
 import Hero3D from "../components/Hero3D";
 import AboutSection from "../components/AboutSection";
-import ProjectsSection from "../components/ProjectsSection";
+import ProjectsShowcase from "../components/ProjectsShowcase";
 import ContactSection from "../components/ContactSection";
 import ResumeSection from "../components/ResumeSection";
 import BlogSection from "../components/BlogSection";
@@ -13,7 +13,7 @@ const Index = () => {
     <Layout>
       <Hero3D />
       <AboutSection />
-      <ProjectsSection />
+      <ProjectsShowcase />
       <ContactSection />
       <ResumeSection />
       <BlogSection />
