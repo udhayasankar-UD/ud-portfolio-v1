@@ -56,7 +56,7 @@ export default function AvatarParallax({ src, alt, className }: AvatarParallaxPr
         src={src}
         alt={alt}
         draggable={false}
-        className="block w-32 h-32 sm:w-40 sm:h-40 rounded-2xl shadow-neu object-cover border-4 border-gray-800"
+        className="block w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 rounded-2xl shadow-neu object-cover border-4 border-gray-800"
         style={{ userSelect: "none", pointerEvents: "none" }}
       />
     </div>
