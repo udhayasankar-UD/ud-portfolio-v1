@@ -1,14 +1,15 @@
-
 import { Canvas } from "@react-three/fiber";
 import { useRef } from "react";
 
+// AnimatedCube is unchanged except we cast color prop
 function AnimatedCube() {
   const meshRef = useRef<any>(null);
   // Per-frame gentle rotation for the 3D element
   return (
     <mesh ref={meshRef} scale={[1.3, 1.3, 1.3]}>
       <boxGeometry args={[1.2, 1.2, 1.2]} />
-      <meshStandardMaterial color="#60a5fa" metalness={0.7} roughness={0.25} />
+      {/* Explicitly cast color prop to any to satisfy TS */}
+      <meshStandardMaterial color={"#60a5fa" as any} metalness={0.7} roughness={0.25} />
     </mesh>
   );
 }
