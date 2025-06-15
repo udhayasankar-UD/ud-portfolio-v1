@@ -1,12 +1,13 @@
+
 import { Terminal, Gamepad2 } from "lucide-react";
 
 export default function AboutSection() {
   return (
     <section
       id="about"
-      className="w-full px-4 py-16 md:py-20 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900"
+      className="w-full min-h-screen px-4 py-16 md:py-20 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 flex items-center"
     >
-      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center w-full">
         {/* Left: Avatar and fun icons */}
         <div className="flex flex-col items-center md:items-start">
           <div className="relative mb-8 group transition-transform">
@@ -35,7 +36,7 @@ export default function AboutSection() {
           <p className="mb-4 text-base sm:text-lg text-gray-200">
             I'm Udhaya Sankar – a nerdy, creative front-end & game developer crafting beautiful immersive digital experiences! <br /> <br />
             I love blending 3D graphics, seamless UI, and playful code to make tech engaging and accessible. My toolkit spans React, Three.js, Unity, and design systems. <br /><br />
-            When I’m not coding, I’m building games, exploring new frameworks, and leveling up my pixel art or low-poly Blender skills!
+            When I'm not coding, I'm building games, exploring new frameworks, and leveling up my pixel art or low-poly Blender skills!
           </p>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-6">
             <div className="neu-card p-4 text-center">
