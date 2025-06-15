@@ -2,7 +2,8 @@
 import Layout from "../components/Layout";
 import Hero3D from "../components/Hero3D";
 import AboutSection from "../components/AboutSection";
-import ProjectsSection from "../components/ProjectsSection";
+// import ProjectsSection from "../components/ProjectsSection";
+import AlbumProjectsSection from "../components/AlbumProjectsSection";
 import ContactSection from "../components/ContactSection";
 import ResumeSection from "../components/ResumeSection";
 import BlogSection from "../components/BlogSection";
@@ -13,7 +14,7 @@ const Index = () => {
     <Layout>
       <Hero3D />
       <AboutSection />
-      <ProjectsSection />
+      <AlbumProjectsSection />
       <ContactSection />
       <ResumeSection />
       <BlogSection />
