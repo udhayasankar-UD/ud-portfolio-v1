@@ -1,3 +1,7 @@
+
+import { useLocation } from "react-router-dom";
+import React from "react";
+
 const navItems = [
   { label: "About", href: "#about" },
   { label: "Projects", href: "#projects" },
@@ -6,6 +10,11 @@ const navItems = [
 ];
 
 export default function Layout({ children }: { children: React.ReactNode }) {
+  const location = useLocation();
+
+  // The hash includes the "#" (e.g., "#projects")
+  const isProjectsActive = location.hash === "#projects";
+
   return (
     <div className="relative">
       {/* Navbar */}
@@ -16,7 +25,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <a
               key={item.href}
               href={item.href}
-              className="text-lg font-medium text-white/80 hover:text-blue-glow transition story-link"
+              className={
+                `text-lg font-medium text-white/80 hover:text-blue-glow transition story-link ${
+                  item.label === "Projects" && isProjectsActive
+                    ? "text-blue-glow"
+                    : ""
+                }`
+              }
             >
               {item.label}
             </a>
