@@ -27,9 +27,9 @@ export default function BlogSection() {
   return (
     <section
       id="blog"
-      className="py-20 w-full px-4 bg-gradient-to-b from-gray-900 to-gray-800"
+      className="min-h-screen w-full px-4 bg-gradient-to-b from-gray-900 to-gray-800 flex items-center"
     >
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-4xl mx-auto w-full">
         <h2 className="gradient-text text-3xl md:text-4xl font-bold mb-8 text-center">Blog</h2>
         <div className="space-y-8">
           {posts.map(post => (

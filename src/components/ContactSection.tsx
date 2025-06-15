@@ -12,9 +12,9 @@ export default function ContactSection() {
   return (
     <section
       id="contact"
-      className="py-20 w-full bg-gradient-to-br from-gray-800 via-gray-900 to-gray-900 px-4"
+      className="min-h-screen w-full bg-gradient-to-br from-gray-800 via-gray-900 to-gray-900 px-4 flex items-center"
     >
-      <div className="max-w-xl mx-auto">
+      <div className="max-w-xl mx-auto w-full">
         <h2 className="gradient-text text-3xl md:text-4xl font-bold mb-8 text-center">Contact Me</h2>
         {!submitted ? (
           <form className="flex flex-col gap-4" onSubmit={handleSubmit}>

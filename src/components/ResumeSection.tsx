@@ -3,9 +3,9 @@ export default function ResumeSection() {
   return (
     <section
       id="resume"
-      className="py-20 px-4 w-full bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900"
+      className="min-h-screen px-4 w-full bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 flex items-center"
     >
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-3xl mx-auto w-full">
         <h2 className="gradient-text text-3xl md:text-4xl font-bold mb-8 text-center">Resume</h2>
         <div className="glass-card p-6 flex flex-col items-center">
           <embed
