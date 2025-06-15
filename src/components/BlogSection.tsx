@@ -1,4 +1,5 @@
 
+
 const posts = [{
   id: 1,
   slug: "styling-neumorphism-tailwind",
@@ -29,11 +30,16 @@ export default function BlogSection() {
                 <h3 className="text-2xl font-semibold text-blue-glow mb-3">{post.title}</h3>
                 <p className="text-gray-300 mb-4 text-base leading-relaxed flex-grow">{post.excerpt}</p>
                 <div className="flex items-center justify-between mt-auto">
-                  <a href={`/blog/${post.slug}`} className="text-blue-glow underline underline-offset-2 text-base hover:text-blue-400 font-medium">
-                    Read more →
-                  </a>
                   <div className="text-sm text-gray-400">
                     {post.date}
+                  </div>
+                  <div className="flex gap-3">
+                    <button className="neu-btn text-sm px-4 py-2 text-blue-glow hover:text-white transition">
+                      Share
+                    </button>
+                    <a href={`/blog/${post.slug}`} className="neu-btn text-sm px-4 py-2 text-blue-glow hover:text-white transition">
+                      Read more
+                    </a>
                   </div>
                 </div>
               </div>
@@ -42,3 +48,4 @@ export default function BlogSection() {
       </div>
     </section>;
 }
+
