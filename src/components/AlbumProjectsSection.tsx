@@ -1,5 +1,3 @@
-
-
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -110,8 +108,8 @@ export default function AlbumProjectsSection() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(96,165,250,0.1),transparent_50%)]" />
       </div>
 
-      {/* Section Title - Left aligned with reduced padding */}
-      <div className="absolute top-8 left-8 z-20 pointer-events-none">
+      {/* Section Title - Repositioned for visibility */}
+      <div className="absolute top-24 left-12 z-20 pointer-events-none">
         <h2 className="gradient-text text-3xl md:text-5xl font-bold drop-shadow-2xl leading-tight">
           Top Collection
         </h2>
@@ -189,4 +187,3 @@ export default function AlbumProjectsSection() {
     </section>
   );
 }
-
