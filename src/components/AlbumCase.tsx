@@ -47,7 +47,7 @@ export default function AlbumCase({ project, index }: AlbumCaseProps) {
       onMouseMove={handleMouseMove}
     >
       {/* CD Case Container - Larger size */}
-      <div className="relative w-64 h-64 perspective-1000">
+      <div className="relative w-80 h-80 perspective-1000">
         {/* Case Shadow */}
         <div className="absolute inset-0 bg-black/20 rounded-lg transform translate-x-2 translate-y-2 blur-md" />
         
@@ -69,8 +69,8 @@ export default function AlbumCase({ project, index }: AlbumCaseProps) {
           {/* Glossy Overlay */}
           <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent pointer-events-none" />
           
-          {/* Album Art - Increased size and removed gradient */}
-          <div className="relative w-full h-full p-2">
+          {/* Album Art - Increased width with minimal padding */}
+          <div className="relative w-full h-full p-1">
             <div className="w-full h-full rounded border border-white/20 flex items-center justify-center overflow-hidden">
               <img
                 ref={imageRef}
