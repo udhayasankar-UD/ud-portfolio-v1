@@ -41,13 +41,13 @@ export default function AlbumCase({ project, index }: AlbumCaseProps) {
 
   return (
     <div
-      className="flex-shrink-0 group cursor-pointer"
+      className="flex-shrink-0 group cursor-pointer w-full h-full flex items-center justify-center"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={handleMouseLeave}
       onMouseMove={handleMouseMove}
     >
-      {/* CD Case Container - Made smaller for card layout */}
-      <div className="relative w-72 h-72 perspective-1000 mx-auto">
+      {/* CD Case Container - Responsive sizing */}
+      <div className="relative w-48 h-48 perspective-1000">
         {/* Case Shadow */}
         <div className="absolute inset-0 bg-black/20 rounded-lg transform translate-x-2 translate-y-2 blur-md" />
         
@@ -70,7 +70,7 @@ export default function AlbumCase({ project, index }: AlbumCaseProps) {
           <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent pointer-events-none" />
           
           {/* Album Art */}
-          <div className="relative w-full h-full p-4">
+          <div className="relative w-full h-full p-3">
             <div className="w-full h-full bg-gradient-to-br from-blue-glow/30 to-purple-500/30 rounded border border-white/20 flex items-center justify-center overflow-hidden">
               <img
                 ref={imageRef}
@@ -81,7 +81,7 @@ export default function AlbumCase({ project, index }: AlbumCaseProps) {
               
               {/* Project Icon Overlay */}
               <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-blue-glow/60 to-purple-500/60">
-                <div className="text-white text-5xl font-bold opacity-90">
+                <div className="text-white text-3xl font-bold opacity-90">
                   {project.title.charAt(0)}
                 </div>
               </div>
