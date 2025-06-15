@@ -1,30 +1,25 @@
 
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import * as THREE from "three";
 
-// AnimatedCube with interactive rotation and glow
+// Animated cube with parallax + floating effect
 function AnimatedCube() {
   const meshRef = useRef<THREE.Mesh>(null);
   const [target, setTarget] = useState({ x: 0, y: 0 });
   const { size } = useThree();
 
-  // Parallax effect: track mouse movement
-  // Uses requestAnimationFrame for smoothness
   const handlePointerMove = (e: any) => {
-    // Convert mouse coordinates to normalized device coordinates
     const { offsetX, offsetY } = e.nativeEvent;
     const x = (offsetX / size.width) * 2 - 1;
     const y = -(offsetY / size.height) * 2 + 1;
     setTarget({ x: y * 0.4, y: x * 0.4 });
   };
 
-  // Animate rotation toward the parallax target & auto-spin
   useFrame(() => {
     if (meshRef.current) {
       meshRef.current.rotation.x += (target.x - meshRef.current.rotation.x) * 0.07 + 0.003;
       meshRef.current.rotation.y += (target.y - meshRef.current.rotation.y) * 0.07 + 0.007;
-      // Subtle vertical floating
       meshRef.current.position.y = Math.sin(Date.now() * 0.002) * 0.15;
     }
   });
@@ -40,10 +35,11 @@ function AnimatedCube() {
     >
       <boxGeometry args={[1.2, 1.2, 1.2]} />
       <meshStandardMaterial
-        color="#60a5fa"
+        attach="material"
+        color={new THREE.Color("#60a5fa")}
         metalness={1}
         roughness={0.15}
-        emissive="#2563eb"
+        emissive={new THREE.Color("#2563eb")}
         emissiveIntensity={0.5}
         envMapIntensity={0.75}
       />
@@ -51,7 +47,45 @@ function AnimatedCube() {
   );
 }
 
-// Hero section: Modern 3D, bold gradients, subtle motion
+// AnimatedRoles: cycles through professional roles with a fade/type effect
+function AnimatedRoles() {
+  const roles = [
+    "I'm a Full-Stack Developer",
+    "Game Developer",
+    "UI & UX Designer",
+  ];
+  const [index, setIndex] = useState(0);
+  const [show, setShow] = useState(true);
+
+  useEffect(() => {
+    const fadeDuration = 350; // ms
+    const visibleDuration = 1700; // ms
+    // Fade out then change word, fade in
+    const timeout = setTimeout(() => setShow(false), visibleDuration);
+    const afterFade = setTimeout(() => {
+      setIndex((i) => (i + 1) % roles.length);
+      setShow(true);
+    }, visibleDuration + fadeDuration);
+
+    return () => {
+      clearTimeout(timeout);
+      clearTimeout(afterFade);
+    };
+  }, [index, show]);
+  
+  return (
+    <span
+      className={`block mt-2 text-2xl md:text-4xl lg:text-5xl font-semibold bg-gradient-to-r from-blue-glow via-indigo-400 to-fuchsia-500 bg-clip-text text-transparent drop-shadow-[0_0_16px_rgba(96,165,250,0.9)] transition-opacity duration-300 will-change-opacity ${
+        show ? "opacity-100" : "opacity-0"
+      }`}
+      aria-live="polite"
+    >
+      {roles[index]}
+    </span>
+  );
+}
+
+// Main hero export
 export default function Hero3D() {
   return (
     <section
@@ -75,11 +109,9 @@ export default function Hero3D() {
         </div>
         {/* Animated text */}
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-center gradient-text animate-fade-in-up drop-shadow-[0_2px_14px_rgba(96,165,250,0.7)]">
-          Hi, I’m Udhaya Sankar <br />
-          <span className="block mt-2 text-3xl md:text-4xl lg:text-5xl gradient-text bg-gradient-to-r from-blue-glow via-indigo-400 to-fuchsia-500 bg-clip-text text-transparent drop-shadow-[0_0_16px_rgba(96,165,250,0.9)] animate-fade-in-up">
-            Front-End &amp; Game Developer
-          </span>
+          Hi, I’m Udhaya Sankar
         </h1>
+        <AnimatedRoles />
         <div className="mt-6 text-lg md:text-xl text-blue-100 text-center max-w-2xl animate-fade-in-up">
           Building immersive web &amp; game experiences with 3D, modern UI, and a nerd’s passion for code.
         </div>
@@ -113,4 +145,3 @@ export default function Hero3D() {
     </section>
   );
 }
-
