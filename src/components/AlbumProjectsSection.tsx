@@ -111,7 +111,7 @@ export default function AlbumProjectsSection() {
 
       {/* Section Title - Fixed positioning */}
       <div className="absolute top-8 left-8 z-20 pointer-events-none">
-        <h2 className="gradient-text text-5xl md:text-7xl font-bold drop-shadow-2xl leading-tight">
+        <h2 className="gradient-text text-3xl md:text-5xl font-bold drop-shadow-2xl leading-tight">
           Top Collection
         </h2>
         <p className="text-white/90 text-base md:text-lg mt-3 drop-shadow-lg max-w-md">
