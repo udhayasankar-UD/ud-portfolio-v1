@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from "react";
 import ProjectSidebar from "./ProjectSidebar";
 import ProjectDetail from "./ProjectDetail";
@@ -71,44 +70,83 @@ export default function ProjectsShowcase() {
   const [isActive, setIsActive] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [animateDirection, setAnimateDirection] = useState<'up' | 'down'>('down');
+  const [isExiting, setIsExiting] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const panelHeight = 100; // vh units
+  const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setIsActive(entry.isIntersecting);
+        const isIntersecting = entry.isIntersecting;
+        const intersectionRatio = entry.intersectionRatio;
+        
+        if (isIntersecting && intersectionRatio > 0.5) {
+          setIsActive(true);
+          setIsExiting(false);
+        } else if (isActive && intersectionRatio < 0.1) {
+          setIsExiting(true);
+          setTimeout(() => {
+            setIsActive(false);
+            setIsExiting(false);
+          }, 300); // Smooth transition delay
+        }
       },
-      { threshold: 0.5 }
+      { 
+        threshold: [0, 0.1, 0.5, 0.9, 1],
+        rootMargin: '-10% 0px -10% 0px'
+      }
     );
 
-    const section = document.getElementById('projects-showcase');
-    if (section) observer.observe(section);
-
+    if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
-  }, []);
+  }, [isActive]);
 
   useEffect(() => {
-    document.body.style.overflow = isActive ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
-  }, [isActive]);
+    const body = document.body;
+    const html = document.documentElement;
+    
+    if (isActive && !isExiting) {
+      body.style.overflow = "hidden";
+      html.style.scrollBehavior = "smooth";
+    } else {
+      body.style.overflow = "";
+      // Delay removing scroll behavior to allow smooth transition
+      setTimeout(() => {
+        html.style.scrollBehavior = "";
+      }, 500);
+    }
+    
+    return () => {
+      body.style.overflow = "";
+      html.style.scrollBehavior = "";
+    };
+  }, [isActive, isExiting]);
 
   const handleScroll = () => {
     if (!containerRef.current) return;
     
     const scrollTop = containerRef.current.scrollTop;
-    const newIndex = Math.round(scrollTop / (containerRef.current.scrollHeight / (projects.length + 1)));
+    const containerHeight = containerRef.current.scrollHeight;
+    const viewportHeight = containerRef.current.clientHeight;
+    const maxScroll = containerHeight - viewportHeight;
     
-    if (newIndex !== currentIndex) {
-      setAnimateDirection(newIndex > currentIndex ? 'down' : 'up');
-      setCurrentIndex(newIndex);
+    const newIndex = Math.round((scrollTop / maxScroll) * projects.length);
+    const clampedIndex = Math.min(newIndex, projects.length);
+    
+    if (clampedIndex !== currentIndex) {
+      setAnimateDirection(clampedIndex > currentIndex ? 'down' : 'up');
+      setCurrentIndex(clampedIndex);
     }
   };
 
   const handleSidebarSelect = (index: number) => {
     if (!containerRef.current) return;
     
-    const targetScroll = (index * containerRef.current.scrollHeight) / (projects.length + 1);
+    const containerHeight = containerRef.current.scrollHeight;
+    const viewportHeight = containerRef.current.clientHeight;
+    const maxScroll = containerHeight - viewportHeight;
+    const targetScroll = (index / projects.length) * maxScroll;
+    
     containerRef.current.scrollTo({
       top: targetScroll,
       behavior: 'smooth'
@@ -117,11 +155,16 @@ export default function ProjectsShowcase() {
 
   return (
     <section
+      ref={sectionRef}
       id="projects-showcase"
       className="h-screen w-full relative bg-gradient-to-br from-gray-900 via-gray-800 to-blue-glow/10"
     >
       {isActive && (
-        <div className="fixed inset-0 z-30 flex w-full h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-blue-glow/10">
+        <div className={`
+          fixed inset-0 z-30 flex w-full h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-blue-glow/10
+          transition-all duration-500 ease-out
+          ${isExiting ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}
+        `}>
           <ProjectSidebar
             projects={projects}
             activeIndex={currentIndex}
@@ -130,15 +173,18 @@ export default function ProjectsShowcase() {
           
           <div
             ref={containerRef}
-            className="flex-1 h-full overflow-y-auto overflow-x-hidden"
+            className="flex-1 h-full overflow-y-auto overflow-x-hidden scroll-smooth"
             onScroll={handleScroll}
-            style={{ scrollSnapType: 'y mandatory' }}
+            style={{ 
+              scrollSnapType: 'y mandatory',
+              scrollBehavior: 'smooth'
+            }}
           >
             {projects.map((project, index) => (
               <div
                 key={project.id}
                 className="h-screen flex items-center justify-center p-8"
-                style={{ scrollSnapAlign: 'start' }}
+                style={{ scrollSnapAlign: 'center' }}
               >
                 <ProjectDetail 
                   project={project} 
@@ -150,7 +196,7 @@ export default function ProjectsShowcase() {
             
             <div 
               className="h-screen flex items-center justify-center"
-              style={{ scrollSnapAlign: 'start' }}
+              style={{ scrollSnapAlign: 'center' }}
             >
               <ProjectFinalPanel isActive={currentIndex === projects.length} />
             </div>
