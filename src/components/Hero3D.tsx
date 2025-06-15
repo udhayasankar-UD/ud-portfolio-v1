@@ -1,4 +1,3 @@
-
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useRef, useState, useEffect } from "react";
 import * as THREE from "three";
@@ -43,17 +42,17 @@ function FloatingParticles() {
       <bufferGeometry>
         <bufferAttribute
           attach="attributes-position"
-          count={particleCount}
-          array={positions}
-          itemSize={3}
+          args={[positions, 3]}
         />
       </bufferGeometry>
       <pointsMaterial
-        size={0.05}
-        color="#60a5fa"
-        transparent={true}
-        opacity={0.6}
-        sizeAttenuation={true}
+        args={[{
+          size: 0.05,
+          color: "#60a5fa",
+          transparent: true,
+          opacity: 0.6,
+          sizeAttenuation: true
+        }]}
       />
     </points>
   );
