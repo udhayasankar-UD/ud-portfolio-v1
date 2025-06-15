@@ -69,22 +69,15 @@ export default function AlbumCase({ project, index }: AlbumCaseProps) {
           {/* Glossy Overlay */}
           <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent pointer-events-none" />
           
-          {/* Album Art */}
-          <div className="relative w-full h-full p-4">
-            <div className="w-full h-full bg-gradient-to-br from-blue-glow/30 to-purple-500/30 rounded border border-white/20 flex items-center justify-center overflow-hidden">
+          {/* Album Art - Increased size and removed gradient */}
+          <div className="relative w-full h-full p-2">
+            <div className="w-full h-full rounded border border-white/20 flex items-center justify-center overflow-hidden">
               <img
                 ref={imageRef}
                 src={project.image}
                 alt={project.title}
                 className="w-full h-full object-cover transition-transform duration-200 ease-out"
               />
-              
-              {/* Project Icon Overlay */}
-              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-blue-glow/60 to-purple-500/60">
-                <div className="text-white text-4xl font-bold opacity-90">
-                  {project.title.charAt(0)}
-                </div>
-              </div>
             </div>
           </div>
 
