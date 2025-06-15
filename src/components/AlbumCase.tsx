@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 interface Project {
   id: number;
@@ -18,12 +18,33 @@ interface AlbumCaseProps {
 
 export default function AlbumCase({ project, index }: AlbumCaseProps) {
   const [isHovered, setIsHovered] = useState(false);
+  const imageRef = useRef<HTMLImageElement>(null);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!imageRef.current) return;
+    
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    
+    const moveX = (x - rect.width / 2) / 10;
+    const moveY = (y - rect.height / 2) / 10;
+    
+    imageRef.current.style.transform = `translate(${moveX}px, ${moveY}px) scale(1.1)`;
+  };
+
+  const handleMouseLeave = () => {
+    if (!imageRef.current) return;
+    imageRef.current.style.transform = 'translate(0px, 0px) scale(1)';
+    setIsHovered(false);
+  };
 
   return (
     <div
       className="flex-shrink-0 group cursor-pointer"
       onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseLeave={handleMouseLeave}
+      onMouseMove={handleMouseMove}
     >
       {/* CD Case Container */}
       <div className="relative w-80 h-80 perspective-1000">
@@ -52,14 +73,15 @@ export default function AlbumCase({ project, index }: AlbumCaseProps) {
           <div className="relative w-full h-full p-4">
             <div className="w-full h-full bg-gradient-to-br from-blue-glow/30 to-purple-500/30 rounded border border-white/20 flex items-center justify-center overflow-hidden">
               <img
+                ref={imageRef}
                 src={project.image}
                 alt={project.title}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover transition-transform duration-200 ease-out"
               />
               
               {/* Project Icon Overlay */}
-              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-blue-glow/80 to-purple-500/80">
-                <div className="text-white text-6xl font-bold opacity-80">
+              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-blue-glow/60 to-purple-500/60">
+                <div className="text-white text-6xl font-bold opacity-90">
                   {project.title.charAt(0)}
                 </div>
               </div>

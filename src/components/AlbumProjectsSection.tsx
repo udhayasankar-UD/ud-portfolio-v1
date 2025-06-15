@@ -110,18 +110,18 @@ export default function AlbumProjectsSection() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(96,165,250,0.1),transparent_50%)]" />
       </div>
 
-      {/* Section Title - Fixed position and highly visible */}
-      <div className="fixed top-20 left-8 z-50 pointer-events-none">
-        <h2 className="gradient-text text-4xl md:text-6xl font-bold drop-shadow-2xl">
+      {/* Section Title - Positioned to not overlap with projects */}
+      <div className="absolute top-16 left-8 z-10 pointer-events-none">
+        <h2 className="gradient-text text-3xl md:text-5xl font-bold drop-shadow-2xl">
           Top Collection
         </h2>
-        <p className="text-white/90 text-lg mt-2 drop-shadow-lg">
+        <p className="text-white/90 text-base mt-1 drop-shadow-lg">
           Scroll to explore my featured projects
         </p>
       </div>
 
       {/* Main Content */}
-      <div className="relative h-full flex items-center pt-32">
+      <div className="relative h-full flex items-center pt-24">
         {/* Cases Track with project details below each case */}
         <div
           ref={trackRef}
