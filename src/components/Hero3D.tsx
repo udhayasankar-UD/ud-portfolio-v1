@@ -66,6 +66,8 @@ function AnimatedRoles() {
   useEffect(() => {
     let timeout: number | undefined;
     const word = roles[index];
+    // Debug logging: see what happens every render
+    console.log("AnimatedRoles effect: displayed =", displayed, "typing =", typing, "index =", index, "word =", word);
 
     if (typing) {
       if (displayed.length < word.length) {
