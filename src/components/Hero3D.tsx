@@ -1,4 +1,3 @@
-
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useRef, useState, useEffect } from "react";
 import * as THREE from "three";
@@ -47,40 +46,64 @@ function AnimatedCube() {
   );
 }
 
-// AnimatedRoles: cycles through professional roles with a fade/type effect
+// AnimatedRoles: Shows each role with typewriter animation.
 function AnimatedRoles() {
   const roles = [
-    "I'm a Full-Stack Developer",
+    "Full-Stack Developer",
     "Game Developer",
     "UI & UX Designer",
   ];
-  const [index, setIndex] = useState(0);
-  const [show, setShow] = useState(true);
+  const [index, setIndex] = useState(0);     // Index of role
+  const [displayed, setDisplayed] = useState(""); // Currently displayed text
+  const [typing, setTyping] = useState(true);     // Typing or deleting
 
   useEffect(() => {
-    const fadeDuration = 350; // ms
-    const visibleDuration = 1700; // ms
-    // Fade out then change word, fade in
-    const timeout = setTimeout(() => setShow(false), visibleDuration);
-    const afterFade = setTimeout(() => {
-      setIndex((i) => (i + 1) % roles.length);
-      setShow(true);
-    }, visibleDuration + fadeDuration);
+    let timeout: number | undefined;
+    const word = roles[index];
 
-    return () => {
-      clearTimeout(timeout);
-      clearTimeout(afterFade);
-    };
-  }, [index, show]);
-  
+    if (typing) {
+      if (displayed.length < word.length) {
+        timeout = window.setTimeout(() => {
+          setDisplayed(word.slice(0, displayed.length + 1));
+        }, 65);
+      } else {
+        // Pause before starting to delete
+        timeout = window.setTimeout(() => setTyping(false), 1000);
+      }
+    } else {
+      if (displayed.length > 0) {
+        timeout = window.setTimeout(() => {
+          setDisplayed(word.slice(0, displayed.length - 1));
+        }, 36);
+      } else {
+        // Move to next role
+        setTyping(true);
+        setIndex((prev) => (prev + 1) % roles.length);
+      }
+    }
+    return () => clearTimeout(timeout);
+  }, [displayed, typing, index, roles]);
+
   return (
     <span
-      className={`block mt-2 text-2xl md:text-4xl lg:text-5xl font-semibold bg-gradient-to-r from-blue-glow via-indigo-400 to-fuchsia-500 bg-clip-text text-transparent drop-shadow-[0_0_16px_rgba(96,165,250,0.9)] transition-opacity duration-300 will-change-opacity ${
-        show ? "opacity-100" : "opacity-0"
-      }`}
+      className={
+        "block mt-2 text-2xl md:text-4xl lg:text-5xl font-semibold bg-gradient-to-r from-blue-glow via-indigo-400 to-fuchsia-500 bg-clip-text text-transparent drop-shadow-[0_0_16px_rgba(96,165,250,0.9)] select-none transition-all duration-200 min-h-[2.6rem] md:min-h-[3.2rem] lg:min-h-[3.5rem]"
+      }
       aria-live="polite"
     >
-      {roles[index]}
+      <span>{`I'm `}</span>
+      <span className="border-r-2 border-blue-glow animate-pulse-slow">
+        {displayed}
+      </span>
+      <style>{`
+        @keyframes pulse-slow {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.55; }
+        }
+        .animate-pulse-slow {
+          animation: pulse-slow 1.1s steps(2) infinite;
+        }
+      `}</style>
     </span>
   );
 }
