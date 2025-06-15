@@ -11,48 +11,57 @@ gsap.registerPlugin(ScrollTrigger);
 const projects = [
   {
     id: 1,
-    title: "AI-Powered Task Manager",
-    description: "Intelligent task management system with natural language processing and smart prioritization",
-    tech: ["React", "TypeScript", "OpenAI API", "Supabase"],
-    image: "/placeholder.svg",
-    liveUrl: "https://ai-task-manager.demo.com",
-    githubUrl: "https://github.com/yourusername/ai-task-manager"
+    title: "Your Wellbeing",
+    description: "A modern React-driven app for wellness and self-care with intuitive interface design",
+    tech: ["React", "TypeScript", "Tailwind CSS", "Node.js"],
+    image: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&w=600&q=80",
+    liveUrl: "#",
+    githubUrl: "#"
   },
   {
     id: 2,
-    title: "Real-Time Collaboration Platform",
-    description: "Multi-user workspace with live editing, video calls, and project management features",
-    tech: ["React", "Socket.io", "Node.js", "MongoDB"],
-    image: "/placeholder.svg",
-    liveUrl: "https://collab-platform.demo.com",
-    githubUrl: "https://github.com/yourusername/collab-platform"
+    title: "Unsung Empires: The Cholas II",
+    description: "Epic historical strategy game – contributions in 3D modeling, AI systems & gameplay mechanics",
+    tech: ["Unity", "C#", "3D Modeling", "AI Systems"],
+    image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=600&q=80",
+    liveUrl: "#",
+    githubUrl: "#"
   },
   {
     id: 3,
-    title: "3D Portfolio Website",
-    description: "Interactive portfolio with Three.js animations and immersive user experience",
-    tech: ["React", "Three.js", "GSAP", "Tailwind CSS"],
-    image: "/placeholder.svg",
-    liveUrl: "https://3d-portfolio.demo.com",
-    githubUrl: "https://github.com/yourusername/3d-portfolio"
+    title: "Car-Park AI",
+    description: "AI-powered parking solution with real-time dashboard and intelligent web UI for optimal space management",
+    tech: ["React", "Python", "AI/ML", "Dashboard"],
+    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80",
+    liveUrl: "#",
+    githubUrl: "#"
   },
   {
     id: 4,
-    title: "E-Commerce Analytics Dashboard",
-    description: "Comprehensive analytics platform with real-time data visualization and reporting",
-    tech: ["React", "Chart.js", "Firebase", "Stripe API"],
-    image: "/placeholder.svg",
-    liveUrl: "https://ecommerce-analytics.demo.com",
-    githubUrl: "https://github.com/yourusername/ecommerce-analytics"
+    title: "Game Portfolio",
+    description: "Comprehensive showcase with thumbnails, demo builds & playtest videos for indie game projects",
+    tech: ["Unity", "Game Design", "Video Editing", "Portfolio"],
+    image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=600&q=80",
+    liveUrl: "#",
+    githubUrl: "#"
   },
   {
     id: 5,
-    title: "Mobile-First Social App",
-    description: "Social networking platform optimized for mobile with PWA capabilities",
-    tech: ["React", "PWA", "WebRTC", "PostgreSQL"],
-    image: "/placeholder.svg",
-    liveUrl: "https://social-app.demo.com",
-    githubUrl: "https://github.com/yourusername/social-app"
+    title: "AURA e-Commerce Revamp",
+    description: "Complete UI/UX overhaul for efficient online shopping experience with lightning-fast SPA performance",
+    tech: ["React", "UI/UX", "E-Commerce", "SPA"],
+    image: "https://images.unsplash.com/photo-1470813740244-df37b8c1edcb?auto=format&fit=crop&w=600&q=80",
+    liveUrl: "#",
+    githubUrl: "#"
+  },
+  {
+    id: 6,
+    title: "Interion Workshop",
+    description: "API-driven interior design playground with collaborative features. Open source community project",
+    tech: ["React", "API", "Interior Design", "Open Source"],
+    image: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=600&q=80",
+    liveUrl: "#",
+    githubUrl: "#"
   }
 ];
 
@@ -120,10 +129,10 @@ export default function AlbumProjectsSection() {
 
       {/* Main Content */}
       <div className="relative h-full flex items-center">
-        {/* Cases Track */}
+        {/* Cases Track with increased spacing */}
         <div
           ref={trackRef}
-          className="flex items-center gap-8 px-20 min-w-max case-track"
+          className="flex items-center gap-16 px-32 min-w-max case-track"
         >
           {projects.map((project, index) => (
             <AlbumCase
@@ -139,7 +148,7 @@ export default function AlbumProjectsSection() {
       {/* Details Panel */}
       <div
         ref={detailsRef}
-        className="absolute bottom-8 left-8 right-8 md:right-auto md:w-96"
+        className="absolute bottom-8 left-8 right-8 md:right-auto md:w-[420px]"
       >
         {projects.map((project, index) => (
           <AlbumDetailsCard

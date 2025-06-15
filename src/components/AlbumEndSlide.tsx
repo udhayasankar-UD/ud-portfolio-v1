@@ -3,10 +3,10 @@ import { ArrowRight, Sparkles } from "lucide-react";
 
 export default function AlbumEndSlide() {
   const handleViewAll = () => {
-    // Scroll to regular projects section or navigate to projects page
-    const projectsSection = document.getElementById('projects-grid');
-    if (projectsSection) {
-      projectsSection.scrollIntoView({ behavior: 'smooth' });
+    // Scroll to contact section since projects section is removed
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
@@ -24,7 +24,7 @@ export default function AlbumEndSlide() {
         </h2>
         
         <p className="text-white/80 text-xl md:text-2xl mb-8 leading-relaxed">
-          Want to see every project in detail?
+          Ready to work together on your next project?
         </p>
 
         {/* CTA Button */}
@@ -32,7 +32,7 @@ export default function AlbumEndSlide() {
           onClick={handleViewAll}
           className="neu-btn bg-blue-glow hover:bg-blue-400 text-white font-bold px-8 py-4 rounded-xl text-lg flex items-center gap-3 mx-auto transition-all duration-300 hover:scale-105"
         >
-          View All Projects
+          Get In Touch
           <ArrowRight className="w-6 h-6" />
         </button>
 
