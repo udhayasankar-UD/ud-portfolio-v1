@@ -1,4 +1,3 @@
-
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -110,17 +109,14 @@ export default function AlbumProjectsSection() {
       </div>
 
       {/* Section Title - Fixed positioning */}
-      <div className="absolute top-8 left-8 z-20 pointer-events-none">
-        <h2 className="gradient-text text-3xl md:text-5xl font-bold drop-shadow-2xl leading-tight">
+      <div className="absolute top-6 left-8 z-20 pointer-events-none">
+        <h2 className="gradient-text text-2xl md:text-4xl font-bold drop-shadow-2xl leading-tight">
           Top Collection
         </h2>
-        <p className="text-white/90 text-base md:text-lg mt-3 drop-shadow-lg max-w-md">
-          Scroll to explore my featured projects
-        </p>
       </div>
 
       {/* Main Content */}
-      <div className="relative h-full flex items-center pt-24">
+      <div className="relative h-full flex items-center pt-16">
         {/* Combined Project Cards Track */}
         <div
           ref={trackRef}
