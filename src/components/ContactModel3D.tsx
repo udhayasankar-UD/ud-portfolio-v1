@@ -21,17 +21,17 @@ function RoundedLimb({
       {/* Cylinder */}
       <mesh>
         <cylinderGeometry args={[radius, radius, length, 16]} />
-        <meshPhongMaterial color={color} />
+        <meshPhongMaterial args={[color]} />
       </mesh>
       {/* Top hemisphere */}
       <mesh position={[0, length/2, 0]}>
         <sphereGeometry args={[radius, 16, 16, 0, Math.PI * 2, 0, Math.PI/2]} />
-        <meshPhongMaterial color={color} />
+        <meshPhongMaterial args={[color]} />
       </mesh>
       {/* Bottom hemisphere */}
       <mesh position={[0, -length/2, 0]} rotation={[Math.PI, 0, 0]}>
         <sphereGeometry args={[radius, 16, 16, 0, Math.PI * 2, 0, Math.PI/2]} />
-        <meshPhongMaterial color={color} />
+        <meshPhongMaterial args={[color]} />
       </mesh>
     </group>
   );
@@ -94,15 +94,22 @@ function SimpleCharacter() {
       {/* Head - larger sphere */}
       <mesh position={[0, 2, 0]}>
         <sphereGeometry args={[0.5, 32, 32]} />
-        <meshPhongMaterial color="#fdbcb4" />
+        <meshPhongMaterial args={["#fdbcb4"]} />
       </mesh>
-
+      {/* Eyes - two small black spheres */}
+      <mesh position={[-0.15, 2.08, 0.42]}>
+        <sphereGeometry args={[0.04, 16, 16]} />
+        <meshPhongMaterial args={["#000"]} />
+      </mesh>
+      <mesh position={[0.15, 2.08, 0.42]}>
+        <sphereGeometry args={[0.04, 16, 16]} />
+        <meshPhongMaterial args={["#000"]} />
+      </mesh>
       {/* Body */}
       <mesh position={[0, 1, 0]}>
         <sphereGeometry args={[0.4, 32, 32]} />
-        <meshPhongMaterial color="#4a90e2" />
+        <meshPhongMaterial args={["#4a90e2"]} />
       </mesh>
-
       {/* Left Arm */}
       <RoundedLimb 
         position={[-0.65, 1.35, 0]}
@@ -135,21 +142,10 @@ function SimpleCharacter() {
         radius={0.13}
         color="#2c5aa0"
       />
-
-      {/* Eyes */}
-      <mesh position={[-0.15, 2.08, 0.42]}>
-        <sphereGeometry args={[0.04, 16, 16]} />
-        <meshPhongMaterial color="#000000" />
-      </mesh>
-      <mesh position={[0.15, 2.08, 0.42]}>
-        <sphereGeometry args={[0.04, 16, 16]} />
-        <meshPhongMaterial color="#000000" />
-      </mesh>
-
       {/* Smile */}
       <mesh position={[0, 1.92, 0.42]} rotation={[Math.PI/2, 0, 0]}>
         <torusGeometry args={[0.1, 0.018, 8, 16, Math.PI]} />
-        <meshPhongMaterial color="#000000" />
+        <meshPhongMaterial args={["#000"]} />
       </mesh>
     </group>
   );
