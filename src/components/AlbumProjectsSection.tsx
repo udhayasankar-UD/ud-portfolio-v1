@@ -1,3 +1,4 @@
+
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -108,15 +109,15 @@ export default function AlbumProjectsSection() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(96,165,250,0.1),transparent_50%)]" />
       </div>
 
-      {/* Section Title - Fixed positioning */}
-      <div className="absolute top-6 left-8 z-20 pointer-events-none">
-        <h2 className="gradient-text text-2xl md:text-4xl font-bold drop-shadow-2xl leading-tight">
+      {/* Section Title - More prominent positioning */}
+      <div className="absolute top-12 left-1/2 transform -translate-x-1/2 z-20 pointer-events-none text-center">
+        <h2 className="gradient-text text-4xl md:text-6xl font-bold drop-shadow-2xl leading-tight">
           Top Collection
         </h2>
       </div>
 
       {/* Main Content */}
-      <div className="relative h-full flex items-center pt-16">
+      <div className="relative h-full flex items-center pt-32">
         {/* Combined Project Cards Track */}
         <div
           ref={trackRef}
