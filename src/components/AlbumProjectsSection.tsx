@@ -11,39 +11,48 @@ gsap.registerPlugin(ScrollTrigger);
 const projects = [
   {
     id: 1,
-    title: "E-Commerce Platform",
-    description: "A full-stack e-commerce solution with React, Node.js, and MongoDB",
-    tech: ["React", "Node.js", "MongoDB", "Stripe"],
+    title: "AI-Powered Task Manager",
+    description: "Intelligent task management system with natural language processing and smart prioritization",
+    tech: ["React", "TypeScript", "OpenAI API", "Supabase"],
     image: "/placeholder.svg",
-    liveUrl: "#",
-    githubUrl: "#"
+    liveUrl: "https://ai-task-manager.demo.com",
+    githubUrl: "https://github.com/yourusername/ai-task-manager"
   },
   {
     id: 2,
-    title: "Task Management App",
-    description: "Collaborative task management with real-time updates",
-    tech: ["React", "Firebase", "Tailwind CSS"],
+    title: "Real-Time Collaboration Platform",
+    description: "Multi-user workspace with live editing, video calls, and project management features",
+    tech: ["React", "Socket.io", "Node.js", "MongoDB"],
     image: "/placeholder.svg",
-    liveUrl: "#",
-    githubUrl: "#"
+    liveUrl: "https://collab-platform.demo.com",
+    githubUrl: "https://github.com/yourusername/collab-platform"
   },
   {
     id: 3,
-    title: "Weather Dashboard",
-    description: "Real-time weather data visualization with interactive charts",
-    tech: ["React", "Chart.js", "Weather API"],
+    title: "3D Portfolio Website",
+    description: "Interactive portfolio with Three.js animations and immersive user experience",
+    tech: ["React", "Three.js", "GSAP", "Tailwind CSS"],
     image: "/placeholder.svg",
-    liveUrl: "#",
-    githubUrl: "#"
+    liveUrl: "https://3d-portfolio.demo.com",
+    githubUrl: "https://github.com/yourusername/3d-portfolio"
   },
   {
     id: 4,
-    title: "Portfolio Website",
-    description: "Personal portfolio with 3D animations and modern design",
-    tech: ["React", "Three.js", "GSAP", "Tailwind"],
+    title: "E-Commerce Analytics Dashboard",
+    description: "Comprehensive analytics platform with real-time data visualization and reporting",
+    tech: ["React", "Chart.js", "Firebase", "Stripe API"],
     image: "/placeholder.svg",
-    liveUrl: "#",
-    githubUrl: "#"
+    liveUrl: "https://ecommerce-analytics.demo.com",
+    githubUrl: "https://github.com/yourusername/ecommerce-analytics"
+  },
+  {
+    id: 5,
+    title: "Mobile-First Social App",
+    description: "Social networking platform optimized for mobile with PWA capabilities",
+    tech: ["React", "PWA", "WebRTC", "PostgreSQL"],
+    image: "/placeholder.svg",
+    liveUrl: "https://social-app.demo.com",
+    githubUrl: "https://github.com/yourusername/social-app"
   }
 ];
 
@@ -144,10 +153,10 @@ export default function AlbumProjectsSection() {
       {/* Section Title */}
       <div className="absolute top-8 left-8">
         <h2 className="gradient-text text-4xl md:text-6xl font-bold">
-          My Collection
+          Top Collection
         </h2>
         <p className="text-white/60 text-lg mt-2">
-          Scroll to explore my projects
+          Scroll to explore my featured projects
         </p>
       </div>
     </section>
