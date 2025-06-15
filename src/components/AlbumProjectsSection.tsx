@@ -6,8 +6,8 @@ import AlbumEndSlide from "./AlbumEndSlide";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-// MUST register for GSAP plugins!
-if (typeof window !== "undefined" && !gsap.core.globals().ScrollTrigger) {
+// Register GSAP plugin (fix: remove .globals() usage)
+if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
