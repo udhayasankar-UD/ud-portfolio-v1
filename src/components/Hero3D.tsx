@@ -34,11 +34,10 @@ function AnimatedCube() {
     >
       <boxGeometry args={[1.2, 1.2, 1.2]} />
       <meshStandardMaterial
-        attach="material"
-        color={new THREE.Color("#60a5fa")}
+        color="#60a5fa"
         metalness={1}
         roughness={0.15}
-        emissive={new THREE.Color("#2563eb")}
+        emissive="#2563eb"
         emissiveIntensity={0.5}
         envMapIntensity={0.75}
       />
