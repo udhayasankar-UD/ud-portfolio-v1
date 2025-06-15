@@ -34,7 +34,7 @@ function AnimatedCube() {
     >
       <boxGeometry args={[1.2, 1.2, 1.2]} />
       <meshStandardMaterial
-        color="#60a5fa"
+        args={["#60a5fa"]}
         metalness={1}
         roughness={0.15}
         emissive="#2563eb"
