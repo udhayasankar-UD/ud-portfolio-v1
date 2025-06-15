@@ -23,6 +23,20 @@ function AnimatedCube() {
     }
   });
 
+  // Create the material instance with proper properties only once
+  const materialRef = useRef<THREE.MeshStandardMaterial>();
+
+  if (!materialRef.current) {
+    materialRef.current = new THREE.MeshStandardMaterial({
+      color: "#60a5fa",
+      metalness: 1,
+      roughness: 0.15,
+      emissive: "#2563eb",
+      emissiveIntensity: 0.5,
+      envMapIntensity: 0.75,
+    });
+  }
+
   return (
     <mesh
       ref={meshRef}
@@ -33,14 +47,7 @@ function AnimatedCube() {
       receiveShadow
     >
       <boxGeometry args={[1.2, 1.2, 1.2]} />
-      <meshStandardMaterial
-        color="#60a5fa"
-        metalness={1}
-        roughness={0.15}
-        emissive="#2563eb"
-        emissiveIntensity={0.5}
-        envMapIntensity={0.75}
-      />
+      <primitive object={materialRef.current} attach="material" />
     </mesh>
   );
 }
