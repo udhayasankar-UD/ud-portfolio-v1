@@ -1,5 +1,6 @@
 
 import { Terminal, Gamepad2 } from "lucide-react";
+import AvatarParallax from "./AvatarParallax";
 
 export default function AboutSection() {
   return (
@@ -11,10 +12,10 @@ export default function AboutSection() {
         {/* Left: Avatar and fun icons */}
         <div className="flex flex-col items-center md:items-start">
           <div className="relative mb-8 group transition-transform">
-            <img
+            <AvatarParallax
               src="https://avatars.githubusercontent.com/u/49582342?v=4"
               alt="Udhaya Sankar Avatar"
-              className="w-32 h-32 sm:w-40 sm:h-40 rounded-2xl shadow-neu object-cover border-4 border-gray-800 hover:scale-105 active:scale-95 hover:shadow-[0_0_32px_8px_rgba(96,165,250,0.25)] transition duration-200 ease-in-out cursor-pointer"
+              className="" // you may customize further if needed
             />
             <span className="absolute -top-4 -right-5 bg-blue-glow text-white rounded-full p-2 shadow-soft-glow">
               <Gamepad2 size={28} />
