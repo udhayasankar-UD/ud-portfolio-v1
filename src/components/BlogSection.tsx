@@ -1,3 +1,4 @@
+
 const posts = [{
   id: 1,
   slug: "styling-neumorphism-tailwind",
@@ -17,22 +18,23 @@ const posts = [{
   date: "2024-04-18",
   excerpt: "Your Unity game is WebGL-ready – now embed it beautifully in your dev portfolio and wow recruiters with live demos!"
 }];
+
 export default function BlogSection() {
   return <section id="blog" className="min-h-screen w-full px-4 bg-gradient-to-b from-gray-900 to-gray-800 flex items-center">
-      <div className="max-w-5xl mx-auto w-full">
+      <div className="max-w-6xl mx-auto w-full">
         <h2 className="gradient-text text-4xl md:text-5xl font-bold mb-12 text-left">Blog</h2>
-        <div className="space-y-10">
-          {posts.map(post => <div key={post.id} className="glass-card p-8 rounded-xl hover:shadow-soft-glow transition cursor-pointer">
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-                <div>
-                  <h3 className="text-3xl font-semibold text-blue-glow mb-3">{post.title}</h3>
-                  <p className="text-gray-300 mb-4 text-lg leading-relaxed">{post.excerpt}</p>
+        <div className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+          {posts.map(post => <div key={post.id} className="glass-card p-6 rounded-xl hover:shadow-soft-glow transition cursor-pointer">
+              <div className="flex flex-col h-full">
+                <h3 className="text-2xl font-semibold text-blue-glow mb-3">{post.title}</h3>
+                <p className="text-gray-300 mb-4 text-base leading-relaxed flex-grow">{post.excerpt}</p>
+                <div className="flex items-center justify-between mt-auto">
                   <a href={`/blog/${post.slug}`} className="text-blue-glow underline underline-offset-2 text-base hover:text-blue-400 font-medium">
                     Read more →
                   </a>
-                </div>
-                <div className="text-sm text-gray-400 mt-6 md:mt-0 md:text-right whitespace-nowrap">
-                  {post.date}
+                  <div className="text-sm text-gray-400">
+                    {post.date}
+                  </div>
                 </div>
               </div>
             </div>)}
