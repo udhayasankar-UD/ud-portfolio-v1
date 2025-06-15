@@ -30,43 +30,43 @@ function MaleModel({ mousePosition }: { mousePosition: { x: number; y: number } 
       {/* Head */}
       <mesh position={[0, 1.6, 0]}>
         <sphereGeometry args={[0.3, 32, 32]} />
-        <meshPhongMaterial color={0xffdbac} />
+        <meshPhongMaterial color="#ffdbac" />
       </mesh>
       
       {/* Body */}
       <mesh position={[0, 0.8, 0]}>
         <cylinderGeometry args={[0.25, 0.3, 0.8, 8]} />
-        <meshPhongMaterial color={0x4a90e2} />
+        <meshPhongMaterial color="#4a90e2" />
       </mesh>
       
       {/* Arms */}
       <mesh position={[-0.4, 0.9, 0]} rotation={[0, 0, Math.PI / 6]}>
         <cylinderGeometry args={[0.08, 0.08, 0.6, 8]} />
-        <meshPhongMaterial color={0xffdbac} />
+        <meshPhongMaterial color="#ffdbac" />
       </mesh>
       <mesh position={[0.4, 0.9, 0]} rotation={[0, 0, -Math.PI / 6]}>
         <cylinderGeometry args={[0.08, 0.08, 0.6, 8]} />
-        <meshPhongMaterial color={0xffdbac} />
+        <meshPhongMaterial color="#ffdbac" />
       </mesh>
       
       {/* Legs */}
       <mesh position={[-0.15, 0.1, 0]}>
         <cylinderGeometry args={[0.1, 0.1, 0.7, 8]} />
-        <meshPhongMaterial color={0x2c3e50} />
+        <meshPhongMaterial color="#2c3e50" />
       </mesh>
       <mesh position={[0.15, 0.1, 0]}>
         <cylinderGeometry args={[0.1, 0.1, 0.7, 8]} />
-        <meshPhongMaterial color={0x2c3e50} />
+        <meshPhongMaterial color="#2c3e50" />
       </mesh>
       
       {/* Eyes */}
       <mesh position={[-0.1, 1.65, 0.25]}>
         <sphereGeometry args={[0.03, 8, 8]} />
-        <meshPhongMaterial color={0x000000} />
+        <meshPhongMaterial color="#000000" />
       </mesh>
       <mesh position={[0.1, 1.65, 0.25]}>
         <sphereGeometry args={[0.03, 8, 8]} />
-        <meshPhongMaterial color={0x000000} />
+        <meshPhongMaterial color="#000000" />
       </mesh>
     </group>
   );
