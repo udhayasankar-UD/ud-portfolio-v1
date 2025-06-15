@@ -1,4 +1,3 @@
-
 import React, { useRef, useEffect, useState } from "react";
 import AlbumCase from "./AlbumCase";
 import AlbumDetailsCard from "./AlbumDetailsCard";
@@ -74,16 +73,21 @@ export default function AlbumProjectsSection() {
   }, []);
 
   useEffect(() => {
-    if (isMobile) return; // Don't run GSAP on mobile
+    if (isMobile) {
+      // Ensure scroll is always enabled on mobile
+      document.body.style.overflow = "";
+      return;
+    }
+
     const section = sectionRef.current;
     const track = trackRef.current;
     if (!section || !track) return;
 
     document.body.classList.add("no-scrollbar"); // Nice UX
+
     // Pin + horizontal animation using ScrollTrigger
     const totalPanels = PROJECTS.length + 1;
     const width = track.scrollWidth;
-    const singleCase = track.offsetWidth / totalPanels;
 
     let st: ScrollTrigger;
     let tween: gsap.core.Tween;
@@ -97,6 +101,9 @@ export default function AlbumProjectsSection() {
       pin: true,
       scrub: 1.4,
       anticipatePin: 1,
+      onEnter: () => {
+        document.body.style.overflow = "hidden";
+      },
       onUpdate: (self) => {
         // Calculate which is centered (roughly)
         const prog = self.progress;
@@ -110,9 +117,11 @@ export default function AlbumProjectsSection() {
         setIsEnd(prog > 0.98);
       },
       onLeave: () => {
+        document.body.style.overflow = "";
         document.body.classList.remove("no-scrollbar");
       },
       onLeaveBack: () => {
+        document.body.style.overflow = "";
         document.body.classList.remove("no-scrollbar");
       }
     });
@@ -128,7 +137,7 @@ export default function AlbumProjectsSection() {
       }
     });
 
-    // Prevent body scroll
+    // Ensure body scroll is LOCKED ONLY when pinned
     document.body.style.overflow = "hidden";
 
     return () => {
