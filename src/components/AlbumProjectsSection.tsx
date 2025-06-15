@@ -109,18 +109,18 @@ export default function AlbumProjectsSection() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(96,165,250,0.1),transparent_50%)]" />
       </div>
 
-      {/* Section Title */}
-      <div className="absolute top-12 left-12 z-10 pointer-events-none">
-        <h2 className="gradient-text text-4xl md:text-6xl font-bold drop-shadow-2xl">
+      {/* Section Title - Fixed positioning */}
+      <div className="absolute top-8 left-8 z-20 pointer-events-none">
+        <h2 className="gradient-text text-5xl md:text-7xl font-bold drop-shadow-2xl leading-tight">
           Top Collection
         </h2>
-        <p className="text-white/90 text-lg mt-2 drop-shadow-lg">
+        <p className="text-white/90 text-base md:text-lg mt-3 drop-shadow-lg max-w-md">
           Scroll to explore my featured projects
         </p>
       </div>
 
       {/* Main Content */}
-      <div className="relative h-full flex items-center pt-32">
+      <div className="relative h-full flex items-center pt-24">
         {/* Combined Project Cards Track */}
         <div
           ref={trackRef}
