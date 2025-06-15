@@ -162,7 +162,7 @@ function AnimatedRoles() {
 
   return (
     <div className="mt-2 text-2xl md:text-4xl lg:text-5xl font-semibold min-h-[2.6rem] md:min-h-[3.2rem] lg:min-h-[3.5rem]">
-      <span className="text-white animate-pulse">I'm </span>
+      <span className="text-white">I'm </span>
       <span className="relative text-blue-400 drop-shadow-[0_0_8px_rgba(96,165,250,0.8)] animate-bounce">
         {displayed}
         <span className="absolute border-r-2 border-blue-400 animate-pulse ml-1 h-full"></span>

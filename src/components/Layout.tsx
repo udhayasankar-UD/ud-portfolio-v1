@@ -16,7 +16,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       {/* Navbar */}
       <nav className="fixed left-0 top-0 w-full z-40 flex justify-center py-4 bg-gradient-to-b from-gray-900/80 via-gray-900/60 to-transparent backdrop-blur-md">
         <div className="flex space-x-8 px-6">
-          <a href="/" className="text-2xl font-bold gradient-text tracking-tight select-none">Udhaya Sankar U</a>
+          <a href="/" className="text-2xl font-bold gradient-text tracking-tight select-none">UD</a>
           {navItems.map((item) => (
             <a
               key={item.href}
@@ -34,3 +34,4 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     </div>
   );
 }
+
