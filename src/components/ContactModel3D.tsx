@@ -8,15 +8,14 @@ function RoundedLimb({
   rotation,
   length = 0.5,
   radius = 0.1,
-  color = 0xfdbcb4,
+  color = "#fdbcb4",
 }: {
   position?: [number, number, number],
   rotation?: [number, number, number],
   length?: number,
   radius?: number,
-  color?: number
+  color?: string
 }) {
-  // Composite capsule-like limb with cylinder and hemisphere ends.
   return (
     <group position={position} rotation={rotation}>
       {/* Cylinder */}
@@ -46,7 +45,6 @@ function SimpleCharacter() {
 
   useFrame(() => {
     if (groupRef.current && !isDragging) {
-      // Gentle automatic rotation
       groupRef.current.rotation.y += 0.005;
     } else if (groupRef.current && isDragging) {
       groupRef.current.rotation.y = rotation.y;
@@ -92,18 +90,17 @@ function SimpleCharacter() {
       ref={groupRef} 
       position={[0, -0.5, 0]}
       onPointerDown={handlePointerDown}
-      // Note: .style does not apply to <group>; use CSS for the Canvas parent if needed.
     >
       {/* Head - larger sphere */}
       <mesh position={[0, 2, 0]}>
         <sphereGeometry args={[0.5, 32, 32]} />
-        <meshPhongMaterial color={0xfdbcb4} />
+        <meshPhongMaterial color="#fdbcb4" />
       </mesh>
 
       {/* Body */}
       <mesh position={[0, 1, 0]}>
         <sphereGeometry args={[0.4, 32, 32]} />
-        <meshPhongMaterial color={0x4a90e2} />
+        <meshPhongMaterial color="#4a90e2" />
       </mesh>
 
       {/* Left Arm */}
@@ -112,7 +109,7 @@ function SimpleCharacter() {
         rotation={[0, 0, Math.PI/6]}
         length={0.55}
         radius={0.11}
-        color={0xfdbcb4}
+        color="#fdbcb4"
       />
       {/* Right Arm */}
       <RoundedLimb 
@@ -120,7 +117,7 @@ function SimpleCharacter() {
         rotation={[0, 0, -Math.PI/6]}
         length={0.55}
         radius={0.11}
-        color={0xfdbcb4}
+        color="#fdbcb4"
       />
       {/* Left Leg */}
       <RoundedLimb 
@@ -128,7 +125,7 @@ function SimpleCharacter() {
         rotation={[0, 0, 0]}
         length={0.65}
         radius={0.13}
-        color={0x2c5aa0}
+        color="#2c5aa0"
       />
       {/* Right Leg */}
       <RoundedLimb 
@@ -136,22 +133,23 @@ function SimpleCharacter() {
         rotation={[0, 0, 0]}
         length={0.65}
         radius={0.13}
-        color={0x2c5aa0}
+        color="#2c5aa0"
       />
 
       {/* Eyes */}
-      <mesh position={[-0.15, 2.08, 0.4]}>
+      <mesh position={[-0.15, 2.08, 0.42]}>
         <sphereGeometry args={[0.04, 16, 16]} />
-        <meshPhongMaterial color={0x000000} />
+        <meshPhongMaterial color="#000000" />
       </mesh>
-      <mesh position={[0.15, 2.08, 0.4]}>
+      <mesh position={[0.15, 2.08, 0.42]}>
         <sphereGeometry args={[0.04, 16, 16]} />
-        <meshPhongMaterial color={0x000000} />
+        <meshPhongMaterial color="#000000" />
       </mesh>
+
       {/* Smile */}
       <mesh position={[0, 1.92, 0.42]} rotation={[Math.PI/2, 0, 0]}>
         <torusGeometry args={[0.1, 0.018, 8, 16, Math.PI]} />
-        <meshPhongMaterial color={0x000000} />
+        <meshPhongMaterial color="#000000" />
       </mesh>
     </group>
   );
