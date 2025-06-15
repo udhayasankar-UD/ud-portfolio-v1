@@ -1,3 +1,4 @@
+
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useRef, useState, useEffect } from "react";
 import * as THREE from "three";
@@ -93,26 +94,22 @@ function AnimatedRoles() {
   }, [displayed, typing, index, roles]);
 
   return (
-    <span
-      className={
-        "block mt-2 text-2xl md:text-4xl lg:text-5xl font-semibold bg-gradient-to-r from-blue-glow via-indigo-400 to-fuchsia-500 bg-clip-text text-transparent drop-shadow-[0_0_16px_rgba(96,165,250,0.9)] select-none transition-all duration-200 min-h-[2.6rem] md:min-h-[3.2rem] lg:min-h-[3.5rem]"
-      }
-      aria-live="polite"
-    >
-      <span>{`I'm `}</span>
-      <span className="border-r-2 border-blue-glow animate-pulse-slow">
+    <div className="mt-2 text-2xl md:text-4xl lg:text-5xl font-semibold bg-gradient-to-r from-blue-glow via-indigo-400 to-fuchsia-500 bg-clip-text text-transparent drop-shadow-[0_0_16px_rgba(96,165,250,0.9)] select-none transition-all duration-200 min-h-[2.6rem] md:min-h-[3.2rem] lg:min-h-[3.5rem]">
+      <span className="text-white">I'm </span>
+      <span className="relative">
         {displayed}
+        <span className="absolute border-r-2 border-blue-glow animate-pulse ml-1 h-full"></span>
       </span>
       <style>{`
-        @keyframes pulse-slow {
+        @keyframes pulse {
           0%, 100% { opacity: 1; }
-          50% { opacity: 0.55; }
+          50% { opacity: 0; }
         }
-        .animate-pulse-slow {
-          animation: pulse-slow 1.1s steps(2) infinite;
+        .animate-pulse {
+          animation: pulse 1s infinite;
         }
       `}</style>
-    </span>
+    </div>
   );
 }
 
@@ -140,11 +137,11 @@ export default function Hero3D() {
         </div>
         {/* Animated text */}
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-center gradient-text animate-fade-in-up drop-shadow-[0_2px_14px_rgba(96,165,250,0.7)]">
-          Hi, I’m Udhaya Sankar
+          Hi, I'm Udhaya Sankar
         </h1>
         <AnimatedRoles />
         <div className="mt-6 text-lg md:text-xl text-blue-100 text-center max-w-2xl animate-fade-in-up">
-          Building immersive web &amp; game experiences with 3D, modern UI, and a nerd’s passion for code.
+          Building immersive web &amp; game experiences with 3D, modern UI, and a nerd's passion for code.
         </div>
         <a
           href="#about"
