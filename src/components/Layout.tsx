@@ -1,5 +1,5 @@
 
-import DarkModeToggle from "./DarkModeToggle";
+// Removed: import DarkModeToggle from "./DarkModeToggle";
 
 const navItems = [
   { label: "About", href: "#about" },
@@ -12,7 +12,7 @@ const navItems = [
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="relative">
-      <DarkModeToggle />
+      {/* <DarkModeToggle /> removed */}
       {/* Navbar */}
       <nav className="fixed left-0 top-0 w-full z-40 flex justify-center py-4 bg-gradient-to-b from-gray-900/80 via-gray-900/60 to-transparent backdrop-blur-md">
         <div className="flex space-x-8 px-6">
