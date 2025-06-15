@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -33,11 +34,45 @@
     background-clip: text;
     text-fill-color: transparent;
   }
+  
+  /* 3D Perspective utilities */
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  
+  .rotate-y-12 {
+    transform: rotateY(12deg);
+  }
+  
+  .rotate-y-0 {
+    transform: rotateY(0deg);
+  }
 }
 
 /* Ensure mobile-friendly root paddings */
 @media (max-width: 640px) {
   #root {
     padding: 0.5rem;
+  }
+  
+  /* Mobile responsive adjustments for album section */
+  .case-track {
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+  
+  .case-track > div:first-child {
+    width: 280px;
+    height: 280px;
+  }
+}
+
+/* Tablet adjustments */
+@media (max-width: 1024px) {
+  .case-track {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    gap: 1.5rem;
   }
 }
