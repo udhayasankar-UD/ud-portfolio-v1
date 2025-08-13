@@ -1,5 +1,5 @@
 import Layout from "../components/Layout";
-import Hero3D from "../components/Hero3D";
+import HeroSplit from "../components/HeroSplit";
 import AboutSection from "../components/AboutSection";
 import AlbumProjectsSection from "../components/AlbumProjectsSection";
 import ContactSection from "../components/ContactSection";
@@ -9,7 +9,7 @@ import FooterSection from "../components/FooterSection";
 const Index = () => {
   return (
     <Layout>
-      <Hero3D />
+      <HeroSplit />
       <AboutSection />
       <AlbumProjectsSection />
       <ContactSection />
