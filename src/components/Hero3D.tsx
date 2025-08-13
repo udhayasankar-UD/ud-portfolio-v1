@@ -59,8 +59,8 @@ function FloatingParticles() {
   );
 }
 
-// Enhanced animated cube with more effects
-function AnimatedCube() {
+// Glowing circle with subtle blinking effect
+function GlowingCircle() {
   const meshRef = useRef<THREE.Mesh>(null);
   const [target, setTarget] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
@@ -70,26 +70,26 @@ function AnimatedCube() {
     const { offsetX, offsetY } = e.nativeEvent;
     const x = (offsetX / size.width) * 2 - 1;
     const y = -(offsetY / size.height) * 2 + 1;
-    setTarget({ x: y * 0.4, y: x * 0.4 });
+    setTarget({ x: y * 0.2, y: x * 0.2 });
   };
 
   useFrame((state) => {
     if (meshRef.current) {
       const time = state.clock.getElapsedTime();
 
-      // Slower floating
-      meshRef.current.rotation.x += (target.x - meshRef.current.rotation.x) * 0.07 + 0.001;
-      meshRef.current.rotation.y += (target.y - meshRef.current.rotation.y) * 0.07 + 0.0015;
-      meshRef.current.position.y = Math.sin(time * 0.36) * 0.13; // was time*0.8
+      // Gentle rotation
+      meshRef.current.rotation.x += (target.x - meshRef.current.rotation.x) * 0.05;
+      meshRef.current.rotation.y += (target.y - meshRef.current.rotation.y) * 0.05;
+      meshRef.current.position.y = Math.sin(time * 0.5) * 0.1;
 
-      // Slower, more subtle "pulsing glow"
+      // Subtle blinking glow effect
       if (meshRef.current.material instanceof THREE.MeshStandardMaterial) {
-        meshRef.current.material.emissiveIntensity = 0.46 + Math.sin(time * 0.65) * 0.08;
+        meshRef.current.material.emissiveIntensity = 0.3 + Math.sin(time * 0.8) * 0.15;
       }
 
-      // More subtle scale
-      const scale = isHovered ? 1.55 : 1.38;
-      meshRef.current.scale.lerp(new THREE.Vector3(scale, scale, scale), 0.06);
+      // Subtle scale on hover
+      const scale = isHovered ? 1.1 : 1.0;
+      meshRef.current.scale.lerp(new THREE.Vector3(scale, scale, scale), 0.05);
     }
   });
 
@@ -98,18 +98,18 @@ function AnimatedCube() {
   if (!materialRef.current) {
     materialRef.current = new THREE.MeshStandardMaterial({
       color: "#60a5fa",
-      metalness: 1,
-      roughness: 0.15,
-      emissive: "#2563eb",
-      emissiveIntensity: 0.5,
-      envMapIntensity: 0.75,
+      metalness: 0.8,
+      roughness: 0.2,
+      emissive: "#3b82f6",
+      emissiveIntensity: 0.3,
+      envMapIntensity: 0.5,
     });
   }
 
   return (
     <mesh
       ref={meshRef}
-      scale={[1.4, 1.4, 1.4]}
+      scale={[1.8, 1.8, 1.8]}
       onPointerMove={handlePointerMove}
       onPointerOver={() => setIsHovered(true)}
       onPointerOut={() => {
@@ -119,7 +119,7 @@ function AnimatedCube() {
       castShadow
       receiveShadow
     >
-      <boxGeometry args={[1.2, 1.2, 1.2]} />
+      <sphereGeometry args={[1, 32, 32]} />
       <primitive object={materialRef.current} attach="material" />
     </mesh>
   );
@@ -162,9 +162,9 @@ function AnimatedRoles() {
   }, [displayed, typing, index, roles]);
 
   return (
-    <div className="mt-2 text-2xl md:text-4xl lg:text-5xl font-semibold min-h-[2.6rem] md:min-h-[3.2rem] lg:min-h-[3.5rem]">
+    <div className="mt-4 text-2xl md:text-3xl lg:text-4xl font-semibold min-h-[2.6rem] md:min-h-[3.2rem] lg:min-h-[3.5rem]">
       <span className="text-white">I'm </span>
-      <span className="relative text-blue-400 drop-shadow-[0_0_8px_rgba(96,165,250,0.8)] animate-bounce">
+      <span className="relative text-blue-400 bg-gradient-to-r from-blue-400/20 to-blue-500/20 px-2 py-1 rounded">
         {displayed}
         <span className="absolute border-r-2 border-blue-400 animate-pulse ml-1 h-full"></span>
       </span>
@@ -222,7 +222,7 @@ function ScrollIndicator() {
   );
 }
 
-// Main hero export with enhanced interactivity
+// Main hero export with split layout
 export default function Hero3D() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
@@ -238,93 +238,128 @@ export default function Hero3D() {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
+  const scrollToAbout = () => {
+    document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <>
       <CursorBullet />
       <section
         id="home"
-        className="relative flex flex-col items-center justify-center h-[80vh] md:h-[90vh] pt-8 pb-10 w-full overflow-hidden cursor-none"
-        style={{ minHeight: "450px" }}
+        className="relative min-h-[90vh] w-full overflow-hidden cursor-none"
+        style={{ minHeight: "600px" }}
       >
         {/* Animated background with parallax */}
         <div 
           className="absolute inset-0 z-0 bg-hero-gradient opacity-95 transition-transform duration-100"
           style={{
-            transform: `translate(${mousePosition.x * 10}px, ${mousePosition.y * 10}px)`,
+            transform: `translate(${mousePosition.x * 5}px, ${mousePosition.y * 5}px)`,
           }}
         />
         
-        {/* Multiple decorative blur rings with different animations */}
-        <div className="absolute left-0 right-0 top-36 mx-auto w-80 h-80 rounded-full blur-3xl bg-blue-glow/40 animate-pulse" />
+        {/* Decorative blur rings */}
+        <div className="absolute left-1/4 top-1/3 w-96 h-96 rounded-full blur-3xl bg-blue-glow/30 animate-pulse" />
         <div 
-          className="absolute left-0 right-0 top-24 mx-auto w-96 h-96 rounded-full blur-2xl bg-purple-500/20 animate-pulse"
+          className="absolute right-1/4 top-1/2 w-80 h-80 rounded-full blur-2xl bg-purple-500/20 animate-pulse"
           style={{
-            animationDelay: '1s',
-            transform: `translate(${mousePosition.x * -5}px, ${mousePosition.y * -5}px)`,
+            animationDelay: '1.5s',
+            transform: `translate(${mousePosition.x * -3}px, ${mousePosition.y * -3}px)`,
           }}
         />
 
-        <div className="relative z-10 flex flex-col items-center">
-          {/* Enhanced glassy canvas */}
-          <div 
-            className="w-[90vw] max-w-[380px] h-[90vw] max-h-[380px] md:w-[380px] md:h-[380px] rounded-full shadow-soft-glow border-2 border-white/10 overflow-hidden flex items-center justify-center bg-gradient-to-br from-blue-900/70 to-gray-900/90 mb-8 animate-float hover:shadow-[0_0_30px_10px_rgba(96,165,250,0.3)] transition-all duration-300 cursor-pointer"
-            style={{
-              transform: `perspective(1000px) rotateX(${mousePosition.y * 5}deg) rotateY(${mousePosition.x * 5}deg)`,
-            }}
-          >
-            <Canvas camera={{ position: [2.4, 2.4, 3.2] }} shadows>
-              <ambientLight intensity={0.85} />
-              <directionalLight position={[2, 4, 2]} intensity={1.1} castShadow color="#60a5fa" />
-              <FloatingParticles />
-              <AnimatedCube />
-            </Canvas>
-          </div>
+        {/* Split Layout Container */}
+        <div className="relative z-10 container mx-auto px-6 h-full flex items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center w-full min-h-[80vh]">
+            
+            {/* Left Column - 3D Canvas */}
+            <div className="flex justify-center lg:justify-end order-2 lg:order-1">
+              <div 
+                className="w-[300px] h-[300px] md:w-[400px] md:h-[400px] lg:w-[450px] lg:h-[450px] rounded-full shadow-soft-glow border-2 border-white/10 overflow-hidden flex items-center justify-center bg-gradient-to-br from-blue-900/50 to-gray-900/70 hover:shadow-[0_0_40px_15px_rgba(96,165,250,0.25)] transition-all duration-500 cursor-pointer animate-float"
+                style={{
+                  transform: `perspective(1000px) rotateX(${mousePosition.y * 3}deg) rotateY(${mousePosition.x * 3}deg)`,
+                }}
+              >
+                <Canvas camera={{ position: [3, 3, 4] }} shadows>
+                  <ambientLight intensity={0.6} />
+                  <directionalLight position={[3, 5, 3]} intensity={1} castShadow color="#60a5fa" />
+                  <FloatingParticles />
+                  <GlowingCircle />
+                </Canvas>
+              </div>
+            </div>
 
-          {/* Enhanced animated text with more effects */}
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-center gradient-text animate-fade-in-up drop-shadow-[0_2px_14px_rgba(96,165,250,0.7)] hover:scale-105 transition-transform duration-300">
-            Hi, I'm Udhaya Sankar
-          </h1>
-          
-          <AnimatedRoles />
-          
-          <div className="mt-6 text-lg md:text-xl text-blue-100 text-center max-w-2xl animate-fade-in-up hover:text-white transition-colors duration-300">
-            Building immersive web &amp; game experiences with 3D, modern UI, and a nerd's passion for code.
+            {/* Right Column - Content */}
+            <div className="flex flex-col justify-center order-1 lg:order-2 text-center lg:text-left">
+              {/* Hero Heading */}
+              <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-2 animate-fade-in-up">
+                <span className="text-white" style={{ textShadow: '0 8px 20px rgba(60,120,255,0.12)' }}>
+                  Hi, I'm 
+                </span>
+                <br />
+                <span className="text-white" style={{ textShadow: '0 8px 20px rgba(60,120,255,0.12)' }}>
+                  Udhaya Sankar
+                </span>
+              </h1>
+              
+              {/* Animated Roles */}
+              <AnimatedRoles />
+              
+              {/* Hero Description */}
+              <div className="mt-6 text-lg md:text-xl text-blue-100 max-w-2xl mx-auto lg:mx-0 animate-fade-in-up">
+                Building immersive web &amp; game experiences with 3D, modern UI, and a nerd's passion for code.
+              </div>
+              
+              {/* CTAs */}
+              <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                <a
+                  href="#projects"
+                  className="neu-btn px-8 py-3 text-lg shadow-soft-glow transition-all duration-300 hover:scale-105 hover:bg-blue-glow/80 hover:shadow-[0_0_20px_5px_rgba(96,165,250,0.4)] animate-fade-in-up"
+                >
+                  View My Work
+                </a>
+                <a
+                  href="#contact"
+                  className="neu-btn px-8 py-3 text-lg shadow-soft-glow transition-all duration-300 hover:scale-105 hover:bg-blue-glow/80 hover:shadow-[0_0_20px_5px_rgba(96,165,250,0.4)] animate-fade-in-up"
+                  style={{ animationDelay: '0.1s' }}
+                >
+                  Get In Touch
+                </a>
+              </div>
+            </div>
           </div>
-          
-          {/* Enhanced scroll button */}
-          <a
-            href="#about"
-            className="mt-12 neu-btn px-8 py-3 text-lg shadow-soft-glow flex items-center group transition-all duration-300 hover:scale-110 hover:bg-blue-glow/80 hover:shadow-[0_0_20px_5px_rgba(96,165,250,0.4)] animate-fade-in-up"
-          >
-            <span className="group-hover:text-white transition-colors">Scroll Down</span>
-            <svg 
-              width={24} 
-              height={24} 
-              className="ml-3 group-hover:translate-y-2 group-hover:animate-bounce transition-all duration-200"
-            >
-              <path
-                d="M12 5v14m0 0l6-6m-6 6l-6-6"
-                stroke="#60a5fa"
-                strokeWidth={2}
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                fill="none"
-              />
-            </svg>
-          </a>
         </div>
 
-        <ScrollIndicator />
+        {/* Small Mouse Scroll Icon */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+          <button
+            onClick={scrollToAbout}
+            aria-label="Scroll to about"
+            className="animate-bounce transition-opacity duration-500 hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-blue-400 rounded-full p-2"
+          >
+            <div className="w-6 h-10 border-2 border-blue-400 rounded-full flex justify-center">
+              <div className="w-1 h-3 bg-blue-400 rounded-full mt-2 animate-pulse"></div>
+            </div>
+          </button>
+        </div>
 
         {/* Enhanced floating animation */}
         <style>{`
           @keyframes float {
             0%, 100% { transform: translateY(0) rotate(0deg); }
-            33% { transform: translateY(-6px) rotate(0.3deg); }
-            66% { transform: translateY(-4px) rotate(-0.2deg); }
+            33% { transform: translateY(-8px) rotate(0.5deg); }
+            66% { transform: translateY(-5px) rotate(-0.3deg); }
           }
           .animate-float {
-            animation: float 8s ease-in-out infinite;
+            animation: float 10s ease-in-out infinite;
+          }
+          @keyframes pulse-glow {
+            0%, 100% { 
+              box-shadow: 0 0 20px rgba(96, 165, 250, 0.3);
+            }
+            50% { 
+              box-shadow: 0 0 40px rgba(96, 165, 250, 0.5), 0 0 60px rgba(96, 165, 250, 0.2);
+            }
           }
         `}</style>
       </section>
