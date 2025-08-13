@@ -291,27 +291,6 @@ export default function Hero3D() {
             Building immersive web &amp; game experiences with 3D, modern UI, and a nerd's passion for code.
           </div>
           
-          {/* Enhanced scroll button */}
-          <a
-            href="#about"
-            className="mt-12 neu-btn px-8 py-3 text-lg shadow-soft-glow flex items-center group transition-all duration-300 hover:scale-110 hover:bg-blue-glow/80 hover:shadow-[0_0_20px_5px_rgba(96,165,250,0.4)] animate-fade-in-up"
-          >
-            <span className="group-hover:text-white transition-colors">Scroll Down</span>
-            <svg 
-              width={24} 
-              height={24} 
-              className="ml-3 group-hover:translate-y-2 group-hover:animate-bounce transition-all duration-200"
-            >
-              <path
-                d="M12 5v14m0 0l6-6m-6 6l-6-6"
-                stroke="#60a5fa"
-                strokeWidth={2}
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                fill="none"
-              />
-            </svg>
-          </a>
         </div>
 
         <ScrollIndicator />
