@@ -125,8 +125,8 @@ function AnimatedCube() {
   );
 }
 
-// Enhanced animated roles with more effects
-function AnimatedRoles() {
+// Inline typed roles with accessibility
+function InlineTypedRoles() {
   const roles = [
     "Full-Stack Developer",
     "Game Developer", 
@@ -135,6 +135,7 @@ function AnimatedRoles() {
   const [index, setIndex] = useState(0);
   const [displayed, setDisplayed] = useState("");
   const [typing, setTyping] = useState(true);
+  const [announceRole, setAnnounceRole] = useState("");
 
   useEffect(() => {
     let timeout: number | undefined;
@@ -146,6 +147,8 @@ function AnimatedRoles() {
           setDisplayed(word.slice(0, displayed.length + 1));
         }, 65);
       } else {
+        // Announce complete role for screen readers
+        setAnnounceRole(word);
         timeout = window.setTimeout(() => setTyping(false), 1000);
       }
     } else {
@@ -156,19 +159,36 @@ function AnimatedRoles() {
       } else {
         setTyping(true);
         setIndex((prev) => (prev + 1) % roles.length);
+        setAnnounceRole("");
       }
     }
     return () => clearTimeout(timeout);
   }, [displayed, typing, index, roles]);
 
   return (
-    <div className="mt-2 font-semibold min-h-[2.6rem] md:min-h-[3.2rem] lg:min-h-[3.5rem]" style={{ fontSize: 'clamp(1.5rem, 4vw, 3rem)' }}>
-      <span className="text-white">I'm </span>
-      <span className="relative text-blue-400 drop-shadow-[0_0_8px_rgba(96,165,250,0.8)] animate-bounce">
+    <>
+      <span 
+        className="relative text-blue-400 inline"
+        aria-hidden="true"
+        style={{
+          textShadow: '0 8px 20px rgba(60,120,255,0.12)',
+        }}
+      >
         {displayed}
-        <span className="absolute border-r-2 border-blue-400 animate-pulse ml-1 h-full"></span>
+        <span className="absolute border-r-2 border-blue-400 ml-1 h-full animate-pulse"></span>
       </span>
+      
+      {/* Screen reader announcement */}
+      <span className="sr-only" aria-live="polite">
+        {announceRole}
+      </span>
+      
       <style>{`
+        @media (prefers-reduced-motion: reduce) {
+          .animate-pulse {
+            animation: none;
+          }
+        }
         @keyframes pulse {
           0%, 100% { opacity: 1; }
           50% { opacity: 0; }
@@ -176,25 +196,8 @@ function AnimatedRoles() {
         .animate-pulse {
           animation: pulse 1s infinite;
         }
-        @keyframes bounce {
-          0%, 20%, 53%, 80%, 100% {
-            transform: translate3d(0,0,0);
-          }
-          40%, 43% {
-            transform: translate3d(0, -2px, 0);
-          }
-          70% {
-            transform: translate3d(0, -1px, 0);
-          }
-          90% {
-            transform: translate3d(0, -1px, 0);
-          }
-        }
-        .animate-bounce {
-          animation: bounce 2s infinite;
-        }
       `}</style>
-    </div>
+    </>
   );
 }
 
@@ -268,13 +271,16 @@ export default function Hero3D() {
           
           {/* Text content - order first on mobile */}
           <div className="order-1 lg:order-2 flex flex-col justify-center max-w-2xl lg:max-w-none">
-            <h1 className="font-bold text-center lg:text-left gradient-text animate-fade-in-up drop-shadow-[0_2px_14px_rgba(96,165,250,0.7)] hover:scale-105 transition-transform duration-300" style={{ fontSize: 'clamp(2rem, 5vw, 4rem)' }}>
-              Hi, I'm Udhaya Sankar
+            <h1 className="font-bold text-center lg:text-left animate-fade-in-up hover:scale-105 transition-transform duration-300" style={{ fontSize: 'clamp(2rem, 5vw, 4rem)' }}>
+              <span className="text-white">Hi, I'm </span>
+              <span className="whitespace-nowrap gradient-text" style={{ textShadow: '0 8px 20px rgba(60,120,255,0.12)' }}>
+                Udhaya Sankar
+              </span>
+              <span className="text-white"> and I'm </span>
+              <span className="block lg:inline">
+                <InlineTypedRoles />
+              </span>
             </h1>
-            
-            <div className="text-center lg:text-left">
-              <AnimatedRoles />
-            </div>
             
             <div className="mt-6 text-center lg:text-left text-blue-100 animate-fade-in-up hover:text-white transition-colors duration-300 max-w-2xl" style={{ fontSize: 'clamp(1rem, 2.5vw, 1.25rem)' }}>
               Building immersive web &amp; game experiences with 3D, modern UI, and a nerd's passion for code.
