@@ -162,7 +162,7 @@ function AnimatedRoles() {
   }, [displayed, typing, index, roles]);
 
   return (
-    <div className="mt-2 text-2xl md:text-4xl lg:text-5xl font-semibold min-h-[2.6rem] md:min-h-[3.2rem] lg:min-h-[3.5rem]">
+    <div className="mt-2 font-semibold min-h-[2.6rem] md:min-h-[3.2rem] lg:min-h-[3.5rem]" style={{ fontSize: 'clamp(1.5rem, 4vw, 3rem)' }}>
       <span className="text-white">I'm </span>
       <span className="relative text-blue-400 drop-shadow-[0_0_8px_rgba(96,165,250,0.8)] animate-bounce">
         {displayed}
@@ -243,8 +243,7 @@ export default function Hero3D() {
       <CursorBullet />
       <section
         id="home"
-        className="relative flex flex-col items-center justify-center h-[80vh] md:h-[90vh] pt-8 pb-10 w-full overflow-hidden cursor-none"
-        style={{ minHeight: "450px" }}
+        className="relative min-h-screen flex items-center justify-center w-full overflow-hidden cursor-none"
       >
         {/* Animated background with parallax */}
         <div 
@@ -255,42 +254,49 @@ export default function Hero3D() {
         />
         
         {/* Multiple decorative blur rings with different animations */}
-        <div className="absolute left-0 right-0 top-36 mx-auto w-80 h-80 rounded-full blur-3xl bg-blue-glow/40 animate-pulse" />
+        <div className="absolute left-1/4 top-1/3 w-80 h-80 rounded-full blur-3xl bg-blue-glow/30 animate-pulse" />
         <div 
-          className="absolute left-0 right-0 top-24 mx-auto w-96 h-96 rounded-full blur-2xl bg-purple-500/20 animate-pulse"
+          className="absolute right-1/4 top-1/2 w-96 h-96 rounded-full blur-2xl bg-purple-500/15 animate-pulse"
           style={{
             animationDelay: '1s',
             transform: `translate(${mousePosition.x * -5}px, ${mousePosition.y * -5}px)`,
           }}
         />
 
-        <div className="relative z-10 flex flex-col items-center">
-          {/* Enhanced glassy canvas */}
-          <div 
-            className="w-[90vw] max-w-[380px] h-[90vw] max-h-[380px] md:w-[380px] md:h-[380px] rounded-full shadow-soft-glow border-2 border-white/10 overflow-hidden flex items-center justify-center bg-gradient-to-br from-blue-900/70 to-gray-900/90 mb-8 animate-float hover:shadow-[0_0_30px_10px_rgba(96,165,250,0.3)] transition-all duration-300 cursor-pointer"
-            style={{
-              transform: `perspective(1000px) rotateX(${mousePosition.y * 5}deg) rotateY(${mousePosition.x * 5}deg)`,
-            }}
-          >
-            <Canvas camera={{ position: [2.4, 2.4, 3.2] }} shadows>
-              <ambientLight intensity={0.85} />
-              <directionalLight position={[2, 4, 2]} intensity={1.1} castShadow color="#60a5fa" />
-              <FloatingParticles />
-              <AnimatedCube />
-            </Canvas>
+        {/* Main content grid - responsive layout */}
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center min-h-screen">
+          
+          {/* Text content - order first on mobile */}
+          <div className="order-1 lg:order-2 flex flex-col justify-center max-w-2xl lg:max-w-none">
+            <h1 className="font-bold text-center lg:text-left gradient-text animate-fade-in-up drop-shadow-[0_2px_14px_rgba(96,165,250,0.7)] hover:scale-105 transition-transform duration-300" style={{ fontSize: 'clamp(2rem, 5vw, 4rem)' }}>
+              Hi, I'm Udhaya Sankar
+            </h1>
+            
+            <div className="text-center lg:text-left">
+              <AnimatedRoles />
+            </div>
+            
+            <div className="mt-6 text-center lg:text-left text-blue-100 animate-fade-in-up hover:text-white transition-colors duration-300 max-w-2xl" style={{ fontSize: 'clamp(1rem, 2.5vw, 1.25rem)' }}>
+              Building immersive web &amp; game experiences with 3D, modern UI, and a nerd's passion for code.
+            </div>
           </div>
 
-          {/* Enhanced animated text with more effects */}
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-center gradient-text animate-fade-in-up drop-shadow-[0_2px_14px_rgba(96,165,250,0.7)] hover:scale-105 transition-transform duration-300">
-            Hi, I'm Udhaya Sankar
-          </h1>
-          
-          <AnimatedRoles />
-          
-          <div className="mt-6 text-lg md:text-xl text-blue-100 text-center max-w-2xl animate-fade-in-up hover:text-white transition-colors duration-300">
-            Building immersive web &amp; game experiences with 3D, modern UI, and a nerd's passion for code.
+          {/* Canvas container - order second on mobile */}
+          <div className="order-2 lg:order-1 flex justify-center lg:justify-start">
+            <div 
+              className="w-[280px] h-[280px] sm:w-[320px] sm:h-[320px] md:w-[380px] md:h-[380px] lg:w-[420px] lg:h-[420px] rounded-full shadow-soft-glow border-2 border-white/10 overflow-hidden flex items-center justify-center bg-gradient-to-br from-blue-900/70 to-gray-900/90 animate-float hover:shadow-[0_0_30px_10px_rgba(96,165,250,0.3)] transition-all duration-300 cursor-pointer"
+              style={{
+                transform: `perspective(1000px) rotateX(${mousePosition.y * 5}deg) rotateY(${mousePosition.x * 5}deg)`,
+              }}
+            >
+              <Canvas camera={{ position: [2.4, 2.4, 3.2] }} shadows>
+                <ambientLight intensity={0.85} />
+                <directionalLight position={[2, 4, 2]} intensity={1.1} castShadow color="#60a5fa" />
+                <FloatingParticles />
+                <AnimatedCube />
+              </Canvas>
+            </div>
           </div>
-          
         </div>
 
         <ScrollIndicator />
