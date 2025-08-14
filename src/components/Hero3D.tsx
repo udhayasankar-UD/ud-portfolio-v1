@@ -148,7 +148,7 @@ function TwoLineTypedRoles() {
         }, 65);
       } else {
         // Announce complete role for screen readers
-        setAnnounceRole(`I'm ${word}`);
+        setAnnounceRole(`and I'm ${word}`);
         timeout = window.setTimeout(() => setTyping(false), 1000);
       }
     } else {
@@ -168,13 +168,11 @@ function TwoLineTypedRoles() {
   return (
     <>
       <div className="hero-line2 whitespace-nowrap" style={{ fontSize: 'clamp(1.5rem, 4vw, 3rem)' }}>
-        <span className="text-white">I'm </span>
+        <span className="text-white desktop-and-text">I'm </span>
+        <span className="text-white mobile-and-text hidden">and I'm </span>
         <span 
-          className="relative text-blue-400 inline"
+          className="relative typed-role inline"
           aria-hidden="true"
-          style={{
-            textShadow: '0 8px 20px rgba(60,120,255,0.12)',
-          }}
         >
           {displayed}
           <span className="absolute border-r-2 border-blue-400 ml-1 h-full animate-pulse"></span>
@@ -187,26 +185,83 @@ function TwoLineTypedRoles() {
       </span>
       
       <style>{`
+        /* Enhanced glow effects */
+        .gradient-text {
+          background: linear-gradient(90deg, #8fbfff 0%, #6aa0ff 60%, #5b7fff 100%);
+          -webkit-background-clip: text;
+          background-clip: text;
+          color: transparent;
+          position: relative;
+          z-index: 2;
+        }
+
+        .gradient-text::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          z-index: 1;
+          filter: blur(18px) saturate(120%);
+          opacity: 0.28;
+          background: linear-gradient(90deg, rgba(120,170,255,0.28), rgba(100,140,255,0.18));
+          border-radius: 6px;
+          pointer-events: none;
+        }
+
+        .typed-role {
+          color: #8fbfff;
+          text-shadow: 0 8px 20px rgba(60,120,255,0.18);
+          position: relative;
+          z-index: 2;
+        }
+
+        /* Desktop layout */
+        @media (min-width: 901px) {
+          .desktop-and-text {
+            display: inline;
+          }
+          .mobile-and-text {
+            display: none !important;
+          }
+        }
+
+        /* Mobile layout - force two-line structure */
+        @media (max-width: 900px) {
+          .desktop-and-text {
+            display: none !important;
+          }
+          .mobile-and-text {
+            display: inline !important;
+          }
+          .hero-line1 {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-size: clamp(20px, 6.5vw, 36px) !important;
+          }
+          .hero-line2 {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-size: clamp(18px, 5.5vw, 30px) !important;
+          }
+        }
+
         @media (prefers-reduced-motion: reduce) {
           .animate-pulse {
             animation: none;
           }
+          .gradient-text::before {
+            filter: none;
+            opacity: 0.1;
+          }
         }
+
         @keyframes pulse {
           0%, 100% { opacity: 1; }
           50% { opacity: 0; }
         }
         .animate-pulse {
           animation: pulse 1s infinite;
-        }
-        .hero-line2 {
-          overflow: hidden;
-          text-overflow: ellipsis;
-        }
-        @media (max-width: 480px) {
-          .hero-line2 {
-            font-size: clamp(1.2rem, 3.5vw, 2.5rem) !important;
-          }
         }
       `}</style>
     </>
@@ -287,10 +342,10 @@ export default function Hero3D() {
             {/* First line - never wrapping */}
             <div className="hero-line1 whitespace-nowrap font-bold animate-fade-in-up hover:scale-105 transition-transform duration-300" style={{ fontSize: 'clamp(2rem, 5vw, 4rem)' }}>
               <span className="text-white">Hi, I'm </span>
-              <span className="gradient-text" style={{ textShadow: '0 8px 20px rgba(60,120,255,0.12)' }}>
+              <span className="gradient-text">
                 Udhaya Sankar
               </span>
-              <span className="text-white"> and</span>
+              <span className="text-white desktop-and-text"> and</span>
             </div>
             
             {/* Second line - typed role */}
