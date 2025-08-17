@@ -185,20 +185,25 @@ function TwoLineTypedRoles() {
       </span>
       
       <style>{`
-        /* Enhanced glow effects */
+        /* Enhanced glow effects - use drop-shadow to avoid rectangular clipping */
         .gradient-text {
           background: linear-gradient(90deg, #8fbfff 0%, #6aa0ff 60%, #5b7fff 100%);
           -webkit-background-clip: text;
           background-clip: text;
           color: transparent;
-          text-shadow: 0 0 20px rgba(143, 191, 255, 0.6), 0 0 40px rgba(143, 191, 255, 0.3);
           position: relative;
           z-index: 2;
+          /* Replaces text-shadow with drop-shadow for better rendering on mobile */
+          filter: drop-shadow(0 0 10px rgba(96, 165, 250, 0.55)) drop-shadow(0 0 22px rgba(96, 165, 250, 0.35));
+          -webkit-filter: drop-shadow(0 0 10px rgba(96, 165, 250, 0.55)) drop-shadow(0 0 22px rgba(96, 165, 250, 0.35));
+          will-change: filter;
         }
 
         .typed-role {
           color: #8fbfff;
-          text-shadow: 0 8px 20px rgba(60,120,255,0.18);
+          /* Match glow behavior to avoid boxy clipping on mobile */
+          filter: drop-shadow(0 0 8px rgba(96, 165, 250, 0.35)) drop-shadow(0 0 16px rgba(96, 165, 250, 0.25));
+          -webkit-filter: drop-shadow(0 0 8px rgba(96, 165, 250, 0.35)) drop-shadow(0 0 16px rgba(96, 165, 250, 0.25));
           position: relative;
           z-index: 2;
         }
@@ -213,7 +218,7 @@ function TwoLineTypedRoles() {
           }
         }
 
-        /* Mobile layout - force two-line structure */
+        /* Mobile layout - allow glow to escape container */
         @media (max-width: 900px) {
           .desktop-and-text {
             display: none !important;
@@ -223,14 +228,13 @@ function TwoLineTypedRoles() {
           }
           .hero-line1 {
             white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            overflow: visible; /* was hidden — caused the rectangular clipping */
+            /* text-overflow removed to allow glow to render beyond box */
             font-size: clamp(20px, 6.5vw, 36px) !important;
           }
           .hero-line2 {
             white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            overflow: visible; /* was hidden — caused the rectangular clipping */
             font-size: clamp(18px, 5.5vw, 30px) !important;
           }
         }
