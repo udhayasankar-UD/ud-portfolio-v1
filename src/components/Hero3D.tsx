@@ -198,12 +198,11 @@ function TwoLineTypedRoles() {
         .gradient-text::before {
           content: "";
           position: absolute;
-          inset: 0;
+          inset: -2px;
           z-index: 1;
-          filter: blur(18px) saturate(120%);
-          opacity: 0.28;
-          background: linear-gradient(90deg, rgba(120,170,255,0.28), rgba(100,140,255,0.18));
-          border-radius: 6px;
+          filter: blur(12px) saturate(150%);
+          opacity: 0.4;
+          background: linear-gradient(90deg, #8fbfff, #6aa0ff);
           pointer-events: none;
         }
 
