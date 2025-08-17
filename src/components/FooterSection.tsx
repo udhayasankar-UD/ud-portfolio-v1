@@ -7,7 +7,7 @@ export default function FooterSection() {
       <div className="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-6">
         <div className="flex gap-6">
           <a 
-            href="https://github.com/udhayasankar" 
+            href="https://github.com/udhayasankar0/" 
             target="_blank" 
             rel="noopener noreferrer" 
             aria-label="GitHub" 
@@ -16,7 +16,7 @@ export default function FooterSection() {
             <Github className="w-7 h-7 text-gray-300 hover:text-white" />
           </a>
           <a 
-            href="https://linkedin.com/in/udhayasankar" 
+            href="https://www.linkedin.com/in/udhayasankar0/" 
             target="_blank" 
             rel="noopener noreferrer" 
             aria-label="LinkedIn" 
@@ -25,7 +25,7 @@ export default function FooterSection() {
             <Linkedin className="w-7 h-7 text-blue-400 hover:text-white" />
           </a>
           <a 
-            href="https://youtube.com/@udhayasankar" 
+            href="#" 
             target="_blank" 
             rel="noopener noreferrer" 
             aria-label="YouTube" 
@@ -34,7 +34,7 @@ export default function FooterSection() {
             <Youtube className="w-7 h-7 text-red-400 hover:text-white" />
           </a>
           <a 
-            href="https://instagram.com/udhayasankar" 
+            href="https://www.instagram.com/kid__gamer__/" 
             target="_blank" 
             rel="noopener noreferrer" 
             aria-label="Instagram" 

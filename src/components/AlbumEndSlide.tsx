@@ -20,7 +20,7 @@ export default function AlbumEndSlide() {
 
         {/* Main Text */}
         <h2 className="gradient-text text-5xl md:text-7xl font-bold mb-6">
-          That's My Collection!
+          That's My Top Collections!
         </h2>
         
         <p className="text-white/80 text-xl md:text-2xl mb-8 leading-relaxed">
