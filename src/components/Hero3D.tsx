@@ -193,17 +193,14 @@ function TwoLineTypedRoles() {
           color: transparent;
           position: relative;
           z-index: 2;
-          /* Replaces text-shadow with drop-shadow for better rendering on mobile */
-          filter: drop-shadow(0 0 10px rgba(96, 165, 250, 0.55)) drop-shadow(0 0 22px rgba(96, 165, 250, 0.35));
-          -webkit-filter: drop-shadow(0 0 10px rgba(96, 165, 250, 0.55)) drop-shadow(0 0 22px rgba(96, 165, 250, 0.35));
-          will-change: filter;
         }
 
         .typed-role {
           color: #8fbfff;
-          /* Match glow behavior to avoid boxy clipping on mobile */
-          filter: drop-shadow(0 0 8px rgba(96, 165, 250, 0.35)) drop-shadow(0 0 16px rgba(96, 165, 250, 0.25));
-          -webkit-filter: drop-shadow(0 0 8px rgba(96, 165, 250, 0.35)) drop-shadow(0 0 16px rgba(96, 165, 250, 0.25));
+          font-weight: 700;
+          /* Enhanced glow effect for typed role only */
+          filter: drop-shadow(0 0 12px rgba(96, 165, 250, 0.7)) drop-shadow(0 0 25px rgba(96, 165, 250, 0.4)) drop-shadow(0 0 40px rgba(96, 165, 250, 0.2));
+          -webkit-filter: drop-shadow(0 0 12px rgba(96, 165, 250, 0.7)) drop-shadow(0 0 25px rgba(96, 165, 250, 0.4)) drop-shadow(0 0 40px rgba(96, 165, 250, 0.2));
           position: relative;
           z-index: 2;
         }
