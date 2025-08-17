@@ -193,6 +193,9 @@ function TwoLineTypedRoles() {
           color: transparent;
           position: relative;
           z-index: 2;
+          /* Glow effect for Udhaya Sankar */
+          filter: drop-shadow(0 0 10px rgba(96, 165, 250, 0.6)) drop-shadow(0 0 20px rgba(96, 165, 250, 0.3));
+          -webkit-filter: drop-shadow(0 0 10px rgba(96, 165, 250, 0.6)) drop-shadow(0 0 20px rgba(96, 165, 250, 0.3));
         }
 
         .typed-role {
