@@ -125,8 +125,8 @@ function AnimatedCube() {
   );
 }
 
-// Two-line typed roles with accessibility
-function TwoLineTypedRoles() {
+// Enhanced animated roles with more effects
+function AnimatedRoles() {
   const roles = [
     "Full-Stack Developer",
     "Game Developer", 
@@ -135,7 +135,6 @@ function TwoLineTypedRoles() {
   const [index, setIndex] = useState(0);
   const [displayed, setDisplayed] = useState("");
   const [typing, setTyping] = useState(true);
-  const [announceRole, setAnnounceRole] = useState("");
 
   useEffect(() => {
     let timeout: number | undefined;
@@ -147,8 +146,6 @@ function TwoLineTypedRoles() {
           setDisplayed(word.slice(0, displayed.length + 1));
         }, 65);
       } else {
-        // Announce complete role for screen readers
-        setAnnounceRole(`and I'm ${word}`);
         timeout = window.setTimeout(() => setTyping(false), 1000);
       }
     } else {
@@ -159,103 +156,19 @@ function TwoLineTypedRoles() {
       } else {
         setTyping(true);
         setIndex((prev) => (prev + 1) % roles.length);
-        setAnnounceRole("");
       }
     }
     return () => clearTimeout(timeout);
   }, [displayed, typing, index, roles]);
 
   return (
-    <>
-      <div className="hero-line2 whitespace-nowrap" style={{ fontSize: 'clamp(1.5rem, 4vw, 3rem)' }}>
-        <span className="text-white desktop-and-text">I'm </span>
-        <span className="text-white mobile-and-text hidden">and I'm </span>
-        <span 
-          className="relative typed-role inline"
-          aria-hidden="true"
-        >
-          {displayed}
-          <span className="absolute border-r-2 border-blue-400 ml-1 h-full animate-pulse"></span>
-        </span>
-      </div>
-      
-      {/* Screen reader announcement */}
-      <span className="sr-only" aria-live="polite">
-        {announceRole}
+    <div className="mt-2 text-2xl md:text-4xl lg:text-5xl font-semibold min-h-[2.6rem] md:min-h-[3.2rem] lg:min-h-[3.5rem]">
+      <span className="text-white">I'm </span>
+      <span className="relative text-blue-400 drop-shadow-[0_0_8px_rgba(96,165,250,0.8)] animate-bounce">
+        {displayed}
+        <span className="absolute border-r-2 border-blue-400 animate-pulse ml-1 h-full"></span>
       </span>
-      
       <style>{`
-        /* Enhanced glow effects */
-        .gradient-text {
-          background: linear-gradient(90deg, #8fbfff 0%, #6aa0ff 60%, #5b7fff 100%);
-          -webkit-background-clip: text;
-          background-clip: text;
-          color: transparent;
-          position: relative;
-          z-index: 2;
-        }
-
-        .gradient-text::before {
-          content: "";
-          position: absolute;
-          inset: 0;
-          z-index: 1;
-          filter: blur(18px) saturate(120%);
-          opacity: 0.28;
-          background: linear-gradient(90deg, rgba(120,170,255,0.28), rgba(100,140,255,0.18));
-          border-radius: 6px;
-          pointer-events: none;
-        }
-
-        .typed-role {
-          color: #8fbfff;
-          text-shadow: 0 8px 20px rgba(60,120,255,0.18);
-          position: relative;
-          z-index: 2;
-        }
-
-        /* Desktop layout */
-        @media (min-width: 901px) {
-          .desktop-and-text {
-            display: inline;
-          }
-          .mobile-and-text {
-            display: none !important;
-          }
-        }
-
-        /* Mobile layout - force two-line structure */
-        @media (max-width: 900px) {
-          .desktop-and-text {
-            display: none !important;
-          }
-          .mobile-and-text {
-            display: inline !important;
-          }
-          .hero-line1 {
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            font-size: clamp(20px, 6.5vw, 36px) !important;
-          }
-          .hero-line2 {
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            font-size: clamp(18px, 5.5vw, 30px) !important;
-          }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-          .animate-pulse {
-            animation: none;
-          }
-          .gradient-text::before {
-            filter: none;
-            opacity: 0.1;
-          }
-        }
-
         @keyframes pulse {
           0%, 100% { opacity: 1; }
           50% { opacity: 0; }
@@ -263,8 +176,25 @@ function TwoLineTypedRoles() {
         .animate-pulse {
           animation: pulse 1s infinite;
         }
+        @keyframes bounce {
+          0%, 20%, 53%, 80%, 100% {
+            transform: translate3d(0,0,0);
+          }
+          40%, 43% {
+            transform: translate3d(0, -2px, 0);
+          }
+          70% {
+            transform: translate3d(0, -1px, 0);
+          }
+          90% {
+            transform: translate3d(0, -1px, 0);
+          }
+        }
+        .animate-bounce {
+          animation: bounce 2s infinite;
+        }
       `}</style>
-    </>
+    </div>
   );
 }
 
@@ -313,7 +243,8 @@ export default function Hero3D() {
       <CursorBullet />
       <section
         id="home"
-        className="relative min-h-screen flex items-center justify-center w-full overflow-hidden cursor-none"
+        className="relative flex flex-col items-center justify-center h-[80vh] md:h-[90vh] pt-8 pb-10 w-full overflow-hidden cursor-none"
+        style={{ minHeight: "450px" }}
       >
         {/* Animated background with parallax */}
         <div 
@@ -324,55 +255,42 @@ export default function Hero3D() {
         />
         
         {/* Multiple decorative blur rings with different animations */}
-        <div className="absolute left-1/4 top-1/3 w-80 h-80 rounded-full blur-3xl bg-blue-glow/30 animate-pulse" />
+        <div className="absolute left-0 right-0 top-36 mx-auto w-80 h-80 rounded-full blur-3xl bg-blue-glow/40 animate-pulse" />
         <div 
-          className="absolute right-1/4 top-1/2 w-96 h-96 rounded-full blur-2xl bg-purple-500/15 animate-pulse"
+          className="absolute left-0 right-0 top-24 mx-auto w-96 h-96 rounded-full blur-2xl bg-purple-500/20 animate-pulse"
           style={{
             animationDelay: '1s',
             transform: `translate(${mousePosition.x * -5}px, ${mousePosition.y * -5}px)`,
           }}
         />
 
-        {/* Main content grid - responsive layout */}
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center min-h-screen">
-          
-          {/* Text content - order first on mobile */}
-          <div className="order-1 lg:order-2 flex flex-col justify-center max-w-2xl lg:max-w-none">
-          <div className="text-center lg:text-left">
-            {/* First line - never wrapping */}
-            <div className="hero-line1 whitespace-nowrap font-bold animate-fade-in-up hover:scale-105 transition-transform duration-300" style={{ fontSize: 'clamp(2rem, 5vw, 4rem)' }}>
-              <span className="text-white">Hi, I'm </span>
-              <span className="gradient-text">
-                Udhaya Sankar
-              </span>
-              <span className="text-white desktop-and-text"> and</span>
-            </div>
-            
-            {/* Second line - typed role */}
-            <TwoLineTypedRoles />
-          </div>
-            
-            <div className="mt-6 text-center lg:text-left text-blue-100 animate-fade-in-up hover:text-white transition-colors duration-300 max-w-2xl" style={{ fontSize: 'clamp(1rem, 2.5vw, 1.25rem)' }}>
-              Building immersive web &amp; game experiences with 3D, modern UI, and a nerd's passion for code.
-            </div>
+        <div className="relative z-10 flex flex-col items-center">
+          {/* Enhanced glassy canvas */}
+          <div 
+            className="w-[90vw] max-w-[380px] h-[90vw] max-h-[380px] md:w-[380px] md:h-[380px] rounded-full shadow-soft-glow border-2 border-white/10 overflow-hidden flex items-center justify-center bg-gradient-to-br from-blue-900/70 to-gray-900/90 mb-8 animate-float hover:shadow-[0_0_30px_10px_rgba(96,165,250,0.3)] transition-all duration-300 cursor-pointer"
+            style={{
+              transform: `perspective(1000px) rotateX(${mousePosition.y * 5}deg) rotateY(${mousePosition.x * 5}deg)`,
+            }}
+          >
+            <Canvas camera={{ position: [2.4, 2.4, 3.2] }} shadows>
+              <ambientLight intensity={0.85} />
+              <directionalLight position={[2, 4, 2]} intensity={1.1} castShadow color="#60a5fa" />
+              <FloatingParticles />
+              <AnimatedCube />
+            </Canvas>
           </div>
 
-          {/* Canvas container - order second on mobile */}
-          <div className="order-2 lg:order-1 flex justify-center lg:justify-start">
-            <div 
-              className="w-[280px] h-[280px] sm:w-[320px] sm:h-[320px] md:w-[380px] md:h-[380px] lg:w-[420px] lg:h-[420px] rounded-full shadow-soft-glow border-2 border-white/10 overflow-hidden flex items-center justify-center bg-gradient-to-br from-blue-900/70 to-gray-900/90 animate-float hover:shadow-[0_0_30px_10px_rgba(96,165,250,0.3)] transition-all duration-300 cursor-pointer"
-              style={{
-                transform: `perspective(1000px) rotateX(${mousePosition.y * 5}deg) rotateY(${mousePosition.x * 5}deg)`,
-              }}
-            >
-              <Canvas camera={{ position: [2.4, 2.4, 3.2] }} shadows>
-                <ambientLight intensity={0.85} />
-                <directionalLight position={[2, 4, 2]} intensity={1.1} castShadow color="#60a5fa" />
-                <FloatingParticles />
-                <AnimatedCube />
-              </Canvas>
-            </div>
+          {/* Enhanced animated text with more effects */}
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-center gradient-text animate-fade-in-up drop-shadow-[0_2px_14px_rgba(96,165,250,0.7)] hover:scale-105 transition-transform duration-300">
+            Hi, I'm Udhaya Sankar
+          </h1>
+          
+          <AnimatedRoles />
+          
+          <div className="mt-6 text-lg md:text-xl text-blue-100 text-center max-w-2xl animate-fade-in-up hover:text-white transition-colors duration-300">
+            Building immersive web &amp; game experiences with 3D, modern UI, and a nerd's passion for code.
           </div>
+          
         </div>
 
         <ScrollIndicator />
