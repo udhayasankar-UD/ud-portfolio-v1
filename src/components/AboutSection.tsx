@@ -13,7 +13,7 @@ export default function AboutSection() {
         <div className="flex flex-col items-center md:items-start">
           <div className="relative mb-8 group transition-transform">
             <AvatarParallax
-              src="https://avatars.githubusercontent.com/u/49582342?v=4"
+              src="public\Assets\me-1.jpg"
               alt="Udhaya Sankar Avatar"
               className="" // you may customize further if needed
             />
