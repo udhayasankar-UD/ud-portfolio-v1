@@ -191,20 +191,9 @@ function TwoLineTypedRoles() {
           -webkit-background-clip: text;
           background-clip: text;
           color: transparent;
+          text-shadow: 0 0 20px rgba(143, 191, 255, 0.6), 0 0 40px rgba(143, 191, 255, 0.3);
           position: relative;
           z-index: 2;
-        }
-
-        .gradient-text::before {
-          content: "";
-          position: absolute;
-          inset: 0;
-          z-index: 1;
-          filter: blur(18px) saturate(120%);
-          opacity: 0.28;
-          background: linear-gradient(90deg, rgba(120,170,255,0.28), rgba(100,140,255,0.18));
-          border-radius: 6px;
-          pointer-events: none;
         }
 
         .typed-role {
@@ -249,10 +238,6 @@ function TwoLineTypedRoles() {
         @media (prefers-reduced-motion: reduce) {
           .animate-pulse {
             animation: none;
-          }
-          .gradient-text::before {
-            filter: none;
-            opacity: 0.1;
           }
         }
 
