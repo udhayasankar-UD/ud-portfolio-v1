@@ -171,7 +171,7 @@ function TwoLineTypedRoles() {
         <span className="text-white desktop-and-text">I'm </span>
         <span className="text-white mobile-and-text hidden">and I'm </span>
         <span 
-          className="relative typed-role inline"
+          className="relative typed-role hero-role-glow inline"
           aria-hidden="true"
         >
           {displayed}
@@ -185,54 +185,63 @@ function TwoLineTypedRoles() {
       </span>
       
       <style>{`
-        /* Enhanced glow effects - use drop-shadow to avoid rectangular clipping */
+        /* ---- KEEP gradient globally (NO glow here) ---- */
         .gradient-text {
           background: linear-gradient(90deg, #8fbfff 0%, #6aa0ff 60%, #5b7fff 100%);
           -webkit-background-clip: text;
           background-clip: text;
           color: transparent;
-          position: relative;
-          z-index: 2;
-          /* Glow effect for Udhaya Sankar */
-          filter: drop-shadow(0 0 10px rgba(96, 165, 250, 0.6)) drop-shadow(0 0 20px rgba(96, 165, 250, 0.3));
-          -webkit-filter: drop-shadow(0 0 10px rgba(96, 165, 250, 0.6)) drop-shadow(0 0 20px rgba(96, 165, 250, 0.3));
         }
 
+        /* Keep typed-role's color and weight globally but NO glow */
         .typed-role {
           color: #8fbfff;
           font-weight: 700;
-          /* Enhanced glow effect for typed role only */
-          filter: drop-shadow(0 0 12px rgba(96, 165, 250, 0.7)) drop-shadow(0 0 25px rgba(96, 165, 250, 0.4)) drop-shadow(0 0 40px rgba(96, 165, 250, 0.2));
-          -webkit-filter: drop-shadow(0 0 12px rgba(96, 165, 250, 0.7)) drop-shadow(0 0 25px rgba(96, 165, 250, 0.4)) drop-shadow(0 0 40px rgba(96, 165, 250, 0.2));
+          position: relative;
+          z-index: 2;
+          /* no drop-shadow globally */
+        }
+
+        /* ---------------- HERO-ONLY GLOW (scoped) ---------------- */
+        #home .hero-name-glow {
+          /* glow for the big name only when inside #home */
+          filter: drop-shadow(0 0 10px rgba(96,165,250,0.6)) 
+                  drop-shadow(0 0 20px rgba(96,165,250,0.3));
+          -webkit-filter: drop-shadow(0 0 10px rgba(96,165,250,0.6)) 
+                           drop-shadow(0 0 20px rgba(96,165,250,0.3));
           position: relative;
           z-index: 2;
         }
 
-        /* Desktop layout */
-        @media (min-width: 901px) {
-          .desktop-and-text {
-            display: inline;
-          }
-          .mobile-and-text {
-            display: none !important;
-          }
+        #home .hero-role-glow {
+          /* glow for the typed role inside #home */
+          filter: drop-shadow(0 0 12px rgba(96, 165, 250, 0.7)) 
+                  drop-shadow(0 0 25px rgba(96, 165, 250, 0.4)) 
+                  drop-shadow(0 0 40px rgba(96, 165, 250, 0.2));
+          -webkit-filter: drop-shadow(0 0 12px rgba(96, 165, 250, 0.7)) 
+                           drop-shadow(0 0 25px rgba(96, 165, 250, 0.4)) 
+                           drop-shadow(0 0 40px rgba(96, 165, 250, 0.2));
+          position: relative;
+          z-index: 2;
         }
 
-        /* Mobile layout - allow glow to escape container */
+        /* Desktop layout (hero-scoped) */
+        @media (min-width: 901px) {
+          #home .desktop-and-text { display: inline; }
+          #home .mobile-and-text { display: none !important; }
+        }
+
+        /* Mobile layout - allow glow to escape container (hero-scoped) */
         @media (max-width: 900px) {
-          .desktop-and-text {
-            display: none !important;
-          }
-          .mobile-and-text {
-            display: inline !important;
-          }
-          .hero-line1 {
+          #home .desktop-and-text { display: none !important; }
+          #home .mobile-and-text { display: inline !important; }
+
+          #home .hero-line1 {
             white-space: nowrap;
             overflow: visible; /* was hidden — caused the rectangular clipping */
-            /* text-overflow removed to allow glow to render beyond box */
             font-size: clamp(20px, 6.5vw, 36px) !important;
           }
-          .hero-line2 {
+          #home .hero-line2 {
             white-space: nowrap;
             overflow: visible; /* was hidden — caused the rectangular clipping */
             font-size: clamp(18px, 5.5vw, 30px) !important;
@@ -240,16 +249,14 @@ function TwoLineTypedRoles() {
         }
 
         @media (prefers-reduced-motion: reduce) {
-          .animate-pulse {
-            animation: none;
-          }
+          #home .animate-pulse { animation: none; }
         }
 
         @keyframes pulse {
           0%, 100% { opacity: 1; }
           50% { opacity: 0; }
         }
-        .animate-pulse {
+        #home .animate-pulse {
           animation: pulse 1s infinite;
         }
       `}</style>
@@ -331,7 +338,8 @@ export default function Hero3D() {
             {/* First line - never wrapping */}
             <div className="hero-line1 whitespace-nowrap font-bold animate-fade-in-up hover:scale-105 transition-transform duration-300" style={{ fontSize: 'clamp(2rem, 5vw, 4rem)' }}>
               <span className="text-white">Hi, I'm </span>
-              <span className="gradient-text">
+              {/* add hero-name-glow to scope glow only for the hero */}
+              <span className="gradient-text hero-name-glow">
                 Udhaya Sankar
               </span>
               <span className="text-white desktop-and-text"> and</span>
