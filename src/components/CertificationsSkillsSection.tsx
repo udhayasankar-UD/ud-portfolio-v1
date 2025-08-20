@@ -2,7 +2,7 @@ import { Award, Trophy } from "lucide-react";
 import CertificationsList from "./CertificationsList";
 import SkillsChart from "./SkillsChart";
 
-const certifications = [
+const featuredCertifications = [
   {
     title: "Network Fundamentals",
     issuer: "Infosys Springboard",
@@ -22,7 +22,10 @@ const certifications = [
     title: "Interion Tech Gala Workshop",
     issuer: "HCL GUVI",
     id: "cert-4"
-  },
+  }
+];
+
+const otherCertifications = [
   {
     title: "Crash Course on Python",
     issuer: "Google",
@@ -69,16 +72,27 @@ export default function CertificationsSkillsSection() {
         </div>
 
         {/* Single Column Layout */}
-        <div className="max-w-4xl mx-auto space-y-16">
-          {/* Certifications Section */}
+        <div className="max-w-5xl mx-auto space-y-16">
+          {/* Featured Certifications Section */}
           <div>
             <div className="flex items-center gap-3 mb-8">
               <div className="p-2 rounded-lg bg-blue-glow/20">
                 <Trophy className="w-6 h-6 text-blue-glow" />
               </div>
-              <h3 className="text-2xl font-bold text-white">Certifications</h3>
+              <h3 className="text-2xl font-bold text-white">Featured Certifications</h3>
             </div>
-            <CertificationsList certifications={certifications} />
+            <CertificationsList certifications={featuredCertifications} featured={true} />
+          </div>
+
+          {/* Other Certifications Section */}
+          <div>
+            <div className="flex items-center gap-3 mb-6">
+              <div className="p-2 rounded-lg bg-blue-glow/20">
+                <Trophy className="w-5 h-5 text-blue-glow" />
+              </div>
+              <h3 className="text-xl font-bold text-white">Other Certifications</h3>
+            </div>
+            <CertificationsList certifications={otherCertifications} featured={false} />
           </div>
 
           {/* Skills Section */}
