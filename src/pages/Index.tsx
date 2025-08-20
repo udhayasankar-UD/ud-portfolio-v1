@@ -2,6 +2,7 @@ import Layout from "../components/Layout";
 import Hero3D from "../components/Hero3D";
 import AboutSection from "../components/AboutSection";
 import AlbumProjectsSection from "../components/AlbumProjectsSection";
+import CertificationsSkillsSection from "../components/CertificationsSkillsSection";
 import ContactSection from "../components/ContactSection";
 import ResumeSection from "../components/ResumeSection";
 import FooterSection from "../components/FooterSection";
@@ -12,6 +13,7 @@ const Index = () => {
       <Hero3D />
       <AboutSection />
       <AlbumProjectsSection />
+      <CertificationsSkillsSection />
       <ContactSection />
       <ResumeSection />
       <FooterSection />
