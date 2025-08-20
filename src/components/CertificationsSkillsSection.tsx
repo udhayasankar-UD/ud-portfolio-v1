@@ -68,10 +68,10 @@ export default function CertificationsSkillsSection() {
           </p>
         </div>
 
-        {/* Desktop: Two Column Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-          {/* Left Column: Certifications */}
-          <div className="order-1 lg:order-1">
+        {/* Single Column Layout */}
+        <div className="max-w-4xl mx-auto space-y-16">
+          {/* Certifications Section */}
+          <div>
             <div className="flex items-center gap-3 mb-8">
               <div className="p-2 rounded-lg bg-blue-glow/20">
                 <Trophy className="w-6 h-6 text-blue-glow" />
@@ -81,8 +81,8 @@ export default function CertificationsSkillsSection() {
             <CertificationsList certifications={certifications} />
           </div>
 
-          {/* Right Column: Skills Chart */}
-          <div className="order-2 lg:order-2">
+          {/* Skills Section */}
+          <div>
             <div className="flex items-center gap-3 mb-8">
               <div className="p-2 rounded-lg bg-blue-glow/20">
                 <Award className="w-6 h-6 text-blue-glow" />

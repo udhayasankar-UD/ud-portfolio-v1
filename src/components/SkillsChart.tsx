@@ -45,31 +45,75 @@ export default function SkillsChart({ skills }: SkillsChartProps) {
   const innerWidth = chartWidth - padding.left - padding.right;
   const innerHeight = chartHeight - padding.top - padding.bottom;
 
-  // Generate path points for area chart
-  const generateAreaPath = (skills: Skill[]) => {
+  // Generate triangular layered paths inspired by the reference
+  const generateTriangularPaths = (skills: Skill[]) => {
     const points = skills.map((skill, index) => {
       const x = (index / (skills.length - 1)) * innerWidth;
       const y = innerHeight - (skill.value / 80) * innerHeight;
       return { x, y, skill };
     });
 
-    let path = `M 0 ${innerHeight}`;
+    // Create multiple layers with triangular shapes
+    const layers = [];
+    
+    // Layer 1: Main triangular area (darkest)
+    let mainPath = `M 0 ${innerHeight}`;
     points.forEach((point, index) => {
       if (index === 0) {
-        path += ` L ${point.x} ${point.y}`;
+        mainPath += ` L ${point.x} ${point.y}`;
       } else {
-        // Create smooth curves between points
-        const prevPoint = points[index - 1];
-        const controlPoint1X = prevPoint.x + (point.x - prevPoint.x) * 0.3;
-        const controlPoint2X = prevPoint.x + (point.x - prevPoint.x) * 0.7;
-        path += ` C ${controlPoint1X} ${prevPoint.y}, ${controlPoint2X} ${point.y}, ${point.x} ${point.y}`;
+        mainPath += ` L ${point.x} ${point.y}`;
       }
     });
-    path += ` L ${innerWidth} ${innerHeight} Z`;
-    return { path, points };
+    mainPath += ` L ${innerWidth} ${innerHeight} Z`;
+    
+    // Layer 2: Secondary triangular overlay (medium opacity)
+    let secondPath = `M ${innerWidth * 0.15} ${innerHeight}`;
+    points.slice(1, -1).forEach((point, index) => {
+      const adjustedY = point.y + (innerHeight - point.y) * 0.3;
+      if (index === 0) {
+        secondPath += ` L ${point.x} ${adjustedY}`;
+      } else {
+        secondPath += ` L ${point.x} ${adjustedY}`;
+      }
+    });
+    secondPath += ` L ${innerWidth * 0.85} ${innerHeight} Z`;
+    
+    // Layer 3: Top triangular highlight (lightest)
+    let topPath = `M ${innerWidth * 0.25} ${innerHeight}`;
+    const highPoints = points.slice(2, -2);
+    highPoints.forEach((point, index) => {
+      const adjustedY = point.y + (innerHeight - point.y) * 0.6;
+      if (index === 0) {
+        topPath += ` L ${point.x} ${adjustedY}`;
+      } else {
+        topPath += ` L ${point.x} ${adjustedY}`;
+      }
+    });
+    topPath += ` L ${innerWidth * 0.75} ${innerHeight} Z`;
+
+    layers.push({
+      path: mainPath,
+      opacity: 0.8,
+      color: '#60A5FA'
+    });
+    
+    layers.push({
+      path: secondPath,
+      opacity: 0.6,
+      color: '#818CF8'
+    });
+    
+    layers.push({
+      path: topPath,
+      opacity: 0.4,
+      color: '#6B8CFF'
+    });
+
+    return { layers, points };
   };
 
-  const { path: mainPath, points } = generateAreaPath(skills);
+  const { layers, points } = generateTriangularPaths(skills);
 
   const handleMouseMove = (event: React.MouseEvent, skill: Skill) => {
     if (svgRef.current) {
@@ -129,11 +173,13 @@ export default function SkillsChart({ skills }: SkillsChartProps) {
           aria-label="Skills visualization chart"
         >
           <defs>
-            <linearGradient id="skillsGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stopColor="#60A5FA" stopOpacity={0.8} />
-              <stop offset="50%" stopColor="#818CF8" stopOpacity={0.6} />
-              <stop offset="100%" stopColor="#6B8CFF" stopOpacity={0.3} />
-            </linearGradient>
+            {/* Paper texture pattern */}
+            <pattern id="paperTexture" patternUnits="userSpaceOnUse" width="100" height="100" patternTransform="rotate(45)">
+              <rect width="100" height="100" fill="rgba(255,255,255,0.005)"/>
+              <circle cx="20" cy="20" r="0.5" fill="rgba(255,255,255,0.02)"/>
+              <circle cx="80" cy="40" r="0.3" fill="rgba(255,255,255,0.01)"/>
+              <circle cx="50" cy="70" r="0.4" fill="rgba(255,255,255,0.015)"/>
+            </pattern>
             <filter id="glow">
               <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
               <feMerge> 
@@ -160,25 +206,49 @@ export default function SkillsChart({ skills }: SkillsChartProps) {
               </g>
             ))}
 
-            {/* Main area path */}
-            <path
-              d={mainPath}
-              fill="url(#skillsGradient)"
-              stroke="#60A5FA"
-              strokeWidth={2}
-              filter="url(#glow)"
-              className="drop-shadow-lg"
+            {/* Triangular layers */}
+            {layers.map((layer, index) => (
+              <path
+                key={index}
+                d={layer.path}
+                fill={layer.color}
+                fillOpacity={layer.opacity}
+                stroke="none"
+                className="drop-shadow-sm"
+              />
+            ))}
+            
+            {/* Paper texture overlay */}
+            <rect
+              x={0}
+              y={0}
+              width={innerWidth}
+              height={innerHeight}
+              fill="url(#paperTexture)"
+              opacity={0.3}
             />
 
-            {/* Data points */}
+            {/* Data points with guide lines */}
             {points.map((point, index) => (
               <g key={point.skill.name}>
+                {/* Vertical guide line */}
+                <line
+                  x1={point.x}
+                  y1={innerHeight}
+                  x2={point.x}
+                  y2={point.y}
+                  stroke="rgba(255,255,255,0.3)"
+                  strokeWidth={1}
+                  strokeDasharray="2,2"
+                />
+                
+                {/* Data point circle */}
                 <circle
                   cx={point.x}
                   cy={point.y}
                   r={hoveredSkill === point.skill.name ? 8 : 6}
                   fill={point.skill.color}
-                  stroke="rgba(255,255,255,0.8)"
+                  stroke="rgba(255,255,255,0.9)"
                   strokeWidth={2}
                   className="transition-all duration-200 cursor-pointer"
                   filter="url(#glow)"
@@ -204,13 +274,13 @@ export default function SkillsChart({ skills }: SkillsChartProps) {
                   onBlur={handleMouseLeave}
                 />
                 
-                {/* Skill labels */}
+                {/* Skill labels (tilted) */}
                 <text
                   x={point.x}
                   y={innerHeight + 20}
                   textAnchor="middle"
                   className="text-xs fill-gray-300 font-medium"
-                  transform={`rotate(-45, ${point.x}, ${innerHeight + 20})`}
+                  transform={`rotate(-20, ${point.x}, ${innerHeight + 20})`}
                 >
                   {point.skill.name}
                 </text>
