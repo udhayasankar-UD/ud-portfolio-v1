@@ -1,47 +1,6 @@
-import { Award, Trophy } from "lucide-react";
-import CertificationsList from "./CertificationsList";
+import { Award } from "lucide-react";
+import CertCarousel from "./CertCarousel";
 import SkillsChart from "./SkillsChart";
-
-const featuredCertifications = [
-  {
-    title: "Network Fundamentals",
-    issuer: "Infosys Springboard",
-    id: "cert-1"
-  },
-  {
-    title: "AWS Certifications",
-    issuer: "Amazon Web Services",
-    id: "cert-2"
-  },
-  {
-    title: "Python: Zero to Hero",
-    issuer: "HCL GUVI",
-    id: "cert-3"
-  },
-  {
-    title: "Interion Tech Gala Workshop",
-    issuer: "HCL GUVI",
-    id: "cert-4"
-  }
-];
-
-const otherCertifications = [
-  {
-    title: "Crash Course on Python",
-    issuer: "Google",
-    id: "cert-5"
-  },
-  {
-    title: "Mastering Figma: Beginner to Expert UI/UX Design",
-    issuer: "HCL GUVI",
-    id: "cert-6"
-  },
-  {
-    title: "NM-AU-TNcpl",
-    issuer: "HCL GUVI",
-    id: "cert-7"
-  }
-];
 
 const skills = [
   { name: "HTML & CSS", value: 70, color: "#60A5FA", description: "Strong foundation in web fundamentals" },
@@ -72,27 +31,10 @@ export default function CertificationsSkillsSection() {
         </div>
 
         {/* Single Column Layout */}
-        <div className="max-w-5xl mx-auto space-y-16">
-          {/* Featured Certifications Section */}
+        <div className="max-w-6xl mx-auto space-y-16">
+          {/* Certifications Carousel */}
           <div>
-            <div className="flex items-center gap-3 mb-8">
-              <div className="p-2 rounded-lg bg-blue-glow/20">
-                <Trophy className="w-6 h-6 text-blue-glow" />
-              </div>
-              <h3 className="text-2xl font-bold text-white">Featured Certifications</h3>
-            </div>
-            <CertificationsList certifications={featuredCertifications} featured={true} />
-          </div>
-
-          {/* Other Certifications Section */}
-          <div>
-            <div className="flex items-center gap-3 mb-6">
-              <div className="p-2 rounded-lg bg-blue-glow/20">
-                <Trophy className="w-5 h-5 text-blue-glow" />
-              </div>
-              <h3 className="text-xl font-bold text-white">Other Certifications</h3>
-            </div>
-            <CertificationsList certifications={otherCertifications} featured={false} />
+            <CertCarousel />
           </div>
 
           {/* Skills Section */}
