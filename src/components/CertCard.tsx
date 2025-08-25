@@ -28,13 +28,11 @@ export default function CertCard({ certificate, isActive, onClick, shouldAnimate
 
   return (
     <div
-      className={`relative group cursor-pointer transition-all duration-500 ${
-        shouldAnimate ? 'ease-in-out' : ''
-      } ${
-        isActive 
-          ? 'scale-100 opacity-100 z-10' 
+      className={`relative group cursor-pointer transition-all duration-500 ${shouldAnimate ? 'ease-in-out' : ''
+        } ${isActive
+          ? 'scale-100 opacity-100 z-10'
           : 'scale-95 opacity-60 md:scale-90 md:opacity-70'
-      }`}
+        }`}
       onClick={onClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -47,14 +45,12 @@ export default function CertCard({ certificate, isActive, onClick, shouldAnimate
       aria-label={`View ${certificate.title} certificate from ${certificate.provider}`}
     >
       {/* Main Card */}
-      <div 
-        className={`relative h-92 md:h-96 rounded-xl overflow-hidden transition-all duration-300 ${
-          isActive 
-            ? 'shadow-2xl shadow-blue-glow/20 ring-2 ring-blue-glow/30' 
+      <div
+        className={`relative h-96 md:h-[28rem] rounded-xl overflow-hidden transition-all duration-300 ${isActive
+            ? 'shadow-2xl shadow-blue-glow/20 ring-2 ring-blue-glow/30'
             : 'shadow-lg'
-        } ${
-          showOverlay ? 'transform -translate-y-2' : ''
-        }`}
+          } ${showOverlay ? 'transform -translate-y-2' : ''
+          }`}
         style={{
           background: 'rgba(255, 255, 255, 0.03)',
           backdropFilter: 'blur(10px)',
@@ -83,19 +79,17 @@ export default function CertCard({ certificate, isActive, onClick, shouldAnimate
           )}
 
           {/* Overlay Gradient */}
-          <div 
-            className={`absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-300 ${
-              showOverlay ? 'opacity-100' : 'opacity-0'
-            }`}
+          <div
+            className={`absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-300 ${showOverlay ? 'opacity-100' : 'opacity-0'
+              }`}
           />
 
           {/* Hover/Focus Overlay */}
-          <div 
-            className={`absolute inset-x-0 bottom-0 p-6 transform transition-all duration-300 ${
-              showOverlay ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
-            }`}
+          <div
+            className={`absolute inset-x-0 bottom-0 p-6 transform transition-all duration-300 ${showOverlay ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
+              }`}
           >
-            <div 
+            <div
               className="p-4 rounded-lg backdrop-blur-sm"
               style={{
                 background: 'rgba(96, 165, 250, 0.1)',
