@@ -89,7 +89,7 @@ export default function CertCarousel() {
     if (isAutoPlaying && shouldAnimate) {
       intervalRef.current = setInterval(() => {
         setCurrentIndex((prev) => (prev + 1) % certificates.length);
-      }, 5000);
+      }, 4000);
     } else {
       if (intervalRef.current) {
         clearInterval(intervalRef.current);
