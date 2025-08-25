@@ -48,7 +48,7 @@ export default function CertCard({ certificate, isActive, onClick, shouldAnimate
     >
       {/* Main Card */}
       <div 
-        className={`relative h-64 md:h-80 rounded-xl overflow-hidden transition-all duration-300 ${
+        className={`relative w-[400px] h-[350px] md:w-[300px] md:h-[260px] sm:w-full sm:h-[280px] rounded-xl overflow-hidden transition-all duration-300 ${
           isActive 
             ? 'shadow-2xl shadow-blue-glow/20 ring-2 ring-blue-glow/30' 
             : 'shadow-lg'
@@ -56,9 +56,9 @@ export default function CertCard({ certificate, isActive, onClick, shouldAnimate
           showOverlay ? 'transform -translate-y-2' : ''
         }`}
         style={{
-          background: 'rgba(255, 255, 255, 0.03)',
+          background: 'rgba(255, 255, 255, 0.04)',
           backdropFilter: 'blur(10px)',
-          border: '1px solid rgba(255, 255, 255, 0.08)',
+          border: '1px solid rgba(96, 165, 250, 0.3)',
         }}
       >
         {/* Certificate Image */}
