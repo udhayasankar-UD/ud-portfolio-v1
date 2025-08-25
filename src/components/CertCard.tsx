@@ -48,7 +48,7 @@ export default function CertCard({ certificate, isActive, onClick, shouldAnimate
     >
       {/* Main Card */}
       <div 
-        className={`relative h-64 md:h-80 rounded-xl overflow-hidden transition-all duration-300 ${
+        className={`relative h-72 md:h-96 rounded-xl overflow-hidden transition-all duration-300 ${
           isActive 
             ? 'shadow-2xl shadow-blue-glow/20 ring-2 ring-blue-glow/30' 
             : 'shadow-lg'
