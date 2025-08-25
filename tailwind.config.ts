@@ -32,9 +32,6 @@ export default {
 				'gray-verydark': '#181a20',
 				'blue-glow': '#60a5fa',
 			},
-			scale: {
-				'103': '1.03',
-			},
 			backgroundImage: {
 				'hero-gradient': 'linear-gradient(135deg, #181a20 0%, #232833 100%)',
 				'section-layer': 'linear-gradient(110deg, #232833 60%, #232f40 100%)',

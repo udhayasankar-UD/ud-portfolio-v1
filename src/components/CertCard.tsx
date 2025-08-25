@@ -28,12 +28,12 @@ export default function CertCard({ certificate, isActive, onClick, shouldAnimate
 
   return (
     <div
-      className={`flex-none group cursor-pointer transition-all duration-500 ${
+      className={`relative group cursor-pointer transition-all duration-500 ${
         shouldAnimate ? 'ease-in-out' : ''
       } ${
         isActive 
-          ? 'scale-103 opacity-100 z-10' 
-          : 'scale-100 opacity-80'
+          ? 'scale-100 opacity-100 z-10' 
+          : 'scale-95 opacity-60 md:scale-90 md:opacity-70'
       }`}
       onClick={onClick}
       onMouseEnter={() => setIsHovered(true)}
@@ -48,7 +48,7 @@ export default function CertCard({ certificate, isActive, onClick, shouldAnimate
     >
       {/* Main Card */}
       <div 
-        className={`relative w-full h-[280px] md:w-[320px] md:h-[280px] lg:w-[400px] lg:h-[350px] rounded-xl overflow-hidden transition-all duration-300 p-3 ${
+        className={`relative w-[400px] h-[350px] md:w-[300px] md:h-[260px] sm:w-full sm:h-[280px] rounded-xl overflow-hidden transition-all duration-300 ${
           isActive 
             ? 'shadow-2xl shadow-blue-glow/20 ring-2 ring-blue-glow/30' 
             : 'shadow-lg'
@@ -62,18 +62,18 @@ export default function CertCard({ certificate, isActive, onClick, shouldAnimate
         }}
       >
         {/* Certificate Image */}
-        <div className="relative w-full h-full rounded-lg overflow-hidden">
+        <div className="relative w-full h-full">
           {!imageError ? (
             <img
               src={certificate.image}
               alt={certificate.alt}
-              className="w-full h-full object-contain object-center bg-white/5"
+              className="w-full h-full object-cover object-center"
               onError={handleImageError}
               loading="lazy"
             />
           ) : (
             // Fallback placeholder
-            <div className="w-full h-full bg-gradient-to-br from-blue-glow/20 to-purple-500/20 flex items-center justify-center rounded-lg">
+            <div className="w-full h-full bg-gradient-to-br from-blue-glow/20 to-purple-500/20 flex items-center justify-center">
               <div className="text-center text-white/70">
                 <div className="text-4xl mb-2">📜</div>
                 <div className="text-sm font-medium">{certificate.title}</div>

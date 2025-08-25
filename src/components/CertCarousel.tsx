@@ -190,25 +190,31 @@ export default function CertCarousel() {
         {/* Carousel Container */}
         <div 
           ref={carouselRef}
-          className="relative overflow-hidden"
+          className="relative overflow-hidden rounded-xl"
           onTouchStart={onTouchStart}
           onTouchMove={onTouchMove}
           onTouchEnd={onTouchEnd}
         >
           <div 
-            className="flex gap-6 transition-transform duration-500 ease-in-out justify-center"
+            className="flex transition-transform duration-500 ease-in-out"
             style={{
-              transform: `translateX(calc(-${currentIndex * 424}px + 50% - 212px))`, // 400px card + 24px gap = 424px, center adjustment
+              transform: `translateX(-${currentIndex * (100 / certificates.length)}%)`,
+              width: `${certificates.length * 100}%`
             }}
           >
             {certificates.map((cert, index) => (
-              <CertCard
+              <div 
                 key={cert.id}
-                certificate={cert}
-                isActive={index === currentIndex}
-                onClick={() => handleCardClick(cert)}
-                shouldAnimate={shouldAnimate}
-              />
+                className="w-full flex-shrink-0 px-2"
+                style={{ width: `${100 / certificates.length}%` }}
+              >
+                <CertCard
+                  certificate={cert}
+                  isActive={index === currentIndex}
+                  onClick={() => handleCardClick(cert)}
+                  shouldAnimate={shouldAnimate}
+                />
+              </div>
             ))}
           </div>
         </div>
