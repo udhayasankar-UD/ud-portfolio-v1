@@ -1,6 +1,5 @@
 
 import { useState } from "react";
-import ContactModel3D from "./ContactModel3D";
 
 export default function ContactSection() {
   const [submitted, setSubmitted] = useState(false);
@@ -45,10 +44,6 @@ export default function ContactSection() {
             )}
           </div>
 
-          {/* Right side - 3D Model */}
-          <div className="flex-1 w-full h-96 lg:h-[600px] glass-card p-4">
-            <ContactModel3D />
-          </div>
         </div>
       </div>
     </section>
