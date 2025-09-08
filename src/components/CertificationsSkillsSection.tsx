@@ -1,8 +1,12 @@
+import React, { useState } from "react";
 import { Award } from "lucide-react";
 import CertCarousel from "./CertCarousel";
 import SkillsChart from "./SkillsChart";
+import BrainExplorer from "./BrainExplorer";
+import SkillDetailPanel from "./SkillDetailPanel";
+import type { BrainRegion } from "./BrainExplorer";
 
-const skills = [
+const allSkills = [
   { name: "HTML & CSS", value: 70, color: "#60A5FA", description: "Strong foundation in web fundamentals" },
   { name: "JavaScript", value: 40, color: "#818CF8", description: "Solid understanding of JS concepts" },
   { name: "React", value: 40, color: "#6B8CFF", description: "Building modern user interfaces" },
@@ -14,10 +18,18 @@ const skills = [
 ];
 
 export default function CertificationsSkillsSection() {
+  const [highlightedSkills, setHighlightedSkills] = useState<BrainRegion['skills']>([]);
+  const [selectedRegion, setSelectedRegion] = useState<BrainRegion | null>(null);
+
+  const handleSkillsHighlight = (skills: BrainRegion['skills'], region: BrainRegion) => {
+    setHighlightedSkills(skills);
+    setSelectedRegion(region);
+  };
+
   return (
     <section
       id="certifications-skills"
-      className="w-full min-h-screen px-4 py-16 md:py-20 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 flex items-center"
+      className="w-full min-h-screen px-4 py-16 md:py-20 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900"
     >
       <div className="max-w-7xl mx-auto w-full">
         {/* Header */}
@@ -26,26 +38,44 @@ export default function CertificationsSkillsSection() {
             Certifications & Skills
           </h2>
           <p className="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto">
-            Tools and certificates that shape my work
+            Explore my brain-mapped skills and professional certifications
           </p>
         </div>
 
-        {/* Single Column Layout */}
-        <div className="max-w-6xl mx-auto space-y-16">
+        <div className="space-y-16">
           {/* Certifications Carousel */}
           <div>
             <CertCarousel />
           </div>
 
-          {/* Skills Section */}
+          {/* Brain Explorer & Skills */}
           <div>
             <div className="flex items-center gap-3 mb-8">
               <div className="p-2 rounded-lg bg-blue-glow/20">
                 <Award className="w-6 h-6 text-blue-glow" />
               </div>
-              <h3 className="text-2xl font-bold text-white">Skills</h3>
+              <h3 className="text-2xl font-bold text-white">Interactive Skills Map</h3>
             </div>
-            <SkillsChart skills={skills} />
+            
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+              {/* Skills Chart */}
+              <div className="space-y-6">
+                <SkillsChart 
+                  skills={allSkills} 
+                  highlightedSkills={highlightedSkills}
+                  regionColor={selectedRegion?.color}
+                />
+                <SkillDetailPanel region={selectedRegion} />
+              </div>
+
+              {/* Brain Explorer */}
+              <div className="lg:sticky lg:top-8">
+                <BrainExplorer 
+                  onSkillsHighlight={handleSkillsHighlight}
+                  className="w-full"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { cn } from "@/lib/utils";
 
 interface Skill {
   name: string;
@@ -9,6 +10,8 @@ interface Skill {
 
 interface SkillsChartProps {
   skills: Skill[];
+  highlightedSkills?: Array<{ name: string; value: number; description: string }>;
+  regionColor?: string;
 }
 
 // Y-axis labels mapping
@@ -20,7 +23,7 @@ const yAxisLabels = [
   { value: 80, label: "Goat" }
 ];
 
-export default function SkillsChart({ skills }: SkillsChartProps) {
+export default function SkillsChart({ skills, highlightedSkills = [], regionColor }: SkillsChartProps) {
   const [tooltip, setTooltip] = useState<{
     skill: Skill;
     x: number;
@@ -211,10 +214,48 @@ export default function SkillsChart({ skills }: SkillsChartProps) {
               <path
                 key={index}
                 d={layer.path}
-                fill={layer.color}
-                fillOpacity={layer.opacity}
-                stroke="none"
-                className="drop-shadow-sm"
+                fill={
+                  highlightedSkills.length > 0 && regionColor 
+                    ? regionColor 
+                    : layer.color
+                }
+                fillOpacity={
+                  highlightedSkills.length > 0 
+                    ? layer.opacity + 0.2
+                    : layer.opacity
+                }
+                stroke={
+                  highlightedSkills.length > 0 && regionColor 
+                    ? regionColor 
+                    : "none"
+                }
+                strokeWidth={highlightedSkills.length > 0 ? 1 : 0}
+                strokeOpacity={0.6}
+                className={cn(
+                  "drop-shadow-sm transition-all duration-500",
+                  highlightedSkills.length > 0 && "drop-shadow-lg"
+                )}
+                style={{
+                  filter: highlightedSkills.length > 0 && regionColor
+                    ? `drop-shadow(0 0 8px ${regionColor}50)`
+                    : undefined
+                }}
+              />
+            ))}
+            
+            {/* Enhanced glow for highlighted region */}
+            {highlightedSkills.length > 0 && regionColor && layers.map((layer, index) => (
+              <path
+                key={`glow-${index}`}
+                d={layer.path}
+                fill="none"
+                stroke={regionColor}
+                strokeWidth={2}
+                strokeOpacity={0.3}
+                className="animate-pulse"
+                style={{
+                  filter: `blur(4px)`
+                }}
               />
             ))}
             
@@ -246,12 +287,30 @@ export default function SkillsChart({ skills }: SkillsChartProps) {
                 <circle
                   cx={point.x}
                   cy={point.y}
-                  r={hoveredSkill === point.skill.name ? 8 : 6}
-                  fill={point.skill.color}
+                  r={
+                    highlightedSkills.some(h => h.name === point.skill.name) ? 10 :
+                    hoveredSkill === point.skill.name ? 8 : 6
+                  }
+                  fill={
+                    highlightedSkills.some(h => h.name === point.skill.name) && regionColor 
+                      ? regionColor 
+                      : point.skill.color
+                  }
                   stroke="rgba(255,255,255,0.9)"
-                  strokeWidth={2}
-                  className="transition-all duration-200 cursor-pointer"
-                  filter="url(#glow)"
+                  strokeWidth={
+                    highlightedSkills.some(h => h.name === point.skill.name) ? 3 : 2
+                  }
+                  className="transition-all duration-300 cursor-pointer"
+                  filter={
+                    highlightedSkills.some(h => h.name === point.skill.name)
+                      ? "url(#glow)"
+                      : "url(#glow)"
+                  }
+                  style={{
+                    boxShadow: highlightedSkills.some(h => h.name === point.skill.name) && regionColor
+                      ? `0 0 20px ${regionColor}50`
+                      : undefined
+                  }}
                   onMouseEnter={(e) => {
                     setHoveredSkill(point.skill.name);
                     handleMouseMove(e, point.skill);
