@@ -5,7 +5,8 @@ import React from "react";
 const navItems = [
   { label: "About", href: "#about" },
   { label: "Projects", href: "#projects" },
-  { label: "Certifications & Skills", href: "#certifications-skills" },
+  { label: "Skills", href: "#skills" },
+  { label: "Certifications", href: "#certifications" },
   { label: "Contact", href: "#contact" },
   { label: "Resume", href: "#resume" }
 ];

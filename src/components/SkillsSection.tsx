@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Award } from "lucide-react";
-import CertCarousel from "./CertCarousel";
 import SkillsChart from "./SkillsChart";
 import BrainExplorer from "./BrainExplorer";
 import SkillDetailPanel from "./SkillDetailPanel";
@@ -17,7 +16,7 @@ const allSkills = [
   { name: "Cloud", value: 10, color: "#06B6D4", description: "Exploring cloud technologies" }
 ];
 
-export default function CertificationsSkillsSection() {
+export default function SkillsSection() {
   const [highlightedSkills, setHighlightedSkills] = useState<BrainRegion['skills']>([]);
   const [selectedRegion, setSelectedRegion] = useState<BrainRegion | null>(null);
 
@@ -28,53 +27,46 @@ export default function CertificationsSkillsSection() {
 
   return (
     <section
-      id="certifications-skills"
+      id="skills"
       className="w-full min-h-screen px-4 py-16 md:py-20 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900"
     >
       <div className="max-w-7xl mx-auto w-full">
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="gradient-text text-4xl md:text-5xl font-bold mb-4">
-            Certifications & Skills
+            Skills
           </h2>
           <p className="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto">
-            Explore my brain-mapped skills and professional certifications
+            Explore my brain-mapped skills and technical expertise
           </p>
         </div>
 
-        <div className="space-y-16">
-          {/* Certifications Carousel */}
-          <div>
-            <CertCarousel />
-          </div>
-
-          {/* Brain Explorer & Skills */}
-          <div>
-            <div className="flex items-center gap-3 mb-8">
-              <div className="p-2 rounded-lg bg-blue-glow/20">
-                <Award className="w-6 h-6 text-blue-glow" />
-              </div>
-              <h3 className="text-2xl font-bold text-white">Interactive Skills Map</h3>
+        {/* Brain Explorer & Skills */}
+        <div>
+          <div className="flex items-center gap-3 mb-8">
+            <div className="p-2 rounded-lg bg-blue-glow/20">
+              <Award className="w-6 h-6 text-blue-glow" />
             </div>
-            
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-              {/* Skills Chart */}
-              <div className="space-y-6">
-                <SkillsChart 
-                  skills={allSkills} 
-                  highlightedSkills={highlightedSkills}
-                  regionColor={selectedRegion?.color}
-                />
-                <SkillDetailPanel region={selectedRegion} />
-              </div>
+            <h3 className="text-2xl font-bold text-white">Interactive Skills Map</h3>
+          </div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+            {/* Skills Chart */}
+            <div className="space-y-6">
+              <SkillsChart 
+                skills={allSkills} 
+                highlightedSkills={highlightedSkills}
+                regionColor={selectedRegion?.color}
+              />
+              <SkillDetailPanel region={selectedRegion} />
+            </div>
 
-              {/* Brain Explorer */}
-              <div className="lg:sticky lg:top-8">
-                <BrainExplorer 
-                  onSkillsHighlight={handleSkillsHighlight}
-                  className="w-full"
-                />
-              </div>
+            {/* Brain Explorer */}
+            <div className="lg:sticky lg:top-8">
+              <BrainExplorer 
+                onSkillsHighlight={handleSkillsHighlight}
+                className="w-full"
+              />
             </div>
           </div>
         </div>
