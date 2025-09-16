@@ -16,9 +16,30 @@ export default function ContactSection() {
     >
       <div className="max-w-7xl mx-auto w-full">
         <h2 className="gradient-text text-4xl md:text-5xl font-bold mb-12 text-center">Contact Me</h2>
-        
-        <div className="flex flex-col lg:flex-row gap-12 items-center">
-          {/* Left side - Form */}
+
+        <div className="flex flex-col lg:flex-row gap-12 items-center lg:items-start">
+          {/* Left side - Text */}
+          <div className="flex-1 w-full">
+            <div className="text-center lg:text-left">
+              <div
+                className="text-white text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black leading-none"
+                style={{ fontFamily: '"Butler", "Playfair Display", "Bodoni MT", serif' }}
+              >
+                Want to<br />
+                <span className="italic">start</span><br />
+                a new<br />
+                project?
+              </div>
+              <p
+                className="text-gray-400 text-base md:text-lg font-light mt-8"
+                style={{ fontFamily: '"Montserrat", "Poppins", "Inter", sans-serif' }}
+              >
+                Or just say hello.
+              </p>
+            </div>
+          </div>
+
+          {/* Right side - Form */}
           <div className="flex-1 w-full max-w-2xl">
             {!submitted ? (
               <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
