@@ -250,6 +250,10 @@ export default function BrainExplorer({ onSkillsHighlight, className }: BrainExp
         role="application"
         aria-label="Interactive brain explorer. Use arrow keys to navigate regions or drag the hotspot."
       >
+        {/* Click & Drag Instruction */}
+        <div className="absolute top-4 left-4 px-3 py-1 bg-black/40 backdrop-blur-sm rounded-full border border-white/10">
+          <span className="text-sm text-white/70 font-medium">Click & drag</span>
+        </div>
         {/* Brain Images */}
         <div className="relative w-full h-full">
           {BRAIN_REGIONS.map((region) => (
