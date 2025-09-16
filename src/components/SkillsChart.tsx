@@ -138,27 +138,25 @@ export default function SkillsChart({ skills, highlightedSkills = [], regionColo
   // Mobile fallback: horizontal bars
   if (isMobile) {
     return (
-      <div className="glass-card p-6 rounded-xl">
-        <div className="space-y-4">
-          {skills.map((skill, index) => (
-            <div key={skill.name} className="space-y-2">
-              <div className="flex justify-between items-center">
-                <span className="text-white font-semibold text-sm">{skill.name}</span>
-                <span className="text-blue-glow text-sm font-bold">{skill.value}%</span>
-              </div>
-              <div className="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
-                <div
-                  className="h-full rounded-full transition-all duration-1000 ease-out"
-                  style={{
-                    backgroundColor: skill.color,
-                    width: `${skill.value}%`,
-                    animationDelay: `${index * 100}ms`
-                  }}
-                />
-              </div>
+      <div className="space-y-4">
+        {skills.map((skill, index) => (
+          <div key={skill.name} className="space-y-2">
+            <div className="flex justify-between items-center">
+              <span className="text-white font-semibold text-sm">{skill.name}</span>
+              <span className="text-blue-glow text-sm font-bold">{skill.value}%</span>
             </div>
-          ))}
-        </div>
+            <div className="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
+              <div
+                className="h-full rounded-full transition-all duration-1000 ease-out"
+                style={{
+                  backgroundColor: skill.color,
+                  width: `${skill.value}%`,
+                  animationDelay: `${index * 100}ms`
+                }}
+              />
+            </div>
+          </div>
+        ))}
       </div>
     );
   }

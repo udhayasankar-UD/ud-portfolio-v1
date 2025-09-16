@@ -50,7 +50,58 @@ export default function SkillsSection() {
             <h3 className="text-2xl font-bold text-white">Interactive Skills Map</h3>
           </div>
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+          {/* Mobile Layout */}
+          <div className="lg:hidden space-y-8">
+            {/* Brain Explorer First */}
+            <BrainExplorer 
+              onSkillsHighlight={handleSkillsHighlight}
+              className="w-full"
+            />
+            
+            {/* Design Skills */}
+            <div className="glass-card p-6 rounded-xl">
+              <h4 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full bg-pink-500"></div>
+                Design Skills
+              </h4>
+              <SkillsChart 
+                skills={allSkills.filter(skill => ['HTML & CSS', 'Blender'].includes(skill.name))} 
+                highlightedSkills={highlightedSkills}
+                regionColor={selectedRegion?.color}
+              />
+            </div>
+            
+            {/* Development Skills */}
+            <div className="glass-card p-6 rounded-xl">
+              <h4 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                Development Skills
+              </h4>
+              <SkillsChart 
+                skills={allSkills.filter(skill => ['JavaScript', 'React', 'Python', 'GameDev'].includes(skill.name))} 
+                highlightedSkills={highlightedSkills}
+                regionColor={selectedRegion?.color}
+              />
+            </div>
+            
+            {/* Tools Skills */}
+            <div className="glass-card p-6 rounded-xl">
+              <h4 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                Tools Skills
+              </h4>
+              <SkillsChart 
+                skills={allSkills.filter(skill => ['Cloud', 'AI & ML'].includes(skill.name))} 
+                highlightedSkills={highlightedSkills}
+                regionColor={selectedRegion?.color}
+              />
+            </div>
+            
+            <SkillDetailPanel region={selectedRegion} />
+          </div>
+
+          {/* Desktop Layout */}
+          <div className="hidden lg:grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
             {/* Skills Chart */}
             <div className="space-y-6">
               <SkillsChart 
