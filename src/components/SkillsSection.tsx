@@ -59,7 +59,7 @@ export default function SkillsSection() {
             />
             
             {/* Design Skills */}
-            <div className="glass-card p-6 rounded-xl">
+            <div>
               <h4 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
                 <div className="w-3 h-3 rounded-full bg-pink-500"></div>
                 Design Skills
@@ -72,7 +72,7 @@ export default function SkillsSection() {
             </div>
             
             {/* Development Skills */}
-            <div className="glass-card p-6 rounded-xl">
+            <div>
               <h4 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
                 <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
                 Development Skills
@@ -85,7 +85,7 @@ export default function SkillsSection() {
             </div>
             
             {/* Tools Skills */}
-            <div className="glass-card p-6 rounded-xl">
+            <div>
               <h4 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
                 <div className="w-3 h-3 rounded-full bg-red-500"></div>
                 Tools Skills
