@@ -7,7 +7,7 @@ export default function FooterSection() {
       <div className="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-6">
         <div className="flex gap-6">
           <a 
-            href="https://github.com/udhayasankar0/" 
+            href="https://github.com/udhayasankar-ud" 
             target="_blank" 
             rel="noopener noreferrer" 
             aria-label="GitHub" 
@@ -16,7 +16,7 @@ export default function FooterSection() {
             <Github className="w-7 h-7 text-gray-300 hover:text-white" />
           </a>
           <a 
-            href="https://www.linkedin.com/in/udhayasankar0/" 
+            href="https://www.linkedin.com/in/udhayasankaru/" 
             target="_blank" 
             rel="noopener noreferrer" 
             aria-label="LinkedIn" 
@@ -24,7 +24,7 @@ export default function FooterSection() {
           >
             <Linkedin className="w-7 h-7 text-blue-400 hover:text-white" />
           </a>
-          <a 
+          {/* <a 
             href="#" 
             target="_blank" 
             rel="noopener noreferrer" 
@@ -32,8 +32,8 @@ export default function FooterSection() {
             className="rounded-full p-3 bg-gray-800 hover:bg-red-600 hover:scale-110 transition-all duration-200"
           >
             <Youtube className="w-7 h-7 text-red-400 hover:text-white" />
-          </a>
-          <a 
+          </a> */}
+          {/* <a 
             href="https://www.instagram.com/kid__gamer__/" 
             target="_blank" 
             rel="noopener noreferrer" 
@@ -41,7 +41,7 @@ export default function FooterSection() {
             className="rounded-full p-3 bg-gray-800 hover:bg-purple-600 hover:scale-110 transition-all duration-200"
           >
             <Instagram className="w-7 h-7 text-purple-400 hover:text-white" />
-          </a>
+          </a> */}
         </div>
         <div className="text-gray-500 text-base">
           &copy; {new Date().getFullYear()} Udhaya Sankar U &mdash; Crafted with <span className="text-blue-glow">♥</span>
