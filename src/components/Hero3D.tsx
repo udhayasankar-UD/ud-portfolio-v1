@@ -337,7 +337,7 @@ export default function Hero3D() {
           <div className="text-center lg:text-left">
             {/* First line - never wrapping */}
             <div className="hero-line1 whitespace-nowrap font-bold animate-fade-in-up hover:scale-105 transition-transform duration-300" style={{ fontSize: 'clamp(2rem, 5vw, 4rem)' }}>
-              <span className="text-white">Hi, I'm </span>
+              <span className="text-white">Hello, I'm </span>
               {/* add hero-name-glow to scope glow only for the hero */}
               <span className="gradient-text hero-name-glow">
                 Udhaya Sankar
