@@ -237,14 +237,14 @@ function TwoLineTypedRoles() {
           #home .mobile-and-text { display: inline !important; }
 
           #home .hero-line1 {
-            white-space: nowrap;
             overflow: visible; /* was hidden — caused the rectangular clipping */
-            font-size: clamp(20px, 6.5vw, 36px) !important;
+            font-size: clamp(18px, 5.5vw, 32px) !important;
+            line-height: 1.2;
           }
           #home .hero-line2 {
-            white-space: nowrap;
             overflow: visible; /* was hidden — caused the rectangular clipping */
-            font-size: clamp(18px, 5.5vw, 30px) !important;
+            font-size: clamp(16px, 4.8vw, 28px) !important;
+            line-height: 1.2;
           }
         }
 
@@ -335,8 +335,8 @@ export default function Hero3D() {
           {/* Text content - order first on mobile */}
           <div className="order-1 lg:order-2 flex flex-col justify-center max-w-2xl lg:max-w-none">
           <div className="text-center lg:text-left">
-            {/* First line - never wrapping */}
-            <div className="hero-line1 whitespace-nowrap font-bold animate-fade-in-up hover:scale-105 transition-transform duration-300" style={{ fontSize: 'clamp(2rem, 5vw, 4rem)' }}>
+            {/* First line - responsive wrapping */}
+            <div className="hero-line1 font-bold animate-fade-in-up hover:scale-105 transition-transform duration-300" style={{ fontSize: 'clamp(1.5rem, 4.5vw, 4rem)' }}>
               <span className="text-white">Hello, I'm </span>
               {/* add hero-name-glow to scope glow only for the hero */}
               <span className="gradient-text hero-name-glow">
