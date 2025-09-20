@@ -330,7 +330,7 @@ export default function Hero3D() {
         />
 
         {/* Main content grid - responsive layout */}
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center min-h-screen">
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-8 items-center min-h-screen">
           
           {/* Text content - order first on mobile */}
           <div className="order-1 lg:order-2 flex flex-col justify-center max-w-2xl lg:max-w-none">
