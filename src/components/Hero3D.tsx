@@ -355,7 +355,7 @@ export default function Hero3D() {
           </div>
 
           {/* Canvas container - order second on mobile */}
-          <div className="order-2 lg:order-1 flex justify-center lg:justify-start">
+          <div className="order-2 lg:order-1 flex justify-center lg:justify-start lg:pr-0 lg:-mr-8">
             <div 
               className="w-[280px] h-[280px] sm:w-[320px] sm:h-[320px] md:w-[380px] md:h-[380px] lg:w-[420px] lg:h-[420px] rounded-full shadow-soft-glow border-2 border-white/10 overflow-hidden flex items-center justify-center bg-gradient-to-br from-blue-900/70 to-gray-900/90 animate-float hover:shadow-[0_0_30px_10px_rgba(96,165,250,0.3)] transition-all duration-300 cursor-pointer"
               style={{
