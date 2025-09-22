@@ -6,7 +6,8 @@ import CursorBullet from "./CursorBullet";
 // Floating particles background
 function FloatingParticles() {
   const particlesRef = useRef<THREE.Points>(null);
-  const particleCount = 50;
+  // Reduce particle count on mobile for performance
+  const particleCount = window.innerWidth < 768 ? 25 : 50;
   
   const positions = new Float32Array(particleCount * 3);
   const velocities = new Float32Array(particleCount * 3);
@@ -167,14 +168,14 @@ function TwoLineTypedRoles() {
 
   return (
     <>
-      <div className="hero-line2 whitespace-nowrap" style={{ fontSize: 'clamp(1.5rem, 4vw, 3rem)' }}>
+      <div className="hero-line2 text-fluid-lg">
         <span className="text-white desktop-and-text">I'm </span>
         <span className="text-white mobile-and-text hidden">and I'm </span>
         <span 
-          className="relative typed-role hero-role-glow inline"
+          className="relative typed-role hero-role-glow inline-block"
           aria-hidden="true"
         >
-          {displayed}
+          <span className="inline-block min-w-[200px] sm:min-w-[280px]">{displayed}</span>
           <span className="absolute border-r-2 border-blue-400 ml-1 h-full animate-pulse"></span>
         </span>
       </div>
@@ -278,10 +279,10 @@ function ScrollIndicator() {
   }, []);
 
   return (
-    <div className={`fixed bottom-8 left-1/2 transform -translate-x-1/2 transition-opacity duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+    <div className={`fixed bottom-6 sm:bottom-8 left-1/2 transform -translate-x-1/2 transition-opacity duration-500 z-20 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
       <div className="animate-bounce">
-        <div className="w-6 h-10 border-2 border-blue-400 rounded-full flex justify-center">
-          <div className="w-1 h-3 bg-blue-400 rounded-full mt-2 animate-pulse"></div>
+        <div className="w-5 h-8 sm:w-6 sm:h-10 border-2 border-blue-400 rounded-full flex justify-center">
+          <div className="w-1 h-2 sm:h-3 bg-blue-400 rounded-full mt-1 sm:mt-2 animate-pulse"></div>
         </div>
       </div>
     </div>
@@ -309,7 +310,8 @@ export default function Hero3D() {
       <CursorBullet />
       <section
         id="home"
-        className="relative min-h-screen flex items-center justify-center w-full overflow-hidden cursor-none"
+        className="relative min-h-screen flex items-center justify-center w-full overflow-hidden"
+        style={{ cursor: window.innerWidth > 1024 ? 'none' : 'default' }}
       >
         {/* Animated background with parallax */}
         <div 
@@ -320,46 +322,45 @@ export default function Hero3D() {
         />
         
         {/* Multiple decorative blur rings with different animations */}
-        <div className="absolute left-1/4 top-1/3 w-80 h-80 rounded-full blur-3xl bg-blue-glow/30 animate-pulse" />
+        <div className="absolute left-1/4 top-1/3 w-60 h-60 sm:w-80 sm:h-80 rounded-full blur-3xl bg-blue-glow/20 sm:bg-blue-glow/30 animate-pulse" />
         <div 
-          className="absolute right-1/4 top-1/2 w-96 h-96 rounded-full blur-2xl bg-purple-500/15 animate-pulse"
+          className="absolute right-1/4 top-1/2 w-72 h-72 sm:w-96 sm:h-96 rounded-full blur-2xl bg-purple-500/10 sm:bg-purple-500/15 animate-pulse"
           style={{
             animationDelay: '1s',
-            transform: `translate(${mousePosition.x * -5}px, ${mousePosition.y * -5}px)`,
+            transform: `translate(${mousePosition.x * -3}px, ${mousePosition.y * -3}px)`,
           }}
         />
 
         {/* Main content grid - responsive layout */}
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-8 items-center min-h-screen">
+        <div className="relative z-10 w-full max-w-7xl mx-auto container-responsive grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center min-h-screen">
           
           {/* Text content - order first on mobile */}
-          <div className="order-1 lg:order-2 flex flex-col justify-center max-w-2xl lg:max-w-none">
-          <div className="text-center lg:text-left">
-            {/* First line - responsive wrapping */}
-            <div className="hero-line1 font-bold animate-fade-in-up hover:scale-105 transition-transform duration-300" style={{ fontSize: 'clamp(1.5rem, 4.5vw, 4rem)' }}>
-              <span className="text-white">Hello, I'm </span>
-              {/* add hero-name-glow to scope glow only for the hero */}
-              <span className="gradient-text hero-name-glow">
-                Udhaya Sankar
-              </span>
-              <span className="text-white desktop-and-text"> and</span>
+          <div className="order-1 lg:order-2 flex flex-col justify-center">
+            <div className="text-center lg:text-left space-y-4 sm:space-y-6">
+              {/* First line - responsive wrapping */}
+              <div className="hero-line1 font-bold animate-fade-in-up hover:scale-105 transition-transform duration-300 text-fluid-xl leading-tight">
+                <span className="text-white block sm:inline">Hello, I'm </span>
+                <span className="gradient-text hero-name-glow block sm:inline">
+                  Udhaya Sankar
+                </span>
+                <span className="text-white desktop-and-text"> and</span>
+              </div>
+              
+              {/* Second line - typed role */}
+              <TwoLineTypedRoles />
             </div>
             
-            {/* Second line - typed role */}
-            <TwoLineTypedRoles />
-          </div>
-            
-            <div className="mt-6 text-center lg:text-left text-blue-100 animate-fade-in-up hover:text-white transition-colors duration-300 max-w-2xl" style={{ fontSize: 'clamp(1rem, 2.5vw, 1.25rem)' }}>
+            <div className="mt-6 text-center lg:text-left text-blue-100 animate-fade-in-up hover:text-white transition-colors duration-300 text-fluid-base max-w-2xl">
               Building immersive web &amp; game experiences with 3D, modern UI, and a nerd's passion for code.
             </div>
           </div>
 
           {/* Canvas container - order second on mobile */}
-          <div className="order-2 lg:order-1 flex justify-center lg:justify-start lg:pr-0 lg:-mr-8">
+          <div className="order-2 lg:order-1 flex justify-center lg:justify-start">
             <div 
-              className="w-[280px] h-[280px] sm:w-[320px] sm:h-[320px] md:w-[380px] md:h-[380px] lg:w-[420px] lg:h-[420px] rounded-full shadow-soft-glow border-2 border-white/10 overflow-hidden flex items-center justify-center bg-gradient-to-br from-blue-900/70 to-gray-900/90 animate-float hover:shadow-[0_0_30px_10px_rgba(96,165,250,0.3)] transition-all duration-300 cursor-pointer"
+              className="w-[240px] h-[240px] sm:w-[280px] sm:h-[280px] md:w-[320px] md:h-[320px] lg:w-[380px] lg:h-[380px] xl:w-[420px] xl:h-[420px] rounded-full shadow-soft-glow border-2 border-white/10 overflow-hidden flex items-center justify-center bg-gradient-to-br from-blue-900/70 to-gray-900/90 animate-float hover:shadow-[0_0_30px_10px_rgba(96,165,250,0.3)] transition-all duration-300 cursor-pointer touch-none"
               style={{
-                transform: `perspective(1000px) rotateX(${mousePosition.y * 5}deg) rotateY(${mousePosition.x * 5}deg)`,
+                transform: `perspective(1000px) rotateX(${mousePosition.y * 3}deg) rotateY(${mousePosition.x * 3}deg)`,
               }}
             >
               <Canvas camera={{ position: [2.4, 2.4, 3.2] }} shadows>

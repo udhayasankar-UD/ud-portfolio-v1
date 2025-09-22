@@ -143,15 +143,18 @@ export default function CertCarousel() {
     }
   };
 
-  // Touch/swipe support
+  // Touch/swipe support with improved gesture detection
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
+  const [startTime, setStartTime] = useState<number>(0);
 
   const minSwipeDistance = 50;
+  const maxSwipeTime = 300; // Maximum time for a swipe gesture
 
   const onTouchStart = (e: React.TouchEvent) => {
     setTouchEnd(null);
     setTouchStart(e.targetTouches[0].clientX);
+    setStartTime(Date.now());
     setIsAutoPlaying(false);
   };
 
@@ -161,17 +164,23 @@ export default function CertCarousel() {
 
   const onTouchEnd = () => {
     if (!touchStart || !touchEnd) return;
+    
     const distance = touchStart - touchEnd;
+    const swipeTime = Date.now() - startTime;
     const isLeftSwipe = distance > minSwipeDistance;
     const isRightSwipe = distance < -minSwipeDistance;
+    const isValidSwipe = swipeTime < maxSwipeTime;
 
-    if (isLeftSwipe) {
-      nextSlide();
-    } else if (isRightSwipe) {
-      prevSlide();
+    if (isValidSwipe) {
+      if (isLeftSwipe) {
+        nextSlide();
+      } else if (isRightSwipe) {
+        prevSlide();
+      }
     }
     
-    setIsAutoPlaying(true);
+    // Resume autoplay after a delay
+    setTimeout(() => setIsAutoPlaying(true), 1000);
   };
 
   return (
@@ -190,30 +199,35 @@ export default function CertCarousel() {
         {/* Carousel Container */}
         <div 
           ref={carouselRef}
-          className="relative overflow-hidden rounded-xl"
+          className="relative overflow-hidden rounded-xl mx-auto max-w-[400px] lg:max-w-[400px] md:max-w-[320px] sm:max-w-full"
           onTouchStart={onTouchStart}
           onTouchMove={onTouchMove}
           onTouchEnd={onTouchEnd}
+          style={{ touchAction: 'pan-x' }}
         >
           <div 
-            className="flex transition-transform duration-500 ease-in-out"
+            className="flex transition-transform duration-500 ease-in-out will-change-transform"
             style={{
-              transform: `translateX(-${currentIndex * (100 / certificates.length)}%)`,
-              width: `${certificates.length * 100}%`
+              transform: `translate3d(-${currentIndex * 100}%, 0, 0)`,
             }}
           >
             {certificates.map((cert, index) => (
               <div 
                 key={cert.id}
-                className="w-full flex-shrink-0 px-2"
-                style={{ width: `${100 / certificates.length}%` }}
+                className="w-full flex-shrink-0 flex justify-center"
+                style={{ 
+                  width: '100%',
+                  minHeight: '350px'
+                }}
               >
-                <CertCard
-                  certificate={cert}
-                  isActive={index === currentIndex}
-                  onClick={() => handleCardClick(cert)}
-                  shouldAnimate={shouldAnimate}
-                />
+                <div className="w-full max-w-[400px] lg:max-w-[400px] md:max-w-[320px] px-2 sm:px-6">
+                  <CertCard
+                    certificate={cert}
+                    isActive={index === currentIndex}
+                    onClick={() => handleCardClick(cert)}
+                    shouldAnimate={shouldAnimate}
+                  />
+                </div>
               </div>
             ))}
           </div>
@@ -222,32 +236,32 @@ export default function CertCarousel() {
         {/* Navigation Arrows */}
         <button
           onClick={prevSlide}
-          className="absolute left-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-blue-glow/20 hover:border-blue-glow/40 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-glow"
+          className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-11 h-11 sm:w-12 sm:h-12 flex items-center justify-center rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-blue-glow/20 hover:border-blue-glow/40 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-glow touch-manipulation"
           aria-label="Previous certificate"
           tabIndex={0}
         >
-          <ChevronLeft className="w-5 h-5" />
+          <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
         </button>
 
         <button
           onClick={nextSlide}
-          className="absolute right-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-blue-glow/20 hover:border-blue-glow/40 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-glow"
+          className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-11 h-11 sm:w-12 sm:h-12 flex items-center justify-center rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-blue-glow/20 hover:border-blue-glow/40 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-glow touch-manipulation"
           aria-label="Next certificate"
           tabIndex={0}
         >
-          <ChevronRight className="w-5 h-5" />
+          <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
         </button>
 
         {/* Pagination Dots */}
-        <div className="flex justify-center space-x-2 mt-6">
+        <div className="flex justify-center space-x-3 mt-6 sm:mt-8">
           {certificates.map((_, index) => (
             <button
               key={index}
               onClick={() => goToSlide(index)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-glow ${
+              className={`w-4 h-4 sm:w-3 sm:h-3 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-glow touch-manipulation ${
                 index === currentIndex
-                  ? 'bg-blue-glow shadow-lg shadow-blue-glow/30'
-                  : 'bg-white/20 hover:bg-white/30'
+                  ? 'bg-blue-glow shadow-lg shadow-blue-glow/30 scale-110'
+                  : 'bg-white/20 hover:bg-white/30 hover:scale-105'
               }`}
               aria-label={`Go to certificate ${index + 1}: ${certificates[index].title}`}
               tabIndex={0}

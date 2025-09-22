@@ -28,73 +28,112 @@ export default function SkillsSection() {
   return (
     <section
       id="skills"
-      className="w-full min-h-screen px-4 py-16 md:py-20 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900"
+      className="w-full min-h-screen container-responsive py-12 sm:py-16 lg:py-20 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900"
     >
       <div className="max-w-7xl mx-auto w-full">
         {/* Header */}
-        <div className="text-center mb-16">
-          <h2 className="gradient-text text-4xl md:text-5xl font-bold mb-4">
+        <div className="text-center mb-8 sm:mb-12 lg:mb-16">
+          <h2 className="gradient-text text-fluid-xl font-bold mb-4">
             Skills
           </h2>
-          <p className="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto">
+          <p className="text-gray-300 text-fluid-base max-w-2xl mx-auto">
             Explore my brain-mapped skills and technical expertise
           </p>
         </div>
 
         {/* Brain Explorer & Skills */}
         <div>
-          <div className="flex items-center gap-3 mb-8">
+          <div className="flex items-center gap-3 mb-6 sm:mb-8">
             <div className="p-2 rounded-lg bg-blue-glow/20">
-              <Award className="w-6 h-6 text-blue-glow" />
+              <Award className="w-5 h-5 sm:w-6 sm:h-6 text-blue-glow" />
             </div>
-            <h3 className="text-2xl font-bold text-white">Interactive Skills Map</h3>
+            <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-white">Interactive Skills Map</h3>
           </div>
 
           {/* Mobile Layout */}
-          <div className="lg:hidden space-y-8">
-            {/* Brain Explorer First */}
-            <BrainExplorer
-              onSkillsHighlight={handleSkillsHighlight}
-              className="w-full"
-            />
+          <div className="lg:hidden space-y-6 sm:space-y-8">
+            {/* Simplified Mobile Skills Chart */}
+            <div className="block sm:hidden">
+              <h4 className="text-lg font-bold text-white mb-4">Skills Overview</h4>
+              <div className="space-y-3">
+                {allSkills.map((skill) => {
+                  const isHighlighted = highlightedSkills.some(h => h.name === skill.name);
+                  return (
+                    <div 
+                      key={skill.name}
+                      className={`p-3 rounded-lg transition-all duration-200 ${
+                        isHighlighted 
+                          ? 'bg-blue-glow/20 border border-blue-glow/40' 
+                          : 'bg-white/5 border border-white/10'
+                      }`}
+                    >
+                      <div className="flex justify-between items-center mb-2">
+                        <span className="text-sm font-medium text-white">{skill.name}</span>
+                        <span className="text-xs text-blue-glow font-bold">{skill.value}%</span>
+                      </div>
+                      <div className="w-full bg-gray-700 rounded-full h-2">
+                        <div 
+                          className="h-2 rounded-full transition-all duration-300"
+                          style={{ 
+                            width: `${skill.value}%`,
+                            backgroundColor: isHighlighted ? selectedRegion?.color || skill.color : skill.color
+                          }}
+                        />
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
 
-            {/* Design Skills */}
-            <div>
-              <h4 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                <div className="w-3 h-3 rounded-full bg-pink-500"></div>
-                Design Skills
-              </h4>
-              <SkillsChart
-                skills={allSkills.filter(skill => ['HTML & CSS', 'Blender'].includes(skill.name))}
-                highlightedSkills={highlightedSkills}
-                regionColor={selectedRegion?.color}
+            {/* Brain Explorer */}
+            <div className="order-1">
+              <BrainExplorer
+                onSkillsHighlight={handleSkillsHighlight}
+                className="w-full"
               />
             </div>
 
-            {/* Development Skills */}
-            <div>
-              <h4 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                Development Skills
-              </h4>
-              <SkillsChart
-                skills={allSkills.filter(skill => ['JavaScript', 'React', 'Python', 'GameDev'].includes(skill.name))}
-                highlightedSkills={highlightedSkills}
-                regionColor={selectedRegion?.color}
-              />
-            </div>
+            {/* Tablet Skills Charts (hidden on mobile) */}
+            <div className="hidden sm:block lg:hidden space-y-6">
+              {/* Design Skills */}
+              <div>
+                <h4 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                  <div className="w-3 h-3 rounded-full bg-pink-500"></div>
+                  Design Skills
+                </h4>
+                <SkillsChart
+                  skills={allSkills.filter(skill => ['HTML & CSS', 'Blender'].includes(skill.name))}
+                  highlightedSkills={highlightedSkills}
+                  regionColor={selectedRegion?.color}
+                />
+              </div>
 
-            {/* Tools Skills */}
-            <div>
-              <h4 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                Tools Skills
-              </h4>
-              <SkillsChart
-                skills={allSkills.filter(skill => ['Cloud', 'AI & ML'].includes(skill.name))}
-                highlightedSkills={highlightedSkills}
-                regionColor={selectedRegion?.color}
-              />
+              {/* Development Skills */}
+              <div>
+                <h4 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                  <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                  Development Skills
+                </h4>
+                <SkillsChart
+                  skills={allSkills.filter(skill => ['JavaScript', 'React', 'Python', 'GameDev'].includes(skill.name))}
+                  highlightedSkills={highlightedSkills}
+                  regionColor={selectedRegion?.color}
+                />
+              </div>
+
+              {/* Tools Skills */}
+              <div>
+                <h4 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                  <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                  Tools Skills
+                </h4>
+                <SkillsChart
+                  skills={allSkills.filter(skill => ['Cloud', 'AI & ML'].includes(skill.name))}
+                  highlightedSkills={highlightedSkills}
+                  regionColor={selectedRegion?.color}
+                />
+              </div>
             </div>
 
             <SkillDetailPanel region={selectedRegion} />

@@ -46,14 +46,14 @@ export default function CertCard({ certificate, isActive, onClick, shouldAnimate
     >
       {/* Main Card */}
       <div
-        className={`relative h-[32rem] md:h-[40rem] rounded-xl overflow-hidden transition-all duration-300 ${isActive
+        className={`relative h-[280px] sm:h-[320px] lg:h-[350px] rounded-xl overflow-hidden transition-all duration-300 touch-manipulation ${isActive
             ? 'shadow-2xl shadow-blue-glow/20 ring-2 ring-blue-glow/30'
             : 'shadow-lg'
           } ${showOverlay ? 'transform -translate-y-2' : ''
           }`}
         style={{
           background: 'rgba(255, 255, 255, 0.03)',
-          backdropFilter: 'blur(10px)',
+          backdropFilter: window.innerWidth > 640 ? 'blur(10px)' : 'none',
           border: '1px solid rgba(255, 255, 255, 0.08)',
         }}
       >
@@ -70,10 +70,10 @@ export default function CertCard({ certificate, isActive, onClick, shouldAnimate
           ) : (
             // Fallback placeholder
             <div className="w-full h-full bg-gradient-to-br from-blue-glow/20 to-purple-500/20 flex items-center justify-center">
-              <div className="text-center text-white/70">
-                <div className="text-4xl mb-2">📜</div>
-                <div className="text-sm font-medium">{certificate.title}</div>
-                <div className="text-xs">{certificate.provider}</div>
+              <div className="text-center text-white/70 p-4">
+                <div className="text-2xl sm:text-3xl lg:text-4xl mb-2">📜</div>
+                <div className="text-xs sm:text-sm font-medium mb-1">{certificate.title}</div>
+                <div className="text-xs text-gray-400">{certificate.provider}</div>
               </div>
             </div>
           )}
@@ -86,23 +86,23 @@ export default function CertCard({ certificate, isActive, onClick, shouldAnimate
 
           {/* Hover/Focus Overlay */}
           <div
-            className={`absolute inset-x-0 bottom-0 p-6 transform transition-all duration-300 ${showOverlay ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
+            className={`absolute inset-x-0 bottom-0 p-3 sm:p-4 lg:p-6 transform transition-all duration-300 ${showOverlay ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
               }`}
           >
             <div
-              className="p-4 rounded-lg backdrop-blur-sm"
+              className="p-3 sm:p-4 rounded-lg backdrop-blur-sm"
               style={{
                 background: 'rgba(96, 165, 250, 0.1)',
                 border: '1px solid rgba(96, 165, 250, 0.2)',
               }}
             >
-              <h3 className="text-white font-bold text-lg mb-1 line-clamp-2">
+              <h3 className="text-white font-bold text-sm sm:text-base lg:text-lg mb-1 line-clamp-2">
                 {certificate.title}
               </h3>
-              <p className="text-blue-glow text-sm font-medium mb-2">
+              <p className="text-blue-glow text-xs sm:text-sm font-medium mb-1 sm:mb-2">
                 {certificate.provider}
               </p>
-              <p className="text-gray-300 text-sm line-clamp-2">
+              <p className="text-gray-300 text-xs sm:text-sm line-clamp-2">
                 {certificate.desc}
               </p>
             </div>

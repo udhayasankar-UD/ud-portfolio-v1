@@ -9,6 +9,44 @@
   body {
     @apply bg-gray-900 text-white font-sans min-h-screen antialiased;
   }
+  
+  /* Global responsive typography using fluid scaling */
+  .text-fluid-xl {
+    font-size: clamp(22px, 6vw, 36px);
+    line-height: 1.2;
+  }
+  
+  .text-fluid-lg {
+    font-size: clamp(18px, 4.2vw, 28px);
+    line-height: 1.3;
+  }
+  
+  .text-fluid-base {
+    font-size: clamp(14px, 2.2vw, 16px);
+    line-height: 1.4;
+  }
+  
+  .text-fluid-sm {
+    font-size: clamp(12px, 1.8vw, 14px);
+    line-height: 1.4;
+  }
+  
+  /* Container responsive padding */
+  .container-responsive {
+    @apply px-6 lg:px-8;
+  }
+  
+  @media (max-width: 640px) {
+    .container-responsive {
+      @apply px-3;
+    }
+  }
+  
+  @media (min-width: 640px) and (max-width: 1023px) {
+    .container-responsive {
+      @apply px-4;
+    }
+  }
   /* Glassmorphic panel utility */
   .glass-card {
     @apply bg-white/10 dark:bg-white/10 backdrop-blur-md border border-white/20 shadow-glass;
@@ -79,11 +117,49 @@
   }
 }
 
-/* Tablet adjustments */
-@media (max-width: 1024px) {
-  .case-track {
-    padding-left: 2rem;
-    padding-right: 2rem;
-    gap: 1.5rem;
+/* Touch optimization and accessibility improvements */
+@media (max-width: 1023px) {
+  /* Ensure touch targets are at least 44px */
+  .touch-target {
+    min-width: 44px;
+    min-height: 44px;
+  }
+  
+  /* Improve text readability on smaller screens */
+  body {
+    line-height: 1.5;
+  }
+  
+  /* Reduce motion for better performance on mobile */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+  
+  /* Optimize scroll behavior */
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Performance optimizations for mobile */
+@media (max-width: 640px) {
+  /* Reduce box shadows for better performance */
+  .shadow-soft-glow {
+    box-shadow: 0 0 8px 1px rgba(96, 165, 250, 0.2);
+  }
+  
+  /* Simplify gradients */
+  .bg-hero-gradient {
+    background: #181a20;
+  }
+  
+  /* Optimize backdrop blur */
+  .backdrop-blur-sm {
+    backdrop-filter: none;
+    background-color: rgba(0, 0, 0, 0.6);
   }
 }

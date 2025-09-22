@@ -242,17 +242,21 @@ export default function BrainExplorer({ onSkillsHighlight, className }: BrainExp
       {/* Brain Card */}
       <div 
         ref={brainRef}
-        className="relative w-full aspect-square bg-gray-900/50 backdrop-blur-sm border border-white/10 rounded-2xl p-8 cursor-grab active:cursor-grabbing"
+        className="relative w-full aspect-square bg-gray-900/50 backdrop-blur-sm border border-white/10 rounded-2xl p-4 sm:p-6 lg:p-8 cursor-grab active:cursor-grabbing touch-manipulation"
         onMouseDown={handleMouseDown}
         onTouchStart={handleTouchStart}
         onKeyDown={handleKeyDown}
         tabIndex={0}
         role="application"
         aria-label="Interactive brain explorer. Use arrow keys to navigate regions or drag the hotspot."
+        style={{ touchAction: 'none' }}
       >
         {/* Click & Drag Instruction */}
-        <div className="absolute bottom-4 right-4 px-3 py-1 bg-black/40 backdrop-blur-sm rounded-full border border-white/10">
-          <span className="text-sm text-white/70 font-medium">Click & drag</span>
+        <div className="absolute bottom-2 right-2 sm:bottom-4 sm:right-4 px-2 py-1 sm:px-3 sm:py-1 bg-black/40 backdrop-blur-sm rounded-full border border-white/10">
+          <span className="text-xs sm:text-sm text-white/70 font-medium">
+            <span className="hidden sm:inline">Click & drag</span>
+            <span className="sm:hidden">Tap & drag</span>
+          </span>
         </div>
         {/* Brain Images */}
         <div className="relative w-full h-full">
@@ -302,12 +306,13 @@ export default function BrainExplorer({ onSkillsHighlight, className }: BrainExp
       </div>
       
       {/* Region Buttons */}
-      <RegionButtons 
-        regions={BRAIN_REGIONS}
-        selectedRegion={selectedRegion}
-        onRegionSelect={(region) => handleRegionSelect(region, true)}
-        className="mt-6"
-      />
+      <div className="mt-4 sm:mt-6">
+        <RegionButtons 
+          regions={BRAIN_REGIONS}
+          selectedRegion={selectedRegion}
+          onRegionSelect={(region) => handleRegionSelect(region, true)}
+        />
+      </div>
     </div>
   );
 }

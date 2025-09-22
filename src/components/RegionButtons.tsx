@@ -12,14 +12,14 @@ interface RegionButtonsProps {
 
 export default function RegionButtons({ regions, selectedRegion, onRegionSelect, className }: RegionButtonsProps) {
   return (
-    <div className={cn("flex gap-3 justify-center", className)}>
+    <div className={cn("flex flex-wrap gap-2 sm:gap-3 justify-center", className)}>
       {regions.map((region) => (
         <Button
           key={region.id}
           variant={selectedRegion.id === region.id ? "default" : "outline"}
           onClick={() => onRegionSelect(region)}
           className={cn(
-            "relative px-6 py-3 font-medium transition-all duration-200",
+            "relative min-w-[44px] min-h-[44px] px-4 py-2 sm:px-6 sm:py-3 font-medium transition-all duration-200 text-sm sm:text-base touch-manipulation",
             selectedRegion.id === region.id 
               ? "shadow-lg transform scale-105" 
               : "hover:scale-105 hover:shadow-md"
@@ -38,7 +38,7 @@ export default function RegionButtons({ regions, selectedRegion, onRegionSelect,
           aria-label={`Select ${region.name} region`}
           aria-pressed={selectedRegion.id === region.id}
         >
-          <span className="relative z-10">{region.name}</span>
+          <span className="relative z-10 whitespace-nowrap">{region.name}</span>
           
           {/* Glow effect on hover */}
           <div 
