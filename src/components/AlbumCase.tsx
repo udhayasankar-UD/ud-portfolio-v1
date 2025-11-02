@@ -14,14 +14,16 @@ interface Project {
 interface AlbumCaseProps {
   project: Project;
   index: number;
+  isMobile?: boolean;
 }
 
-export default function AlbumCase({ project, index }: AlbumCaseProps) {
+export default function AlbumCase({ project, index, isMobile = false }: AlbumCaseProps) {
   const [isHovered, setIsHovered] = useState(false);
+  const [isTapped, setIsTapped] = useState(false);
   const imageRef = useRef<HTMLImageElement>(null);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!imageRef.current) return;
+    if (isMobile || !imageRef.current) return;
     
     const rect = e.currentTarget.getBoundingClientRect();
     const x = e.clientX - rect.left;
@@ -34,20 +36,26 @@ export default function AlbumCase({ project, index }: AlbumCaseProps) {
   };
 
   const handleMouseLeave = () => {
-    if (!imageRef.current) return;
+    if (isMobile || !imageRef.current) return;
     imageRef.current.style.transform = 'translate(0px, 0px) scale(1)';
     setIsHovered(false);
+  };
+
+  const handleTap = () => {
+    if (!isMobile) return;
+    setIsTapped(!isTapped);
   };
 
   return (
     <div
       className="flex-shrink-0 group cursor-pointer w-full h-full flex items-center justify-center"
-      onMouseEnter={() => setIsHovered(true)}
+      onMouseEnter={() => !isMobile && setIsHovered(true)}
       onMouseLeave={handleMouseLeave}
       onMouseMove={handleMouseMove}
+      onClick={handleTap}
     >
-      {/* CD Case Container - Larger size */}
-      <div className="relative w-80 h-80 perspective-1000">
+      {/* CD Case Container - Responsive size */}
+      <div className={`relative perspective-1000 ${isMobile ? 'w-64 h-64' : 'w-80 h-80'}`}>
         {/* Case Shadow */}
         <div className="absolute inset-0 bg-black/20 rounded-lg transform translate-x-2 translate-y-2 blur-md" />
         
@@ -57,7 +65,7 @@ export default function AlbumCase({ project, index }: AlbumCaseProps) {
             relative w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 
             rounded-lg border border-white/10 overflow-hidden
             transform transition-all duration-500 ease-out
-            ${isHovered 
+            ${(isHovered || isTapped)
               ? 'rotate-y-0 scale-110 shadow-2xl shadow-blue-glow/20' 
               : 'rotate-y-12 shadow-lg'
             }
