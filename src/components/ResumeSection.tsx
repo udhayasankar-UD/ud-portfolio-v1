@@ -1,5 +1,5 @@
 export default function ResumeSection() {
-  return <section id="resume" className="min-h-screen px-4 w-full bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 flex items-center">
+  return <section id="resume" className="min-h-screen px-4 w-full bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 pt-20 flex items-center">
       <div className="max-w-4xl mx-auto w-full">
         <h2 className="gradient-text text-4xl md:text-5xl font-bold mb-12 text-left">Resume</h2>
         <div className="glass-card p-8 flex flex-col items-center">

@@ -1,94 +1,76 @@
-
-import React, { useRef } from "react";
-
-const posts = [{
-  id: 1,
-  slug: "styling-neumorphism-tailwind",
-  title: "Styling Neumorphism with Tailwind CSS",
-  date: "2024-06-12",
-  excerpt: "Neumorphic design brings soft, tactile UIs – let's learn how to pull it off with custom box-shadow, gradients, and Tailwind utilities for beautiful cards."
-}, {
-  id: 2,
-  slug: "threejs-react-intro",
-  title: "Getting Started with Three.js in React",
-  date: "2024-05-27",
-  excerpt: "3D scenes? Yes, please! A quickstart on integrating Three.js and @react-three/fiber for stunning hero sections and interactive graphics."
-}, {
-  id: 3,
-  slug: "unity-to-webgl-portfolio",
-  title: "Showcasing Unity Games on Your Portfolio",
-  date: "2024-04-18",
-  excerpt: "Your Unity game is WebGL-ready – now embed it beautifully in your dev portfolio and wow recruiters with live demos!"
-}];
+import React from 'react';
+import { BookOpen, TrendingUp } from 'lucide-react';
+import BlogCard from './BlogCard';
+import { mockBlogPosts } from '../data/blog-data';
 
 export default function BlogSection() {
-  const scrollRef = useRef<HTMLDivElement>(null);
-
-  // Scroll left/right by the width of one card
-  const scrollByCard = (direction: "left" | "right") => {
-    const container = scrollRef.current;
-    if (!container) return;
-    const card = container.querySelector(".blog-card");
-    const cardWidth = card ? (card as HTMLElement).offsetWidth : 320;
-    container.scrollBy({
-      left: direction === "left" ? -cardWidth - 16 : cardWidth + 16, // 16 = gap
-      behavior: "smooth"
-    });
-  };
-
   return (
-    <section id="blog" className="min-h-screen w-full px-4 bg-gradient-to-b from-gray-900 to-gray-800 flex items-center">
-      <div className="max-w-6xl mx-auto w-full">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="gradient-text text-4xl md:text-5xl font-bold text-left">Blog</h2>
-          <div className="flex gap-2">
-            <button aria-label="Scroll left" onClick={() => scrollByCard("left")} className="neu-btn px-3 py-2 text-blue-glow hover:text-white transition hidden sm:inline">
-              &larr;
-            </button>
-            <button aria-label="Scroll right" onClick={() => scrollByCard("right")} className="neu-btn px-3 py-2 text-blue-glow hover:text-white transition hidden sm:inline">
-              &rarr;
-            </button>
-          </div>
-        </div>
-        {/* Carousel/scrollable row of cards */}
-        <div
-          className="flex overflow-x-auto snap-x gap-8 scrollbar-thin pb-4 hide-scrollbar sm:pb-0"
-          ref={scrollRef}
-          tabIndex={0}
-        >
-          {posts.map(post => (
-            <div
-              key={post.id}
-              className="blog-card glass-card p-6 rounded-xl min-w-[320px] max-w-sm snap-start hover:shadow-soft-glow transition cursor-pointer flex-shrink-0"
-            >
-              <div className="flex flex-col h-full">
-                <h3 className="text-2xl font-semibold text-blue-glow mb-3">{post.title}</h3>
-                <p className="text-gray-300 mb-4 text-base leading-relaxed flex-grow">{post.excerpt}</p>
-                <div className="flex items-center justify-between mt-auto">
-                  <div className="text-sm text-gray-400">
-                    {post.date}
-                  </div>
-                  <div className="flex gap-3">
-                    <button className="neu-btn text-sm px-4 py-2 text-blue-glow hover:text-white transition">
-                      Share
-                    </button>
-                    <a href={`/blog/${post.slug}`} className="neu-btn text-sm px-4 py-2 text-blue-glow hover:text-white transition">
-                      Read more
-                    </a>
-                  </div>
-                </div>
-              </div>
+    <section
+      id="blog"
+      className="w-full min-h-screen py-12 sm:py-16 lg:py-20 bg-black leading-normal"
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="text-center mb-8 sm:mb-12 lg:mb-16">
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <div className="p-2 rounded-lg bg-blue-600/20">
+              <BookOpen className="w-5 h-5 sm:w-6 sm:h-6 text-blue-400" />
             </div>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white">
+              Latest <span className="text-blue-400">Insights</span>
+            </h2>
+            <div className="p-2 rounded-lg bg-blue-600/20">
+              <TrendingUp className="w-5 h-5 sm:w-6 sm:h-6 text-blue-400" />
+            </div>
+          </div>
+          <p className="text-zinc-400 text-base sm:text-lg max-w-2xl mx-auto leading-normal">
+            Explore thoughts on design, development, and the future of technology
+          </p>
+        </div>
+
+        {/* Blog Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 auto-rows-fr">
+          {mockBlogPosts.map((post) => (
+            <BlogCard key={post.id} post={post} />
           ))}
         </div>
-        {/* Mobile-only nav buttons */}
-        <div className="flex gap-4 justify-center mt-8 sm:hidden">
-          <button aria-label="Scroll left" onClick={() => scrollByCard("left")} className="neu-btn px-6 py-2 text-blue-glow hover:text-white rounded-lg">
-            &larr; Prev
-          </button>
-          <button aria-label="Scroll right" onClick={() => scrollByCard("right")} className="neu-btn px-6 py-2 text-blue-glow hover:text-white rounded-lg">
-            Next &rarr;
-          </button>
+
+        {/* View All Button */}
+        <div className="text-center mt-12">
+          <a 
+            href="/blog"
+            className="group inline-flex items-center gap-2 bg-zinc-800 hover:bg-zinc-700 text-white font-semibold px-6 py-3 rounded-lg border border-zinc-700 hover:border-zinc-600 transition-all duration-300 hover:shadow-lg hover:shadow-zinc-900/50"
+          >
+            <span>View All Articles</span>
+            <svg 
+              className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" 
+              fill="none" 
+              stroke="currentColor" 
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+        </div>
+
+        {/* Newsletter Signup */}
+        <div className="mt-16 bg-zinc-900 border border-zinc-800 rounded-2xl p-6 sm:p-8 text-center">
+          <h3 className="text-xl sm:text-2xl font-bold text-white mb-3">
+            Stay Updated
+          </h3>
+          <p className="text-zinc-400 mb-6 max-w-md mx-auto leading-normal">
+            Get the latest articles and insights delivered straight to your inbox
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+            <input
+              type="email"
+              placeholder="Enter your email"
+              className="flex-1 bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+            />
+            <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-lg transition-colors duration-300 whitespace-nowrap">
+              Subscribe
+            </button>
+          </div>
         </div>
       </div>
     </section>

@@ -7,6 +7,7 @@ const navItems = [
   { label: "About", href: "#about" },
   { label: "Projects", href: "#projects" },
   { label: "Skills", href: "#skills" },
+  { label: "Blog", href: "/blog" },
   { label: "Certifications", href: "#certifications" },
   { label: "Contact", href: "#contact" },
   { label: "Resume", href: "#resume" }
@@ -37,6 +38,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 className={
                   `text-lg font-medium text-white/80 hover:text-blue-glow transition story-link ${
                     item.label === "Projects" && isProjectsActive
+                      ? "text-blue-glow"
+                      : ""
+                  } ${
+                    item.label === "Blog" && location.pathname === "/blog"
                       ? "text-blue-glow"
                       : ""
                   }`

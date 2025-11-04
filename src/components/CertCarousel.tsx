@@ -199,7 +199,7 @@ export default function CertCarousel() {
         {/* Carousel Container */}
         <div 
           ref={carouselRef}
-          className="relative overflow-hidden rounded-xl mx-auto max-w-[400px] lg:max-w-[400px] md:max-w-[320px] sm:max-w-full"
+          className="relative overflow-hidden rounded-xl mx-auto max-w-full sm:max-w-xl md:max-w-2xl lg:max-w-3xl"
           onTouchStart={onTouchStart}
           onTouchMove={onTouchMove}
           onTouchEnd={onTouchEnd}
@@ -220,7 +220,7 @@ export default function CertCarousel() {
                   minHeight: '350px'
                 }}
               >
-                <div className="w-full max-w-[400px] lg:max-w-[400px] md:max-w-[320px] px-2 sm:px-6">
+                <div className="w-full px-1 sm:px-6">
                   <CertCard
                     certificate={cert}
                     isActive={index === currentIndex}
@@ -253,7 +253,7 @@ export default function CertCarousel() {
         </button>
 
         {/* Pagination Dots */}
-        <div className="flex justify-center space-x-3 mt-6 sm:mt-8">
+        <div className="flex justify-center space-x-2 mt-4 sm:space-x-3 sm:mt-8">
           {certificates.map((_, index) => (
             <button
               key={index}

@@ -20,7 +20,8 @@ export default {
 		},
 		extend: {
 			fontFamily: {
-				sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+				sans: ['Switzer', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+				serif: ['Signifier', 'ui-serif', 'Georgia', 'serif'],
 			},
 			boxShadow: {
 				'neu': '8px 8px 20px #191c23, -8px -8px 20px #232833', // Neumorphic shadow (light/dark)

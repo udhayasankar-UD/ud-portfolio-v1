@@ -12,7 +12,7 @@ export default function ContactSection() {
   return (
     <section
       id="contact"
-      className="min-h-screen w-full bg-gradient-to-br from-gray-800 via-gray-900 to-gray-900 px-4 flex items-center"
+      className="min-h-screen w-full bg-gradient-to-br from-gray-800 via-gray-900 to-gray-900 px-4 pt-20 flex items-center"
     >
       <div className="max-w-7xl mx-auto w-full">
         <h2 className="gradient-text text-4xl md:text-5xl font-bold mb-12 text-center">Contact Me</h2>
