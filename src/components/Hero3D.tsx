@@ -6,15 +6,15 @@ import CursorBullet from "./CursorBullet";
 // Floating particles background
 function FloatingParticles({ count }: { count: number }) {
   const particlesRef = useRef<THREE.Points>(null);
-  
+
   const positions = new Float32Array(count * 3);
   const velocities = new Float32Array(count * 3);
-  
+
   for (let i = 0; i < count * 3; i += 3) {
     positions[i] = (Math.random() - 0.5) * 10;
     positions[i + 1] = (Math.random() - 0.5) * 10;
     positions[i + 2] = (Math.random() - 0.5) * 10;
-    
+
     velocities[i] = (Math.random() - 0.5) * 0.02;
     velocities[i + 1] = (Math.random() - 0.5) * 0.02;
     velocities[i + 2] = (Math.random() - 0.5) * 0.02;
@@ -27,7 +27,7 @@ function FloatingParticles({ count }: { count: number }) {
         positions[i] += velocities[i];
         positions[i + 1] += velocities[i + 1];
         positions[i + 2] += velocities[i + 2];
-        
+
         // Wrap around boundaries
         if (Math.abs(positions[i]) > 5) velocities[i] *= -1;
         if (Math.abs(positions[i + 1]) > 5) velocities[i + 1] *= -1;
@@ -128,7 +128,7 @@ function AnimatedCube() {
 function TwoLineTypedRoles() {
   const roles = [
     "Full-Stack Developer",
-    "Game Developer", 
+    "Game Developer",
     "UI & UX Designer",
   ];
   const [index, setIndex] = useState(0);
@@ -169,7 +169,7 @@ function TwoLineTypedRoles() {
       <div className="hero-line2 text-fluid-lg">
         <span className="text-white desktop-and-text">I'm </span>
         <span className="text-white mobile-and-text hidden">and I'm </span>
-        <span 
+        <span
           className="relative typed-role hero-role-glow inline-block"
           aria-hidden="true"
         >
@@ -177,12 +177,12 @@ function TwoLineTypedRoles() {
           <span className="absolute border-r-2 border-blue-400 ml-1 h-full animate-pulse"></span>
         </span>
       </div>
-      
+
       {/* Screen reader announcement */}
       <span className="sr-only" aria-live="polite">
         {announceRole}
       </span>
-      
+
       <style>{`
         /* ---- KEEP gradient globally (NO glow here) ---- */
         .gradient-text {
@@ -263,29 +263,7 @@ function TwoLineTypedRoles() {
   );
 }
 
-// Scroll indicator with animation
-function ScrollIndicator() {
-  const [isVisible, setIsVisible] = useState(true);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsVisible(window.scrollY < 100);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  return (
-    <div className={`fixed bottom-6 sm:bottom-8 left-1/2 transform -translate-x-1/2 transition-opacity duration-500 z-20 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-      <div className="animate-bounce">
-        <div className="w-5 h-8 sm:w-6 sm:h-10 border-2 border-blue-400 rounded-full flex justify-center">
-          <div className="w-1 h-2 sm:h-3 bg-blue-400 rounded-full mt-1 sm:mt-2 animate-pulse"></div>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 // Main hero export with enhanced interactivity
 export default function Hero3D() {
@@ -301,18 +279,18 @@ export default function Hero3D() {
     const checkTouch = () => setIsTouchDevice(window.matchMedia('(pointer: coarse)').matches);
     // Detect reduced motion preference
     const checkReducedMotion = () => setPrefersReducedMotion(window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-    
+
     checkMobile();
     checkTouch();
     checkReducedMotion();
-    
+
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
   useEffect(() => {
     if (isTouchDevice) return; // Skip mouse tracking on touch devices
-    
+
     const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({
         x: (e.clientX / window.innerWidth) * 2 - 1,
@@ -336,18 +314,18 @@ export default function Hero3D() {
         style={{ cursor: !isTouchDevice && window.innerWidth > 1024 ? 'none' : 'default' }}
       >
         {/* Animated background with parallax - disabled on mobile */}
-        <div 
+        <div
           className="absolute inset-0 z-0 bg-hero-gradient opacity-95"
           style={{
             transform: !isMobile && shouldAnimate ? `translate(${mousePosition.x * 10}px, ${mousePosition.y * 10}px)` : 'none',
             transition: shouldAnimate ? 'transform 0.1s' : 'none'
           }}
         />
-        
+
         {/* Multiple decorative blur rings - reduced on mobile for performance */}
         <div className={`absolute left-1/4 top-1/3 w-60 h-60 ${!isMobile ? 'sm:w-80 sm:h-80' : ''} rounded-full ${isMobile ? 'blur-2xl' : 'blur-3xl'} ${isMobile ? 'bg-blue-glow/10' : 'bg-blue-glow/20 sm:bg-blue-glow/30'} ${shouldAnimate ? 'animate-pulse' : ''}`} />
         {!isMobile && (
-          <div 
+          <div
             className={`absolute right-1/4 top-1/2 w-72 h-72 sm:w-96 sm:h-96 rounded-full blur-2xl bg-purple-500/10 sm:bg-purple-500/15 ${shouldAnimate ? 'animate-pulse' : ''}`}
             style={{
               animationDelay: shouldAnimate ? '1s' : '0s',
@@ -358,7 +336,7 @@ export default function Hero3D() {
 
         {/* Main content grid - responsive layout */}
         <div className="relative z-10 w-full max-w-7xl mx-auto container-responsive grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center min-h-screen">
-          
+
           {/* Text content - order first on mobile */}
           <div className="order-1 lg:order-2 flex flex-col justify-center px-2 sm:px-0">
             <div className="text-center lg:text-left space-y-4 sm:space-y-6">
@@ -370,11 +348,11 @@ export default function Hero3D() {
                 </span>
                 <span className="text-white desktop-and-text"> and</span>
               </div>
-              
+
               {/* Second line - typed role */}
               <TwoLineTypedRoles />
             </div>
-            
+
             <div className={`mt-6 text-center lg:text-left text-blue-100 ${shouldAnimate ? 'animate-fade-in-up hover:text-white transition-colors duration-300' : ''} text-fluid-base max-w-2xl px-2 sm:px-0`}>
               Building immersive web &amp; game experiences with 3D, modern UI, and a nerd's passion for code.
             </div>
@@ -382,7 +360,7 @@ export default function Hero3D() {
 
           {/* Canvas container - order second on mobile, scaled appropriately */}
           <div className="order-2 lg:order-1 flex justify-center lg:justify-start">
-            <div 
+            <div
               className={`w-[min(calc(100vw-48px),320px)] h-[min(calc(100vw-48px),320px)] sm:w-[280px] sm:h-[280px] md:w-[320px] md:h-[320px] lg:w-[380px] lg:h-[380px] xl:w-[420px] xl:h-[420px] rounded-full ${isMobile ? 'shadow-sm' : 'shadow-soft-glow'} border-2 border-white/10 overflow-hidden flex items-center justify-center bg-gradient-to-br from-blue-900/70 to-gray-900/90 ${shouldAnimate && !isMobile ? 'animate-float hover:shadow-[0_0_30px_10px_rgba(96,165,250,0.3)] transition-all duration-300' : ''} ${isTouchDevice ? 'cursor-pointer' : 'cursor-pointer touch-none'}`}
               style={{
                 transform: !isMobile && shouldAnimate ? `perspective(1000px) rotateX(${mousePosition.y * 3}deg) rotateY(${mousePosition.x * 3}deg)` : 'none',
@@ -398,7 +376,7 @@ export default function Hero3D() {
           </div>
         </div>
 
-        <ScrollIndicator />
+
 
         {/* Enhanced floating animation - disabled if reduced motion preferred */}
         <style>{`
