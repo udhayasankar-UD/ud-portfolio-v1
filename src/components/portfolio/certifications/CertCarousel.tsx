@@ -13,53 +13,53 @@ export interface Certificate {
 }
 
 const certificates: Certificate[] = [
-  { 
-    id: 1, 
-    title: "Network Fundamentals", 
-    provider: "Infosys Springboard", 
-    desc: "Intro to networking principles, TCP/IP, and hands-on labs", 
-    image: "/lovable-uploads/512a5493-a429-44f4-bf84-1a14f41026af.png", 
-    alt: "Network Fundamentals certificate from Infosys Springboard" 
+  {
+    id: 1,
+    title: "Network Fundamentals",
+    provider: "Infosys Springboard",
+    desc: "Intro to networking principles, TCP/IP, and hands-on labs",
+    image: "/uploads/512a5493-a429-44f4-bf84-1a14f41026af.png",
+    alt: "Network Fundamentals certificate from Infosys Springboard"
   },
-  { 
-    id: 2, 
-    title: "AWS Certifications", 
-    provider: "Amazon Web Services", 
-    desc: "Cloud fundamentals & services overview (badge collection)", 
-    image: "/lovable-uploads/c26f7f61-876e-4e2d-a80d-f59025983fcf.png", 
-    alt: "AWS certification badge collection" 
+  {
+    id: 2,
+    title: "AWS Certifications",
+    provider: "Amazon Web Services",
+    desc: "Cloud fundamentals & services overview (badge collection)",
+    image: "/uploads/c26f7f61-876e-4e2d-a80d-f59025983fcf.png",
+    alt: "AWS certification badge collection"
   },
-  { 
-    id: 3, 
-    title: "Python: Zero to Hero", 
-    provider: "HCL GUVI", 
-    desc: "Beginner-to-intermediate Python, scripting, and projects", 
-    image: "/lovable-uploads/5672edac-5bef-4a83-b601-f006d4d4191b.png", 
-    alt: "Python certificate from HCL GUVI" 
+  {
+    id: 3,
+    title: "Python: Zero to Hero",
+    provider: "HCL GUVI",
+    desc: "Beginner-to-intermediate Python, scripting, and projects",
+    image: "/uploads/5672edac-5bef-4a83-b601-f006d4d4191b.png",
+    alt: "Python certificate from HCL GUVI"
   },
-  { 
-    id: 4, 
-    title: "Interion Tech Gala Workshop", 
-    provider: "HCL GUVI", 
-    desc: "Hands-on workshop covering prototyping and tools", 
-    image: "/lovable-uploads/92ddbc05-36ea-4482-89a2-4933b2a97fb1.png", 
-    alt: "Interion Tech Gala Workshop certificate" 
+  {
+    id: 4,
+    title: "Interion Tech Gala Workshop",
+    provider: "HCL GUVI",
+    desc: "Hands-on workshop covering prototyping and tools",
+    image: "/uploads/92ddbc05-36ea-4482-89a2-4933b2a97fb1.png",
+    alt: "Interion Tech Gala Workshop certificate"
   },
-  { 
-    id: 5, 
-    title: "Crash Course on Python", 
-    provider: "Google", 
-    desc: "Rapid Python foundations and Jupyter exercises", 
-    image: "/lovable-uploads/cc64e937-4666-4767-876e-1fcee58ee6c4.png", 
-    alt: "Google Crash Course on Python certificate" 
+  {
+    id: 5,
+    title: "Crash Course on Python",
+    provider: "Google",
+    desc: "Rapid Python foundations and Jupyter exercises",
+    image: "/uploads/cc64e937-4666-4767-876e-1fcee58ee6c4.png",
+    alt: "Google Crash Course on Python certificate"
   },
-  { 
-    id: 6, 
-    title: "Mastering Figma: Beginner to Expert UI/UX Design", 
-    provider: "HCL GUVI", 
-    desc: "UI/UX workflow, components, and responsive layouts in Figma", 
-    image: "/lovable-uploads/14567575-4fe5-4482-9810-82ba05f3b023.png", 
-    alt: "Mastering Figma certificate from HCL GUVI" 
+  {
+    id: 6,
+    title: "Mastering Figma: Beginner to Expert UI/UX Design",
+    provider: "HCL GUVI",
+    desc: "UI/UX workflow, components, and responsive layouts in Figma",
+    image: "/uploads/14567575-4fe5-4482-9810-82ba05f3b023.png",
+    alt: "Mastering Figma certificate from HCL GUVI"
   }
 ];
 
@@ -75,11 +75,11 @@ export default function CertCarousel() {
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     setShouldAnimate(!mediaQuery.matches);
-    
+
     const handleChange = (e: MediaQueryListEvent) => {
       setShouldAnimate(!e.matches);
     };
-    
+
     mediaQuery.addEventListener('change', handleChange);
     return () => mediaQuery.removeEventListener('change', handleChange);
   }, []);
@@ -164,7 +164,7 @@ export default function CertCarousel() {
 
   const onTouchEnd = () => {
     if (!touchStart || !touchEnd) return;
-    
+
     const distance = touchStart - touchEnd;
     const swipeTime = Date.now() - startTime;
     const isLeftSwipe = distance > minSwipeDistance;
@@ -178,14 +178,14 @@ export default function CertCarousel() {
         prevSlide();
       }
     }
-    
+
     // Resume autoplay after a delay
     setTimeout(() => setIsAutoPlaying(true), 1000);
   };
 
   return (
     <>
-      <div 
+      <div
         className="relative w-full"
         role="region"
         aria-label="Certifications carousel"
@@ -197,7 +197,7 @@ export default function CertCarousel() {
         tabIndex={0}
       >
         {/* Carousel Container */}
-        <div 
+        <div
           ref={carouselRef}
           className="relative overflow-hidden rounded-xl mx-auto max-w-full sm:max-w-xl md:max-w-2xl lg:max-w-3xl"
           onTouchStart={onTouchStart}
@@ -205,17 +205,17 @@ export default function CertCarousel() {
           onTouchEnd={onTouchEnd}
           style={{ touchAction: 'pan-x' }}
         >
-          <div 
+          <div
             className="flex transition-transform duration-500 ease-in-out will-change-transform"
             style={{
               transform: `translate3d(-${currentIndex * 100}%, 0, 0)`,
             }}
           >
             {certificates.map((cert, index) => (
-              <div 
+              <div
                 key={cert.id}
                 className="w-full flex-shrink-0 flex justify-center"
-                style={{ 
+                style={{
                   width: '100%',
                   minHeight: '350px'
                 }}
@@ -258,11 +258,10 @@ export default function CertCarousel() {
             <button
               key={index}
               onClick={() => goToSlide(index)}
-              className={`w-4 h-4 sm:w-3 sm:h-3 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-glow touch-manipulation ${
-                index === currentIndex
+              className={`w-4 h-4 sm:w-3 sm:h-3 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-glow touch-manipulation ${index === currentIndex
                   ? 'bg-blue-glow shadow-lg shadow-blue-glow/30 scale-110'
                   : 'bg-white/20 hover:bg-white/30 hover:scale-105'
-              }`}
+                }`}
               aria-label={`Go to certificate ${index + 1}: ${certificates[index].title}`}
               tabIndex={0}
             />

@@ -1,7 +1,7 @@
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useRef, useState, useEffect } from "react";
 import * as THREE from "three";
-import CursorBullet from "./CursorBullet";
+import CursorBullet from "../../layout/CursorBullet";
 
 // Floating particles background
 function FloatingParticles({ count }: { count: number }) {

@@ -20,7 +20,7 @@ const BRAIN_REGIONS: BrainRegion[] = [
     color: '#EC4899',
     glowColor: '#EC489950',
     center: { x: 25, y: 30 }, // Left frontal region (pink)
-    image: '/lovable-uploads/44e096c9-54d4-4f0d-95ea-a399fef3a463.png',
+    image: '/uploads/44e096c9-54d4-4f0d-95ea-a399fef3a463.png',
     skills: [
       { name: 'HTML & CSS', value: 70, description: 'Strong foundation in web fundamentals' },
       { name: 'Blender', value: 20, description: 'Creating 3D models and animations' },
@@ -29,11 +29,11 @@ const BRAIN_REGIONS: BrainRegion[] = [
   },
   {
     id: 'development',
-    name: 'Development', 
+    name: 'Development',
     color: '#F59E0B',
     glowColor: '#F59E0B50',
     center: { x: 60, y: 25 }, // Right frontal region (yellow)
-    image: '/lovable-uploads/e496caa6-ba0d-424f-a6c9-357b785aea3c.png',
+    image: '/uploads/e496caa6-ba0d-424f-a6c9-357b785aea3c.png',
     skills: [
       { name: 'JavaScript', value: 40, description: 'Solid understanding of JS concepts' },
       { name: 'React', value: 40, description: 'Building modern user interfaces' },
@@ -47,7 +47,7 @@ const BRAIN_REGIONS: BrainRegion[] = [
     color: '#EF4444',
     glowColor: '#EF444450',
     center: { x: 45, y: 75 }, // Brain stem region (red/orange)
-    image: '/lovable-uploads/085aaa82-0aad-4c7c-8a38-38797a534a9e.png',
+    image: '/uploads/085aaa82-0aad-4c7c-8a38-38797a534a9e.png',
     skills: [
       { name: 'Cloud', value: 10, description: 'Exploring cloud technologies' },
       { name: 'AI & ML', value: 10, description: 'Learning machine learning basics' },
@@ -95,7 +95,7 @@ export default function BrainExplorer({ onSkillsHighlight, className }: BrainExp
     const duration = prefersReducedMotion ? 0 : 200;
     const newOpacity = { design: 0, development: 0, tools: 0 };
     newOpacity[region.id] = 1;
-    
+
     setTimeout(() => setImageOpacity(newOpacity), 0);
   }, [prefersReducedMotion]);
 
@@ -107,7 +107,7 @@ export default function BrainExplorer({ onSkillsHighlight, className }: BrainExp
     }
     updateImageOpacity(region);
     onSkillsHighlight(region.skills, region);
-    
+
     // Announce to screen readers
     const announcement = `${region.name} selected - ${region.skills.map(s => `${s.name} ${s.value}%`).join(', ')}`;
     const ariaLive = document.createElement('div');
@@ -121,7 +121,7 @@ export default function BrainExplorer({ onSkillsHighlight, className }: BrainExp
 
   const handleMouseDown = (e: React.MouseEvent) => {
     if (!brainRef.current) return;
-    
+
     setIsDragging(true);
     const rect = brainRef.current.getBoundingClientRect();
     dragRef.current = {
@@ -134,17 +134,17 @@ export default function BrainExplorer({ onSkillsHighlight, className }: BrainExp
 
   const handleMouseMove = useCallback((e: MouseEvent) => {
     if (!dragRef.current.isDragging || !brainRef.current) return;
-    
+
     const rect = brainRef.current.getBoundingClientRect();
     const x = ((e.clientX - rect.left) / rect.width) * 100;
     const y = ((e.clientY - rect.top) / rect.height) * 100;
-    
+
     // Clamp to brain bounds
     const clampedX = Math.max(10, Math.min(90, x));
     const clampedY = Math.max(10, Math.min(90, y));
-    
+
     setHotspotPosition({ x: clampedX, y: clampedY });
-    
+
     const closestRegion = findClosestRegion({ x: clampedX, y: clampedY });
     if (closestRegion !== hoveredRegion) {
       setHoveredRegion(closestRegion);
@@ -155,10 +155,10 @@ export default function BrainExplorer({ onSkillsHighlight, className }: BrainExp
 
   const handleMouseUp = useCallback(() => {
     if (!dragRef.current.isDragging) return;
-    
+
     setIsDragging(false);
     dragRef.current.isDragging = false;
-    
+
     // Snap to closest region
     const closestRegion = findClosestRegion(hotspotPosition);
     handleRegionSelect(closestRegion, true);
@@ -167,7 +167,7 @@ export default function BrainExplorer({ onSkillsHighlight, className }: BrainExp
   // Touch handlers
   const handleTouchStart = (e: React.TouchEvent) => {
     if (!brainRef.current) return;
-    
+
     const touch = e.touches[0];
     const rect = brainRef.current.getBoundingClientRect();
     setIsDragging(true);
@@ -181,17 +181,17 @@ export default function BrainExplorer({ onSkillsHighlight, className }: BrainExp
 
   const handleTouchMove = useCallback((e: TouchEvent) => {
     if (!dragRef.current.isDragging || !brainRef.current) return;
-    
+
     const touch = e.touches[0];
     const rect = brainRef.current.getBoundingClientRect();
     const x = ((touch.clientX - rect.left) / rect.width) * 100;
     const y = ((touch.clientY - rect.top) / rect.height) * 100;
-    
+
     const clampedX = Math.max(10, Math.min(90, x));
     const clampedY = Math.max(10, Math.min(90, y));
-    
+
     setHotspotPosition({ x: clampedX, y: clampedY });
-    
+
     const closestRegion = findClosestRegion({ x: clampedX, y: clampedY });
     if (closestRegion !== hoveredRegion) {
       setHoveredRegion(closestRegion);
@@ -207,7 +207,7 @@ export default function BrainExplorer({ onSkillsHighlight, className }: BrainExp
     document.addEventListener('mouseup', handleMouseUp);
     document.addEventListener('touchmove', handleTouchMove);
     document.addEventListener('touchend', handleMouseUp);
-    
+
     return () => {
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseup', handleMouseUp);
@@ -219,10 +219,10 @@ export default function BrainExplorer({ onSkillsHighlight, className }: BrainExp
   // Keyboard navigation
   const handleKeyDown = (e: React.KeyboardEvent) => {
     const currentIndex = BRAIN_REGIONS.findIndex(r => r.id === selectedRegion.id);
-    
+
     if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
       e.preventDefault();
-      const nextIndex = e.key === 'ArrowLeft' 
+      const nextIndex = e.key === 'ArrowLeft'
         ? (currentIndex - 1 + BRAIN_REGIONS.length) % BRAIN_REGIONS.length
         : (currentIndex + 1) % BRAIN_REGIONS.length;
       handleRegionSelect(BRAIN_REGIONS[nextIndex]);
@@ -240,7 +240,7 @@ export default function BrainExplorer({ onSkillsHighlight, className }: BrainExp
   return (
     <div className={cn("flex flex-col", className)}>
       {/* Brain Card */}
-      <div 
+      <div
         ref={brainRef}
         className="relative w-full aspect-square bg-gray-900/50 backdrop-blur-sm border border-white/10 rounded-2xl p-4 sm:p-6 lg:p-8 cursor-grab active:cursor-grabbing touch-manipulation"
         onMouseDown={handleMouseDown}
@@ -273,16 +273,16 @@ export default function BrainExplorer({ onSkillsHighlight, className }: BrainExp
               loading="lazy"
             />
           ))}
-          
+
           {/* Hotspot */}
-          <Hotspot 
+          <Hotspot
             position={hotspotPosition}
             isDragging={isDragging}
             color={hoveredRegion.color}
             glowColor={hoveredRegion.glowColor}
             reducedMotion={prefersReducedMotion}
           />
-          
+
           {/* Connection Line */}
           {isDragging && (
             <svg className="absolute inset-0 w-full h-full pointer-events-none">
@@ -304,10 +304,10 @@ export default function BrainExplorer({ onSkillsHighlight, className }: BrainExp
           )}
         </div>
       </div>
-      
+
       {/* Region Buttons */}
       <div className="mt-4 sm:mt-6">
-        <RegionButtons 
+        <RegionButtons
           regions={BRAIN_REGIONS}
           selectedRegion={selectedRegion}
           onRegionSelect={(region) => handleRegionSelect(region, true)}
