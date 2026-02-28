@@ -20,7 +20,7 @@ const BRAIN_REGIONS: BrainRegion[] = [
     color: '#EC4899',
     glowColor: '#EC489950',
     center: { x: 25, y: 30 }, // Left frontal region (pink)
-    image: '/uploads/44e096c9-54d4-4f0d-95ea-a399fef3a463.png',
+    image: '/Assets/images/certifications/44e096c9-54d4-4f0d-95ea-a399fef3a463.png',
     skills: [
       { name: 'HTML & CSS', value: 70, description: 'Strong foundation in web fundamentals' },
       { name: 'Blender', value: 20, description: 'Creating 3D models and animations' },
@@ -33,7 +33,7 @@ const BRAIN_REGIONS: BrainRegion[] = [
     color: '#F59E0B',
     glowColor: '#F59E0B50',
     center: { x: 60, y: 25 }, // Right frontal region (yellow)
-    image: '/uploads/e496caa6-ba0d-424f-a6c9-357b785aea3c.png',
+    image: '/Assets/images/certifications/e496caa6-ba0d-424f-a6c9-357b785aea3c.png',
     skills: [
       { name: 'JavaScript', value: 40, description: 'Solid understanding of JS concepts' },
       { name: 'React', value: 40, description: 'Building modern user interfaces' },
@@ -47,7 +47,7 @@ const BRAIN_REGIONS: BrainRegion[] = [
     color: '#EF4444',
     glowColor: '#EF444450',
     center: { x: 45, y: 75 }, // Brain stem region (red/orange)
-    image: '/uploads/085aaa82-0aad-4c7c-8a38-38797a534a9e.png',
+    image: '/Assets/images/certifications/085aaa82-0aad-4c7c-8a38-38797a534a9e.png',
     skills: [
       { name: 'Cloud', value: 10, description: 'Exploring cloud technologies' },
       { name: 'AI & ML', value: 10, description: 'Learning machine learning basics' },

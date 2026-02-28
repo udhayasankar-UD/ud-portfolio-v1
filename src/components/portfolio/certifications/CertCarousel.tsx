@@ -18,7 +18,7 @@ const certificates: Certificate[] = [
     title: "Network Fundamentals",
     provider: "Infosys Springboard",
     desc: "Intro to networking principles, TCP/IP, and hands-on labs",
-    image: "/uploads/512a5493-a429-44f4-bf84-1a14f41026af.png",
+    image: "/Assets/images/certifications/512a5493-a429-44f4-bf84-1a14f41026af.png",
     alt: "Network Fundamentals certificate from Infosys Springboard"
   },
   {
@@ -26,7 +26,7 @@ const certificates: Certificate[] = [
     title: "AWS Certifications",
     provider: "Amazon Web Services",
     desc: "Cloud fundamentals & services overview (badge collection)",
-    image: "/uploads/c26f7f61-876e-4e2d-a80d-f59025983fcf.png",
+    image: "/Assets/images/certifications/c26f7f61-876e-4e2d-a80d-f59025983fcf.png",
     alt: "AWS certification badge collection"
   },
   {
@@ -34,7 +34,7 @@ const certificates: Certificate[] = [
     title: "Python: Zero to Hero",
     provider: "HCL GUVI",
     desc: "Beginner-to-intermediate Python, scripting, and projects",
-    image: "/uploads/5672edac-5bef-4a83-b601-f006d4d4191b.png",
+    image: "/Assets/images/certifications/5672edac-5bef-4a83-b601-f006d4d4191b.png",
     alt: "Python certificate from HCL GUVI"
   },
   {
@@ -42,7 +42,7 @@ const certificates: Certificate[] = [
     title: "Interion Tech Gala Workshop",
     provider: "HCL GUVI",
     desc: "Hands-on workshop covering prototyping and tools",
-    image: "/uploads/92ddbc05-36ea-4482-89a2-4933b2a97fb1.png",
+    image: "/Assets/images/certifications/92ddbc05-36ea-4482-89a2-4933b2a97fb1.png",
     alt: "Interion Tech Gala Workshop certificate"
   },
   {
@@ -50,7 +50,7 @@ const certificates: Certificate[] = [
     title: "Crash Course on Python",
     provider: "Google",
     desc: "Rapid Python foundations and Jupyter exercises",
-    image: "/uploads/cc64e937-4666-4767-876e-1fcee58ee6c4.png",
+    image: "/Assets/images/certifications/cc64e937-4666-4767-876e-1fcee58ee6c4.png",
     alt: "Google Crash Course on Python certificate"
   },
   {
@@ -58,7 +58,7 @@ const certificates: Certificate[] = [
     title: "Mastering Figma: Beginner to Expert UI/UX Design",
     provider: "HCL GUVI",
     desc: "UI/UX workflow, components, and responsive layouts in Figma",
-    image: "/uploads/14567575-4fe5-4482-9810-82ba05f3b023.png",
+    image: "/Assets/images/certifications/14567575-4fe5-4482-9810-82ba05f3b023.png",
     alt: "Mastering Figma certificate from HCL GUVI"
   }
 ];
